@@ -1,0 +1,23 @@
+# Godot 4+ engine cache & imported resources
+.godot/
+
+# Excluded from version control: heavy / regenerable / tooling
+# (assets ~331MB AI art regenerable via sd-webui; sd-webui is its own repo)
+assets/
+node_modules/
+sd-webui/
+
+# Binaries
+*.exe
+*.pck
+
+# Godot exports & potentially-sensitive export config
+export_presets.cfg
+build/
+
+# Backups / temp / OS junk
+*.bak
+*.tmp
+mono_crash.*.json
+Thumbs.db
+.DS_Store

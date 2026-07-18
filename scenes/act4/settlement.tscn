@@ -1,0 +1,102 @@
+[gd_scene format=3 uid="uid://bvhfxmqpeto2c"]
+
+[ext_resource type="Script" path="res://scripts/ui/act4_settlement.gd" id="1_act4"]
+
+[node name="Act4Settlement" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource("1_act4")
+
+[node name="DarkBackground" type="ColorRect" parent="."]
+layout_mode = 1
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0.08, 0.07, 0.05, 1)
+mouse_filter = 2
+
+[node name="GoldBorder" type="ColorRect" parent="."]
+layout_mode = 1
+anchor_right = 1.0
+anchor_top = 0.15
+anchor_bottom = 0.15
+offset_top = -4.0
+color = Color(0.839, 0.663, 0.184, 1)
+mouse_filter = 2
+
+[node name="TitleLabel" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 56.0
+text = "Act IV — Settlement"
+horizontal_alignment = 1
+vertical_alignment = 1
+theme_override_font_sizes/font_size = 28
+theme_override_colors/font_color = Color(0.839, 0.663, 0.184, 1)
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.03
+anchor_right = 0.5
+anchor_bottom = 0.97
+offset_left = -520
+offset_top = 0
+offset_right = 520
+offset_bottom = 0
+
+[node name="PanelBg" type="PanelContainer" parent="CenterContainer"]
+layout_mode = 2
+mouse_filter = 1
+
+[node name="InnerMargin" type="MarginContainer" parent="CenterContainer/PanelBg"]
+layout_mode = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 24
+
+[node name="InnerVBox" type="VBoxContainer" parent="CenterContainer/PanelBg/InnerMargin"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 4
+
+[node name="ScrollContainer" type="ScrollContainer" parent="CenterContainer/PanelBg/InnerMargin/InnerVBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_minimum_size = Vector2(620, 360)
+
+[node name="ContentVBox" type="VBoxContainer" parent="CenterContainer/PanelBg/InnerMargin/InnerVBox/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 2
+
+[node name="ActionHBox" type="HBoxContainer" parent="CenterContainer/PanelBg/InnerMargin/InnerVBox"]
+layout_mode = 1
+anchor_left = 0.5
+anchor_bottom = 1.0
+anchor_right = 0.5
+offset_left = -200
+offset_right = 200
+custom_minimum_size = Vector2(400, 0)
+theme_override_constants/separation = 16
+alignment = 1
+
+[node name="ActionButton" type="Button" parent="CenterContainer/PanelBg/InnerMargin/InnerVBox/ActionHBox"]
+layout_mode = 2
+text = ""
+custom_minimum_size = Vector2(180, 44)
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 20
+
+[node name="BuildingsButton" type="Button" parent="CenterContainer/PanelBg/InnerMargin/InnerVBox/ActionHBox"]
+layout_mode = 2
+text = ""
+custom_minimum_size = Vector2(180, 44)
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 20

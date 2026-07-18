@@ -1,0 +1,118 @@
+<!-- Tölvuhvíslarinn Chat Widget — embed on tolvuhvislarinn.is -->
+<style>
+#tolvuhvisl-widget {
+  position: fixed; bottom: 24px; right: 24px; z-index: 9999;
+  font-family: system-ui, -apple-system, sans-serif;
+}
+#tolvuhvisl-bubble {
+  width: 56px; height: 56px; border-radius: 50%;
+  background: #1a1a2e; border: 2px solid #e2a83e;
+  color: #e2a83e; font-size: 24px; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+  transition: transform 0.2s;
+}
+#tolvuhvisl-bubble:hover { transform: scale(1.1); }
+#tolvuhvisl-chat {
+  display: none; flex-direction: column;
+  width: 340px; max-height: 480px; background: #1a1a2e;
+  border: 1px solid #e2a83e; border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.6);
+  overflow: hidden; margin-bottom: 12px;
+}
+#tolvuhvisl-chat.open { display: flex; }
+#tolvuhvisl-header {
+  background: #16213e; color: #e2a83e; padding: 12px 16px;
+  font-weight: bold; font-size: 14px;
+  border-bottom: 1px solid #e2a83e33;
+}
+#tolvuhvisl-messages {
+  flex: 1; overflow-y: auto; padding: 12px;
+  display: flex; flex-direction: column; gap: 8px;
+  max-height: 340px;
+}
+.tvh-msg {
+  padding: 8px 12px; border-radius: 8px; font-size: 13px;
+  line-height: 1.4; max-width: 85%; word-wrap: break-word;
+}
+.tvh-user { background: #0f3460; color: #eaeaea; align-self: flex-end; }
+.tvh-bot { background: #16213e; color: #d4c5a9; align-self: flex-start; border: 1px solid #e2a83e33; }
+#tolvuhvisl-input-row {
+  display: flex; padding: 10px; gap: 8px; border-top: 1px solid #e2a83e33;
+}
+#tolvuhvisl-input {
+  flex: 1; background: #0f3460; border: 1px solid #e2a83e44;
+  color: #eaeaea; padding: 8px 12px; border-radius: 20px;
+  font-size: 13px; outline: none;
+}
+#tolvuhvisl-input::placeholder { color: #888; }
+#tolvuhvisl-send {
+  background: #e2a83e; border: none; color: #1a1a2e;
+  border-radius: 50%; width: 36px; height: 36px;
+  cursor: pointer; font-size: 16px; font-weight: bold;
+}
+.tvh-typing { color: #888; font-style: italic; font-size: 12px; }
+</style>
+
+<div id="tolvuhvisl-widget">
+  <div id="tolvuhvisl-chat">
+    <div id="tolvuhvisl-header">🗣️ Tölvuhvíslarinn — Spjallaðu við botninn</div>
+    <div id="tolvuhvisl-messages">
+      <div class="tvh-msg tvh-bot">Hæ! Ég er Tölvuhvíslarinn — bottinn hans Daða. Hvernig get ég hjálpað? 🎮</div>
+    </div>
+    <div id="tolvuhvisl-input-row">
+      <input id="tolvuhvisl-input" placeholder="Skrifaðu skilaboð..." autocomplete="off">
+      <button id="tolvuhvisl-send">→</button>
+    </div>
+  </div>
+  <div id="tolvuhvisl-bubble" title="Spjalla við Tölvuhvíslarann">💬</div>
+</div>
+
+<script>
+(function() {
+  const API = '/api/chat';
+  const bubble = document.getElementById('tolvuhvisl-bubble');
+  const chat = document.getElementById('tolvuhvisl-chat');
+  const messages = document.getElementById('tolvuhvisl-messages');
+  const input = document.getElementById('tolvuhvisl-input');
+  const send = document.getElementById('tolvuhvisl-send');
+  let sid = '';
+  let open = false;
+
+  bubble.onclick = () => { open = !open; chat.classList.toggle('open', open); if (open) input.focus(); };
+
+  function addMsg(text, cls) {
+    const d = document.createElement('div');
+    d.className = 'tvh-msg ' + cls; d.textContent = text;
+    messages.appendChild(d);
+    messages.scrollTop = messages.scrollHeight;
+  }
+
+  async function doSend() {
+    const text = input.value.trim();
+    if (!text) return;
+    input.value = '';
+    addMsg(text, 'tvh-user');
+    const typing = document.createElement('div');
+    typing.className = 'tvh-msg tvh-bot tvh-typing';
+    typing.textContent = '...'; messages.appendChild(typing);
+    try {
+      const r = await fetch(API, {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({message: text, session_id: sid})
+      });
+      const d = await r.json();
+      typing.remove();
+      sid = d.session_id || sid;
+      addMsg(d.reply, 'tvh-bot');
+    } catch(e) {
+      typing.remove();
+      addMsg('Æ, eitthvað fór úrskeiðis... reyndu aftur.', 'tvh-bot');
+    }
+  }
+
+  send.onclick = doSend;
+  input.onkeydown = (e) => { if (e.key === 'Enter') doSend(); };
+})();
+</script>

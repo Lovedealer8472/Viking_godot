@@ -3,9 +3,14 @@
 
 # Excluded from version control: heavy / regenerable / tooling
 # (assets ~331MB AI art regenerable via sd-webui; sd-webui is its own repo)
-assets/
+# Keep the small essential UI fonts so the theme works on a fresh clone.
+assets/*
+!assets/fonts/
 node_modules/
 sd-webui/
+
+# Screenshot-harness output (generated)
+shots/
 
 # Binaries
 *.exe

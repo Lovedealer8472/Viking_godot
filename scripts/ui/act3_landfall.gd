@@ -5,6 +5,9 @@
 class_name Act3Landfall
 extends ActBase
 
+func _backdrop_texture() -> String:
+	return "res://assets/art/scenes/landfall.png"
+
 const GOLD := Color(0.839, 0.663, 0.184)
 const GOLD_BRIGHT := Color(0.95, 0.75, 0.30)
 const WARM := Color(0.910, 0.863, 0.757)
@@ -20,9 +23,9 @@ var _settlement_name: String = ""
 var _chosen_site: String = ""
 
 @onready var _title: Label = $TitleLabel
-@onready var _content: VBoxContainer = $CenterContainer/PanelBg/InnerVBox/ContentVBox
-@onready var _btn: Button = $CenterContainer/PanelBg/InnerVBox/ActionButton
-@onready var _name_input: LineEdit = $CenterContainer/PanelBg/InnerVBox/NameInput
+@onready var _content: VBoxContainer = $CenterContainer/PanelBg/InnerMargin/InnerVBox/ContentVBox
+@onready var _btn: Button = $CenterContainer/PanelBg/InnerMargin/InnerVBox/ActionButton
+@onready var _name_input: LineEdit = $CenterContainer/PanelBg/InnerMargin/InnerVBox/NameInput
 
 # Possible landing sites based on pillar choices from Act 1
 const SITES := {

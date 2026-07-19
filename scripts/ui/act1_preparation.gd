@@ -5,6 +5,9 @@
 class_name Act1Preparation
 extends ActBase
 
+func _backdrop_texture() -> String:
+	return "res://assets/art/scenes/fjord.png"
+
 const GOLD := Color(0.839, 0.663, 0.184)
 const GOLD_BRIGHT := Color(0.95, 0.75, 0.30)
 const WARM := Color(0.910, 0.863, 0.757)

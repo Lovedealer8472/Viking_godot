@@ -235,25 +235,23 @@ func _journal_card(title: String, desc: String) -> Button:
 	b.add_theme_color_override("font_color", WARM)
 
 	var base := StyleBoxFlat.new()
-	base.bg_color = Color(0.12, 0.09, 0.06, 0.5)
+	base.bg_color = Color(0.12, 0.09, 0.06, 0.6)
 	base.set_border_width_all(1)
-	base.set_border_width_left(3)
-	base.border_color = Color(0.55, 0.42, 0.08, 0.3)
-	base.border_color_left = Color(0.55, 0.42, 0.08, 0.6)
+	base.border_width_left = 4
+	base.border_color = Color(0.55, 0.42, 0.08, 0.5)
 	base.set_corner_radius_all(4)
-	base.set_content_margin_all(8)
-	base.set_content_margin_left(12)
+	base.set_content_margin_all(10)
+	base.content_margin_left = 14
 	b.add_theme_stylebox_override("normal", base)
 
 	var hover := StyleBoxFlat.new()
-	hover.bg_color = Color(0.18, 0.13, 0.08, 0.6)
+	hover.bg_color = Color(0.18, 0.13, 0.08, 0.75)
 	hover.set_border_width_all(1)
-	hover.set_border_width_left(3)
-	hover.border_color = Color(0.55, 0.42, 0.08, 0.3)
-	hover.border_color_left = GOLD
+	hover.border_width_left = 4
+	hover.border_color = GOLD
 	hover.set_corner_radius_all(4)
-	hover.set_content_margin_all(8)
-	hover.set_content_margin_left(12)
+	hover.set_content_margin_all(10)
+	hover.content_margin_left = 14
 	b.add_theme_stylebox_override("hover", hover)
 
 	return b
@@ -597,9 +595,9 @@ func _show_event(event_data: Dictionary) -> void:
 			art.texture = load(path)
 			art.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 			art.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-			art.custom_minimum_size = Vector2(350, 175)
+			art.custom_minimum_size = Vector2(640, 350)
 			var art_container := CenterContainer.new()
-			art_container.custom_minimum_size = Vector2(860, 185)
+			art_container.custom_minimum_size = Vector2(860, 360)
 			art_container.add_child(art)
 			_content.add_child(art_container)
 			_content.add_child(_spacer(8))

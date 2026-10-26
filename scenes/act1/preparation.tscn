@@ -49,7 +49,7 @@ offset_top = 0
 offset_right = 520
 offset_bottom = 0
 
-[node name="PanelBg" type="MarginContainer" parent="CenterContainer"]
+[node name="PanelBg" type="PanelContainer" parent="CenterContainer"]
 layout_mode = 2
 mouse_filter = 1
 theme_override_constants/margin_left = 24

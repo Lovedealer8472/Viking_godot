@@ -195,8 +195,31 @@ static func weighted_pick(pool: Array, difficulty_bias: Dictionary = {}, base_fl
 	return {}
 
 
-# Better: weighted array + roll function
-static func weighted_pick_roll(pool: Array, rng: Callable, difficulty_bias: int = -1) -> Dictionary:
+# ── Realism weighting ────────────────────────────────────────────────────
+# Events that declare a "realism" allow-list are, by convention, the
+# supernatural/mythic ones (mundane events omit the key entirely — see
+# _realism_allowed above). Eligibility already keeps them out of the wrong
+# mode entirely; this additionally shapes HOW OFTEN they surface among the
+# events that ARE eligible: Historical rarely surfaces the ones it does
+# allow, Saga-Born sees them at their natural rate, Draugr-Touched sees them
+# crowd out the mundane. Mundane (untagged) events are unaffected either way.
+static func _realism_weight_mult(event: Dictionary, realism: int) -> float:
+	if not event.has("realism"):
+		return 1.0
+	match realism:
+		GameTypes.Realism.HORROR:
+			return 1.8
+		GameTypes.Realism.FANTASY:
+			return 1.15
+		_:  # NORMAL (Historical)
+			return 0.4
+
+
+# Better: weighted array + roll function.
+# realism: pass state.realism to apply _realism_weight_mult; -1 skips the
+# realism bias entirely (kept optional so no other caller is forced to
+# supply it).
+static func weighted_pick_roll(pool: Array, rng: Callable, difficulty_bias: int = -1, realism: int = -1) -> Dictionary:
 	if pool.is_empty():
 		return {}
 
@@ -206,10 +229,13 @@ static func weighted_pick_roll(pool: Array, rng: Callable, difficulty_bias: int 
 		var flags: Dictionary = event.get("requires_flags", {})
 		if not flags.is_empty():
 			w *= 2.5
-		# Difficulty bias from event definition
+		# Difficulty bias from event definition (JSON dict keys are strings)
 		var bias_dict: Dictionary = event.get("difficulty_bias", {})
-		if difficulty_bias >= 0 and bias_dict.has(difficulty_bias):
-			w *= float(bias_dict[difficulty_bias])
+		if difficulty_bias >= 0 and bias_dict.has(str(difficulty_bias)):
+			w *= float(bias_dict[str(difficulty_bias)])
+		# Realism bias — see _realism_weight_mult above.
+		if realism >= 0:
+			w *= _realism_weight_mult(event, realism)
 		weighted.append({"event": event, "weight": w})
 
 	var total_weight: float = 0.0
@@ -279,8 +305,9 @@ static func resolve_choice_effects(state: GameState, choice: Dictionary, event_i
 	if effects.has("herd_delta"):
 		var herd_d: Dictionary = effects["herd_delta"]
 		for animal in herd_d:
-			var new_val: int = _get_herd_count(state, animal) + int(herd_d[animal])
-			_set_herd_count(state, animal, max(0, new_val))
+			var animal_id: int = int(animal)  # JSON dict keys arrive as strings
+			var new_val: int = _get_herd_count(state, animal_id) + int(herd_d[animal])
+			_set_herd_count(state, animal_id, max(0, new_val))
 
 	# Character injury
 	if effects.has("injury_character_id"):

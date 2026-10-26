@@ -29,6 +29,11 @@ static func create(difficulty: int, realism: int, high_seat_pillars: Array) -> G
 	# Founding characters
 	state.characters = _founding_characters()
 
+	# High-seat pillars seed which regions are known at landfall (Act 3's
+	# "what your scouts found"). Without this the menu's pillar picker is cosmetic.
+	if not high_seat_pillars.is_empty():
+		state.discovered_regions = high_seat_pillars.duplicate()
+
 	state.saga_log.append("The saga begins in Norway. A knarr waits in the fjord.")
 	return state
 

@@ -6,6 +6,11 @@
 # the law, and lore. Players with high Land/Rune lore read the signs; those
 # without are ambushed by consequences.
 #
+# Realism gating (see realism_supernatural_profile() below): the consequence
+# math itself never changes — only how strongly it manifests. Historical
+# dims it to near-background noise; Saga-Born runs it at full strength;
+# Draugr-Touched lets it hit harder and escalate further than either.
+#
 # Ported from src/sim/supernatural.ts.
 # ═══════════════════════════════════════════════════════════════════════════
 class_name SimSupernatural
@@ -233,7 +238,82 @@ static func can_claim_barrow(state: GameState) -> bool:
 
 
 # ═══════════════════════════════════════════════════════════════════════════
+# Realism gating — how hard the supernatural layer is allowed to bite.
+#
+# This is the only place Realism touches the supernatural math. It never
+# changes the underlying consequence model (moods, haunting stages, burial
+# debt, curses) — it only dims or amplifies how much of that model's output
+# actually reaches the mundane resource ledger each week, and how far/fast
+# a haunting or draugr can escalate. The consequence system stays a
+# consequence system, not a random-mob generator, in every mode.
+#
+#   pressure_mult         multiplies this week's combined morale/food/labor/
+#                         injury impact from vættir + haunting + curses +
+#                         draugr. The dimmer switch.
+#   vaettir_drift_mult    multiplies the chance an existing mood spirals
+#                         (Offended -> Hostile) or eases (Fed -> Curious).
+#                         0 = moods hold still, no spiral either way.
+#   haunting_advance_mult multiplies the weekly chance a haunting climbs
+#                         one stage.
+#   haunting_stage_cap    hard ceiling a haunting can climb to in this mode.
+#   draugr_mult           multiplies the weekly draugr-emergence chance
+#                         once burial debt crosses DRAUGR_THRESHOLD.
+#   draugr_allowed        hard gate; when false, draugar can never rise no
+#                         matter the roll.
+#
+# Historical(NORMAL):     grounded. Vættir moods hold steady, a haunting can
+#                         only ever be a fleeting "Omen", draugar never rise.
+# Saga-Born(FANTASY):     the numinous is active — vættir moods swing at full
+#                         strength and offerings genuinely matter; a haunting
+#                         can climb as far as "Manifestation"; draugar are
+#                         rare but not impossible.
+# Draugr-Touched(HORROR): the full consequence system is live — a haunting
+#                         can run all the way to "Crisis" and draugar rise
+#                         readily, at real morale/food/injury cost a
+#                         Historical run never sees.
+#
+# Godot 4.7 note: a `const` Dictionary keyed by an enum can trip the parser
+# in some contexts, so this is a static func returning a fresh Dictionary
+# rather than a const table.
+# ═══════════════════════════════════════════════════════════════════════════
+static func realism_supernatural_profile(realism: int) -> Dictionary:
+	match realism:
+		GameTypes.Realism.HORROR:
+			return {
+				"pressure_mult": 1.25,
+				"vaettir_drift_mult": 1.0,
+				"haunting_advance_mult": 1.4,
+				"haunting_stage_cap": 5,
+				"draugr_mult": 1.5,
+				"draugr_allowed": true,
+			}
+		GameTypes.Realism.FANTASY:
+			return {
+				"pressure_mult": 1.0,
+				"vaettir_drift_mult": 1.0,
+				"haunting_advance_mult": 0.55,
+				"haunting_stage_cap": 3,
+				"draugr_mult": 0.4,
+				"draugr_allowed": true,
+			}
+		_:  # GameTypes.Realism.NORMAL (Historical), and any unknown value
+			return {
+				"pressure_mult": 0.2,
+				"vaettir_drift_mult": 0.0,
+				"haunting_advance_mult": 0.15,
+				"haunting_stage_cap": 1,
+				"draugr_mult": 0.0,
+				"draugr_allowed": false,
+			}
+
+
+# ═══════════════════════════════════════════════════════════════════════════
 # Weekly supernatural tick — called inside resolve_assignments.
+# Reads state.realism (see realism_supernatural_profile above) so Historical,
+# Saga-Born, and Draugr-Touched settlements feel mechanically different, not
+# just re-labelled. To measure it: run the same 60-week playthrough at each
+# Realism value (see sim_stress.gd's harness pattern) and compare morale
+# swings / food-risk triggers / injuries attributable to the sup. tick.
 # Returns a Dictionary with:
 #   morale_delta: int, food_risk: float, labor_penalty: float,
 #   injury_risk_bonus: float, new_supernatural: Dictionary
@@ -242,6 +322,7 @@ static func can_claim_barrow(state: GameState) -> bool:
 static func tick_supernatural(state: GameState, rng: Callable) -> Dictionary:
 	var sup: Dictionary = state.supernatural_state.duplicate(true)
 	var moods: Dictionary = sup.get("vaettir_moods", {}).duplicate(true)
+	var profile: Dictionary = realism_supernatural_profile(state.realism)
 
 	var morale_delta := 0.0
 	var food_risk := 0.0
@@ -277,31 +358,56 @@ static func tick_supernatural(state: GameState, rng: Callable) -> Dictionary:
 		injury_risk_bonus += 0.15
 		food_risk       += 0.10
 
+	# ── Realism dimmer ────────────────────────────────────────────────────
+	# Same consequence math above for every mode; only how hard it bleeds
+	# into this week's morale/food/labor/injury ledger differs. Historical
+	# explains it away (pressure_mult ~0.2 — near-dormant); Saga-Born feels
+	# it at full strength; Draugr-Touched hits harder still.
+	var pressure_mult: float = profile.get("pressure_mult", 1.0)
+	morale_delta      *= pressure_mult
+	food_risk         *= pressure_mult
+	labor_penalty     *= pressure_mult
+	injury_risk_bonus *= pressure_mult
+
 	# Clone supernatural for mutation
 	var new_supernatural: Dictionary = sup.duplicate(true)
 	new_supernatural["vaettir_moods"] = moods
 
-	# Haunting advance?
-	if h_stage > 0 and h_stage < 5:
-		var advance_risk: float = haunting_advance_risk(h_stage, sup.get("burial_debt", 0))
+	# Haunting advance? Gated by realism: Historical can't climb past Omen,
+	# Saga-Born tops out at Manifestation, Draugr-Touched can reach Crisis.
+	var stage_cap: int = profile.get("haunting_stage_cap", 5)
+	if h_stage > 0 and h_stage < stage_cap:
+		var advance_mult: float = profile.get("haunting_advance_mult", 1.0)
+		var advance_risk: float = min(0.9, haunting_advance_risk(h_stage, sup.get("burial_debt", 0)) * advance_mult)
 		if rng.call() < advance_risk:
-			new_supernatural["haunting_stage"] = min(5, h_stage + 1)
+			new_supernatural["haunting_stage"] = min(stage_cap, h_stage + 1)
 
-	# Draugr emergence from burial debt?
+	# Draugr emergence from burial debt? Historical hard-blocks this entirely
+	# (draugr_allowed=false); Saga-Born allows it rarely; Draugr-Touched is
+	# where the dead truly rise.
 	var debt: int = sup.get("burial_debt", 0)
-	if not sup.get("draugar_active", false) and debt >= DRAUGR_THRESHOLD:
-		if rng.call() < draugr_risk(debt):
+	var draugr_allowed: bool = profile.get("draugr_allowed", true)
+	if draugr_allowed and not sup.get("draugar_active", false) and debt >= DRAUGR_THRESHOLD:
+		var draugr_mult: float = profile.get("draugr_mult", 1.0)
+		var d_risk: float = min(0.9, draugr_risk(debt) * draugr_mult)
+		if rng.call() < d_risk:
 			new_supernatural["draugar_active"] = true
-			new_supernatural["haunting_stage"] = max(new_supernatural.get("haunting_stage", 0), 2)
+			var floor_stage: int = max(new_supernatural.get("haunting_stage", 0), 2)
+			new_supernatural["haunting_stage"] = min(stage_cap, floor_stage)
 
-	# Natural vættir drift: offended -> hostile, fed -> curious
-	for region in state.discovered_regions:
-		var region_int: int = region  # Godot int enum
-		var mood: int = moods.get(region_int, GameTypes.VaettirMood.UNSEEN)
-		if mood == GameTypes.VaettirMood.OFFENDED and rng.call() < 0.08:
-			moods[region_int] = GameTypes.VaettirMood.HOSTILE
-		if mood == GameTypes.VaettirMood.FED and rng.call() < 0.04:
-			moods[region_int] = GameTypes.VaettirMood.CURIOUS
+	# Natural vættir drift: offended -> hostile, fed -> curious.
+	# Historical freezes this (drift_mult 0 — moods hold steady, no spiral
+	# in either direction); Saga-Born and Draugr-Touched run it at full
+	# strength.
+	var drift_mult: float = profile.get("vaettir_drift_mult", 1.0)
+	if drift_mult > 0.0:
+		for region in state.discovered_regions:
+			var region_int: int = region  # Godot int enum
+			var mood: int = moods.get(region_int, GameTypes.VaettirMood.UNSEEN)
+			if mood == GameTypes.VaettirMood.OFFENDED and rng.call() < 0.08 * drift_mult:
+				moods[region_int] = GameTypes.VaettirMood.HOSTILE
+			if mood == GameTypes.VaettirMood.FED and rng.call() < 0.04 * drift_mult:
+				moods[region_int] = GameTypes.VaettirMood.CURIOUS
 
 	new_supernatural["vaettir_moods"] = moods
 

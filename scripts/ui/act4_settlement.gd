@@ -69,6 +69,7 @@ var _section_lore: VBoxContainer = null
 var _section_supernatural: VBoxContainer = null
 var _section_buildings: VBoxContainer = null
 var _section_summary: VBoxContainer = null
+var _event_overlay: Control = null
 # Summary log (accumulated text entries)
 var _week_log_entries: Array = []
 # Whether buildings panel is expanded
@@ -976,70 +977,91 @@ func _show_event_popup(event_id: String) -> void:
 	_btn.visible = false
 	_buildings_btn.visible = false
 
-	# Clear summary and rebuild with event content
-	for c in _section_summary.get_children():
-		c.queue_free()
-
 	var event_data: Dictionary = SimEvents.find_event(event_id)
 	var title: String = event_data.get("title", event_id)
 	var description: String = event_data.get("text", "")
 
-	_section_summary.add_child(_heading("— Event —"))
-	_section_summary.add_child(_spacer(8))
+	# Full-screen modal overlay. The old render appended the event to the bottom
+	# of the scrolling summary section — below the fold, invisible to the player.
+	# A centred modal makes the event (and its Bayeux art) the focus.
+	var overlay := Control.new()
+	overlay.name = "EventOverlay"
+	overlay.set_anchors_preset(Control.PRESET_FULL_RECT)
+	overlay.mouse_filter = Control.MOUSE_FILTER_STOP
+	add_child(overlay)
+	_event_overlay = overlay
 
-	# Event illustration
+	var scrim := ColorRect.new()
+	scrim.set_anchors_preset(Control.PRESET_FULL_RECT)
+	scrim.color = Color(0.03, 0.025, 0.02, 0.85)
+	scrim.mouse_filter = Control.MOUSE_FILTER_STOP
+	overlay.add_child(scrim)
+
+	var center := CenterContainer.new()
+	center.set_anchors_preset(Control.PRESET_FULL_RECT)
+	overlay.add_child(center)
+
+	var panel := PanelContainer.new()
+	var pstyle := StyleBoxFlat.new()
+	pstyle.bg_color = Color(0.14, 0.11, 0.07, 0.98)
+	pstyle.set_border_width_all(2)
+	pstyle.border_color = GOLD
+	pstyle.set_corner_radius_all(8)
+	pstyle.set_content_margin_all(24)
+	panel.add_theme_stylebox_override("panel", pstyle)
+	center.add_child(panel)
+
+	var vbox := VBoxContainer.new()
+	vbox.custom_minimum_size = Vector2(820, 0)
+	vbox.add_theme_constant_override("separation", 6)
+	panel.add_child(vbox)
+
+	# Event illustration (Bayeux art), prominent and uncropped.
 	var art_path := "res://assets/art/events/%s.png" % event_id
 	if ResourceLoader.exists(art_path):
 		var art := TextureRect.new()
 		art.texture = load(art_path)
 		art.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 		art.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-		art.custom_minimum_size = Vector2(640, 350)
+		art.custom_minimum_size = Vector2(760, 300)
 		var art_container := CenterContainer.new()
-		art_container.custom_minimum_size = Vector2(860, 360)
 		art_container.add_child(art)
-		_section_summary.add_child(art_container)
-		_section_summary.add_child(_spacer(8))
+		vbox.add_child(art_container)
+		vbox.add_child(_spacer(6))
 
-	# Event title
-	var title_lbl := _label(title, GOLD, 18)
-	_section_summary.add_child(title_lbl)
-	_section_summary.add_child(_spacer(4))
+	var title_lbl := _label(title, GOLD, 22)
+	title_lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	vbox.add_child(title_lbl)
+	vbox.add_child(_spacer(4))
 
-	# Event description
-	var desc_lbl := _label(description, WARM, 13)
-	_section_summary.add_child(desc_lbl)
-	_section_summary.add_child(_spacer(12))
+	var desc_lbl := _label(description, WARM, 14)
+	desc_lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	desc_lbl.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	desc_lbl.custom_minimum_size = Vector2(760, 0)
+	vbox.add_child(desc_lbl)
+	vbox.add_child(_spacer(10))
+	vbox.add_child(_divider())
+	vbox.add_child(_spacer(8))
 
-	# Divider
-	_section_summary.add_child(_divider())
-	_section_summary.add_child(_spacer(8))
-
-	# Choice buttons
 	var choices: Array = event_data.get("choices", [])
 	if choices.is_empty():
-		# No choices — auto-resolve
 		var dismiss_btn := Button.new()
 		dismiss_btn.text = "Continue"
 		_apply_button_style(dismiss_btn)
 		dismiss_btn.pressed.connect(_on_event_dismissed)
-		_section_summary.add_child(dismiss_btn)
+		vbox.add_child(dismiss_btn)
 	else:
-		_section_summary.add_child(_label("What will you do?", GOLD, 14))
-		_section_summary.add_child(_spacer(4))
 		for i in choices.size():
 			var choice: Dictionary = choices[i]
-			var choice_text: String = choice.get("text", "Option %d" % (i + 1))
 			var choice_btn := Button.new()
-			choice_btn.text = choice_text
-			choice_btn.custom_minimum_size = Vector2(860, 40)
+			choice_btn.text = choice.get("text", "Option %d" % (i + 1))
+			choice_btn.custom_minimum_size = Vector2(760, 40)
+			choice_btn.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 			_apply_button_style(choice_btn)
 			var choice_idx := i
 			choice_btn.pressed.connect(func(): _on_event_choice(event_id, choice_idx))
-			_section_summary.add_child(choice_btn)
-			_section_summary.add_child(_spacer(4))
-
-	_section_summary.add_child(_spacer(4))
+			vbox.add_child(choice_btn)
+			vbox.add_child(_spacer(4))
 
 
 func _on_event_choice(event_id: String, choice_idx: int) -> void:
@@ -1051,20 +1073,16 @@ func _on_event_choice(event_id: String, choice_idx: int) -> void:
 
 	var choice: Dictionary = choices[choice_idx]
 
-	# Apply effects
-	for key in choice.keys():
-		if key in ["text", "saga"]:
-			continue
-		var delta: float = float(choice[key])
-		if game_state.get(key) != null:
-			game_state.set(key, game_state.get(key) + delta)
-			print("  Effect: ", key, " ", "%+.1f" % delta, " → ", game_state.get(key))
+	# Apply the choice's full effect set (resources, lore, standing, herd,
+	# discoveries, the supernatural layer, event flags, saga entry). This is the
+	# rich, ported effect schema — the old flat top-level-key path only handled
+	# resources and silently dropped supernatural/lore/flag effects.
+	var saga_before: int = game_state.saga_log.size()
+	SimEvents.resolve_choice_effects(game_state, choice, event_id)
 
-	# Log saga entry
-	var saga_text: String = choice.get("saga", "")
-	if not saga_text.is_empty():
-		game_state.saga_log.append(saga_text)
-		_week_log_entries.append(saga_text)
+	# Surface any saga entry the effects appended into the weekly log too.
+	if game_state.saga_log.size() > saga_before:
+		_week_log_entries.append(game_state.saga_log[game_state.saga_log.size() - 1])
 
 	# Clear event
 	game_state.pending_event_id = ""
@@ -1074,8 +1092,18 @@ func _on_event_choice(event_id: String, choice_idx: int) -> void:
 
 func _on_event_dismissed() -> void:
 	print("=== EVENT DISMISSED ===")
+	# Tear down the modal overlay.
+	if is_instance_valid(_event_overlay):
+		_event_overlay.queue_free()
+	_event_overlay = null
+
 	# Advance the week
 	SimWeeklyTurn.advance_week(game_state)
+
+	# An event's fallout can end the saga (starvation, the dead, desertion).
+	if game_state.game_over:
+		_show_ending()
+		return
 
 	# Restore action buttons
 	_btn.visible = true

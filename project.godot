@@ -20,6 +20,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 GameTheme="*res://scripts/game_theme.gd"
+EventData="*res://scripts/event_data.gd"
 
 [display]
 

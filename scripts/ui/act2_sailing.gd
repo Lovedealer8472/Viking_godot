@@ -19,16 +19,17 @@ const GREEN := Color(0.451, 0.714, 0.275)
 
 enum Step { INTRO, ASSIGN, EVENT, ARRIVAL }
 
-# Task display data
+# Task display data. Descriptions double as OptionButton item tooltips, so
+# keep them honest about what the task actually does (see _task_competence).
 const TASK_INFO := {
-	GameTypes.SailingTask.STEER: {"name": "Steer", "desc": "+3-7 course"},
-	GameTypes.SailingTask.NAVIGATE: {"name": "Navigate", "desc": "+5-10 course"},
-	GameTypes.SailingTask.BAIL: {"name": "Bail", "desc": "+3-6 integrity"},
-	GameTypes.SailingTask.REPAIR_SHIP: {"name": "Repair", "desc": "+5-12 integrity"},
-	GameTypes.SailingTask.RATION: {"name": "Ration", "desc": "-2 supplies used"},
-	GameTypes.SailingTask.FISH_AT_SEA: {"name": "Fish", "desc": "+3-7 supplies"},
-	GameTypes.SailingTask.LOOK_OUT: {"name": "Look-out", "desc": "Spot dangers"},
-	GameTypes.SailingTask.REST_AT_SEA: {"name": "Rest", "desc": "+5-10 morale"},
+	GameTypes.SailingTask.STEER: {"name": "Steer", "desc": "Drives the course. Any hand can steer; Scout/Leader steer best."},
+	GameTypes.SailingTask.NAVIGATE: {"name": "Navigate", "desc": "Best course gains. Scholar/Leader + wits shine here."},
+	GameTypes.SailingTask.BAIL: {"name": "Bail", "desc": "Fights the sea-wear on the hull. Fighter/Worker/Crafter + strength."},
+	GameTypes.SailingTask.REPAIR_SHIP: {"name": "Repair", "desc": "Strong hull repair. Crafter + strength best; slow going for others."},
+	GameTypes.SailingTask.RATION: {"name": "Ration", "desc": "Eases the daily supply drain. Any hand."},
+	GameTypes.SailingTask.FISH_AT_SEA: {"name": "Fish", "desc": "Restocks supplies. Worker/Scout best."},
+	GameTypes.SailingTask.LOOK_OUT: {"name": "Look-out", "desc": "Spots currents and safe water for a course bonus. Scout best."},
+	GameTypes.SailingTask.REST_AT_SEA: {"name": "Rest", "desc": "Restores morale. Any hand."},
 }
 
 const TASK_ORDER: Array[int] = [
@@ -41,6 +42,40 @@ const TASK_ORDER: Array[int] = [
 	GameTypes.SailingTask.LOOK_OUT,
 	GameTypes.SailingTask.REST_AT_SEA,
 ]
+
+# ═══════════════════════════════════════════════════════════════════════════
+# Balance tuning — crew assignments are the whole game here. Tune progress
+# by adjusting these constants, not by scattering magic numbers below.
+# ═══════════════════════════════════════════════════════════════════════════
+
+const AMBIENT_DRIFT_MAX := 2.0  # course/day from current alone, nobody steering
+
+const STEER_COURSE_MIN := 1.0
+const STEER_COURSE_MAX := 3.0
+const NAVIGATE_COURSE_MIN := 2.5
+const NAVIGATE_COURSE_MAX := 5.0
+const LOOK_OUT_COURSE_MIN := 0.5
+const LOOK_OUT_COURSE_MAX := 2.0
+
+const BAIL_HULL_MIN := 2.0
+const BAIL_HULL_MAX := 5.0
+const REPAIR_HULL_MIN := 4.0
+const REPAIR_HULL_MAX := 9.0
+const HULL_WEAR_MIN := 1.0  # unconditional sea-wear, applies every day
+const HULL_WEAR_MAX := 2.0
+
+const RATION_SUPPLY_MIN := 1.0
+const RATION_SUPPLY_MAX := 3.0
+const FISH_SUPPLY_MIN := 2.0
+const FISH_SUPPLY_MAX := 6.0
+const SUPPLY_DRAIN_PER_HEAD := 0.6  # unconditional consumption, applies every day
+const SUPPLY_DRAIN_MIN := 3.0
+
+const REST_MORALE_MIN := 4.0
+const REST_MORALE_MAX := 9.0
+const IDLE_MORALE_PENALTY := 1.0
+
+const APPRENTICE_SKILL_MULT := 0.6  # apprentices are weak at skilled tasks
 
 # ═══════════════════════════════════════════════════════════════════════════
 # Sailing event definitions
@@ -146,6 +181,18 @@ var _day := 0
 var _game_over := false
 var _assignments: Dictionary = {}  # char_id -> SailingTask int
 var _pending_event: Dictionary = {}
+
+# Start-of-day snapshots, used to build the "Yesterday" summary shown at
+# the top of the next Assign screen.
+var _day_start_course := 0.0
+var _day_start_integrity := 0.0
+var _day_start_supplies := 0.0
+var _day_start_morale := 0.0
+var _yesterday_summary := ""
+
+# True once "Supplies are gone" has been logged for the current dry spell,
+# so the saga log doesn't repeat the same line every day supplies sit at 0.
+var _supplies_exhausted_logged := false
 
 @onready var _title: Label = $TitleLabel
 @onready var _content: VBoxContainer = $CenterContainer/PanelBg/InnerVBox/ContentVBox
@@ -300,6 +347,12 @@ func _show_assign() -> void:
 	game_state.ship_supplies = maxf(game_state.ship_supplies, 0.0)
 	game_state.ship_morale = clampf(game_state.ship_morale, 0.0, 100.0)
 
+	# Yesterday's outcome — compact, one line, so the player sees exactly
+	# what their assignments cost or earned before choosing again.
+	if _yesterday_summary != "":
+		_content.add_child(_label(_yesterday_summary, 13, MUTED))
+		_content.add_child(_spacer(6))
+
 	# Dashboard
 	_content.add_child(_build_dashboard())
 	_content.add_child(_spacer(8))
@@ -442,10 +495,13 @@ func _crew_row(char: CharacterData) -> Control:
 	option_btn.add_theme_stylebox_override("normal", ob_style)
 	option_btn.add_theme_stylebox_override("hover", ob_style)
 
-	# Populate task list
+	# Populate task list. Tooltips surface TASK_INFO's desc so the player can
+	# see what each task actually does before assigning it.
 	option_btn.add_item("-- Unassigned --", -1)
+	option_btn.set_item_tooltip(0, "Idle hands drag morale down.")
 	for task_id: int in TASK_ORDER:
 		option_btn.add_item(TASK_INFO[task_id]["name"], task_id)
+		option_btn.set_item_tooltip(option_btn.item_count - 1, TASK_INFO[task_id]["desc"])
 
 	# Set current assignment
 	var char_id := char.id
@@ -455,119 +511,235 @@ func _crew_row(char: CharacterData) -> Control:
 			if option_btn.get_item_id(idx) == current:
 				option_btn.select(idx)
 				break
+		option_btn.tooltip_text = TASK_INFO[current]["desc"]
 	else:
 		option_btn.select(0)
+		option_btn.tooltip_text = "Idle hands drag morale down."
 
 	option_btn.item_selected.connect(func(index: int):
 		var task_id := option_btn.get_item_id(index)
 		if task_id < 0:
 			_assignments.erase(char_id)
+			option_btn.tooltip_text = "Idle hands drag morale down."
 		else:
 			_assignments[char_id] = task_id
+			option_btn.tooltip_text = TASK_INFO[task_id]["desc"]
 	)
 
 	hbox.add_child(option_btn)
 	return hbox
 
-# ── Day resolution (simplified, no class bonuses) ─────────────────────────
+# ── Day resolution (crew competence drives everything) ────────────────────
 
 func _resolve_day() -> void:
 	print("\n=== RESOLVING DAY %d ===" % _day)
 
-	# 1. Apply each crew member's task effects
-	var assigned_count := 0
+	# Snapshot start-of-day stats so the next Assign screen can show what
+	# yesterday's choices actually cost or earned.
+	_day_start_course = game_state.course
+	_day_start_integrity = game_state.ship_integrity
+	_day_start_supplies = game_state.ship_supplies
+	_day_start_morale = game_state.ship_morale
+
+	# 1. Apply each able crew member's task — or dock morale for idling.
+	# Course comes from here (STEER/NAVIGATE/LOOK_OUT); leave nobody on
+	# those and the ship only drifts (see step 2).
 	for char: CharacterData in game_state.characters:
 		if not char.alive or char.is_child or char.injured:
 			continue
 		var task: int = _assignments.get(char.id, -1)
 		if task < 0:
-			continue
-		assigned_count += 1
-		_apply_task(char, task)
+			game_state.ship_morale -= IDLE_MORALE_PENALTY
+		else:
+			_apply_task(char, task)
 
-	# 2. Base course advancement (8-15 points)
-	var base_course := randf_range(8.0, 15.0)
-	game_state.course += base_course
+	# 2. Ambient drift — the current carries the knarr a little even with
+	# nobody at the helm.
+	game_state.course += randf_range(0.0, AMBIENT_DRIFT_MAX)
 
-	# 3. Daily supply consumption
-	game_state.ship_supplies -= 4.0
+	# 3. Daily attrition. This is unconditional: more mouths drink more
+	# water, and the sea wears the hull down regardless of assignments.
+	# Only active crew tasks (FISH_AT_SEA/RATION, BAIL/REPAIR_SHIP) offset it.
+	var supply_drain: float = maxf(SUPPLY_DRAIN_MIN, float(game_state.living_population()) * SUPPLY_DRAIN_PER_HEAD)
+	game_state.ship_supplies -= supply_drain
+	game_state.ship_integrity -= randf_range(HULL_WEAR_MIN, HULL_WEAR_MAX)
 
-	# 4. Morale drift from hardship
+	# 4. Clamp before threshold checks read these values.
+	game_state.ship_integrity = clampf(game_state.ship_integrity, 0.0, 100.0)
+	game_state.ship_supplies = maxf(game_state.ship_supplies, 0.0)
+	game_state.ship_morale = clampf(game_state.ship_morale, 0.0, 100.0)
+
+	# 5. Morale drift from hardship
 	if game_state.ship_supplies < 20.0:
 		game_state.ship_morale -= 3.0
 	if game_state.ship_integrity < 30.0:
 		game_state.ship_morale -= 2.0
 	if game_state.ship_morale < 15.0:
 		game_state.ship_morale -= 2.0
+	game_state.ship_morale = clampf(game_state.ship_morale, 0.0, 100.0)
 
-	# 5. Check for death spiral
+	# 6. Hunger — supplies at zero bleeds morale every day (logged once,
+	# not spammed to the saga log while it stays at zero).
+	_check_supplies_exhausted()
+
+	# 7. Check for death spiral
 	if game_state.ship_integrity <= 0.0:
 		_show_foundered()
 		return
-	if game_state.ship_supplies <= 0.0:
-		game_state.ship_morale -= 10.0
-		game_state.saga_log.append("Supplies are gone. Hunger gnaws at the crew.")
 
-	# 6. Check for arrival
+	# 8. Check for arrival
 	game_state.course = minf(game_state.course, 100.0)
 	if game_state.course >= 100.0:
 		game_state.saga_log.append("After %d days at sea, land is sighted on the horizon!" % _day)
 		_show_arrival()
 		return
 
-	# 7. Random encounter (50% chance)
+	# 9. Random encounter (50% chance)
 	if randf() < 0.50:
 		var event_data := _pick_event()
 		_show_event(event_data)
 		return
 
-	# 8. Advance day and return to assignment
+	# 10. Finalize the day's summary, advance, and return to assignment.
+	_finalize_day_summary()
 	_advance_day()
 	_show_assign()
 
 func _advance_day() -> void:
 	_day += 1
 	game_state.sailing_day = _day
-	_assignments.clear()
+	# Assignments persist day to day — the crew keep their posts until the player
+	# changes them. (Re-assigning everyone every single day is tedious, not fun.)
 
 func _apply_task(char: CharacterData, task: int) -> void:
+	var mult := _task_competence(char, task)
+
 	match task:
 		GameTypes.SailingTask.STEER:
-			var effect := randf_range(3.0, 7.0)
-			game_state.course += effect
+			game_state.course += randf_range(STEER_COURSE_MIN, STEER_COURSE_MAX) * mult
 
 		GameTypes.SailingTask.NAVIGATE:
-			var effect := randf_range(5.0, 10.0)
-			game_state.course += effect
-
-		GameTypes.SailingTask.BAIL:
-			var effect := randf_range(3.0, 6.0)
-			game_state.ship_integrity += effect
-
-		GameTypes.SailingTask.REPAIR_SHIP:
-			var effect := randf_range(5.0, 12.0)
-			game_state.ship_integrity += effect
-
-		GameTypes.SailingTask.RATION:
-			game_state.ship_supplies += 2.0
-
-		GameTypes.SailingTask.FISH_AT_SEA:
-			var effect := randf_range(3.0, 7.0)
-			game_state.ship_supplies += effect
+			game_state.course += randf_range(NAVIGATE_COURSE_MIN, NAVIGATE_COURSE_MAX) * mult
 
 		GameTypes.SailingTask.LOOK_OUT:
-			# Lookout gives a one-time course bonus (spotting favourable currents, winds)
-			var effect := randf_range(3.0, 8.0)
-			game_state.course += effect
+			# Spotting favourable currents/safe water — smaller than active
+			# steering, but it counts toward course same as STEER/NAVIGATE.
+			game_state.course += randf_range(LOOK_OUT_COURSE_MIN, LOOK_OUT_COURSE_MAX) * mult
+
+		GameTypes.SailingTask.BAIL:
+			game_state.ship_integrity += randf_range(BAIL_HULL_MIN, BAIL_HULL_MAX) * mult
+
+		GameTypes.SailingTask.REPAIR_SHIP:
+			game_state.ship_integrity += randf_range(REPAIR_HULL_MIN, REPAIR_HULL_MAX) * mult
+
+		GameTypes.SailingTask.RATION:
+			game_state.ship_supplies += randf_range(RATION_SUPPLY_MIN, RATION_SUPPLY_MAX) * mult
+
+		GameTypes.SailingTask.FISH_AT_SEA:
+			game_state.ship_supplies += randf_range(FISH_SUPPLY_MIN, FISH_SUPPLY_MAX) * mult
 
 		GameTypes.SailingTask.REST_AT_SEA:
-			var effect := randf_range(5.0, 10.0)
-			game_state.ship_morale += effect
+			game_state.ship_morale += randf_range(REST_MORALE_MIN, REST_MORALE_MAX) * mult
+
+		_:
+			pass  # unassigned (-1) never reaches here; nothing to apply
 
 	# Clamp ship values
 	game_state.ship_integrity = clampf(game_state.ship_integrity, 0.0, 100.0)
 	game_state.ship_supplies = maxf(game_state.ship_supplies, 0.0)
 	game_state.ship_morale = clampf(game_state.ship_morale, 0.0, 100.0)
+
+# ── Crew competence scoring ────────────────────────────────────────────────
+# Class + attribute multiplier for how well a character performs a sailing
+# task. 1.0 = average competence; higher = better; lower = worse.
+#   NAVIGATE   → Scholar/Leader + intelligence
+#   STEER      → anyone, but Scout/Leader do it better
+#   BAIL/REPAIR_SHIP → Fighter/Worker/Crafter + strength
+#   FISH_AT_SEA → Worker/Scout
+#   LOOK_OUT   → Scout
+#   RATION/REST_AT_SEA → universal, no seamanship needed
+#   Apprentices are weak at every skilled task, but pull full weight on the
+#   universal ones.
+func _task_competence(char: CharacterData, task: int) -> float:
+	var cls: int = char.char_class
+
+	if task == GameTypes.SailingTask.RATION or task == GameTypes.SailingTask.REST_AT_SEA:
+		return 1.0
+	if cls == GameTypes.CharacterClass.APPRENTICE:
+		return APPRENTICE_SKILL_MULT
+
+	match task:
+		GameTypes.SailingTask.NAVIGATE:
+			var cls_mult: float = 0.8
+			match cls:
+				GameTypes.CharacterClass.SCHOLAR: cls_mult = 1.5
+				GameTypes.CharacterClass.LEADER: cls_mult = 1.3
+				_: pass  # everyone else keeps the 0.8 default
+			return cls_mult * _attribute_bonus(char.intelligence)
+
+		GameTypes.SailingTask.STEER:
+			match cls:
+				GameTypes.CharacterClass.SCOUT: return 1.3
+				GameTypes.CharacterClass.LEADER: return 1.3
+				_: return 1.0
+
+		GameTypes.SailingTask.BAIL, GameTypes.SailingTask.REPAIR_SHIP:
+			var cls_mult: float = 0.8
+			match cls:
+				GameTypes.CharacterClass.CRAFTER: cls_mult = 1.4
+				GameTypes.CharacterClass.FIGHTER: cls_mult = 1.3
+				GameTypes.CharacterClass.WORKER: cls_mult = 1.25
+				_: pass  # everyone else keeps the 0.8 default
+			return cls_mult * _attribute_bonus(char.strength)
+
+		GameTypes.SailingTask.FISH_AT_SEA:
+			match cls:
+				GameTypes.CharacterClass.WORKER: return 1.3
+				GameTypes.CharacterClass.SCOUT: return 1.25
+				_: return 0.85
+
+		GameTypes.SailingTask.LOOK_OUT:
+			return 1.5 if cls == GameTypes.CharacterClass.SCOUT else 0.8
+
+		_:
+			return 1.0
+
+func _attribute_bonus(value: int) -> float:
+	# Each point above/below the baseline attribute score (2) shifts
+	# competence by 6%, e.g. intelligence 5 -> 1.18x, intelligence 1 -> 0.94x.
+	return clampf(1.0 + float(value - 2) * 0.06, 0.7, 1.4)
+
+# ── Hunger & day-summary bookkeeping ───────────────────────────────────────
+
+func _check_supplies_exhausted() -> void:
+	if game_state.ship_supplies <= 0.0:
+		game_state.ship_morale -= 10.0
+		game_state.ship_morale = clampf(game_state.ship_morale, 0.0, 100.0)
+		if not _supplies_exhausted_logged:
+			game_state.saga_log.append("Supplies are gone. Hunger gnaws at the crew.")
+			_supplies_exhausted_logged = true
+	else:
+		_supplies_exhausted_logged = false
+
+func _finalize_day_summary() -> void:
+	"""Builds the compact 'Yesterday: ...' line shown atop the next Assign
+	screen, from the deltas since _day_start_* was snapshotted."""
+	var parts: Array = []  # Array[String]
+	_append_delta(parts, game_state.course - _day_start_course, "course")
+	_append_delta(parts, game_state.ship_supplies - _day_start_supplies, "supplies")
+	_append_delta(parts, game_state.ship_integrity - _day_start_integrity, "hull")
+	_append_delta(parts, game_state.ship_morale - _day_start_morale, "morale")
+
+	if parts.is_empty():
+		_yesterday_summary = ""
+	else:
+		_yesterday_summary = "Yesterday: " + "  ·  ".join(parts)
+
+func _append_delta(parts: Array, value: float, label: String) -> void:
+	var rounded := roundi(value)
+	if rounded == 0:
+		return
+	parts.append("%+d %s" % [rounded, label])
 
 # ── Events (simplified, uniform random selection) ─────────────────────────
 
@@ -660,18 +832,19 @@ func _resolve_choice(index: int) -> void:
 	game_state.ship_supplies = maxf(game_state.ship_supplies, 0.0)
 	game_state.ship_morale = clampf(game_state.ship_morale, 0.0, 100.0)
 
-	# Check for game over conditions
+	# Check for game over conditions — show the death narrative (which routes
+	# back to the menu on "The End"). Never inline complete_act() here: that left
+	# act=SAILING, so main.gd reloaded Act 2 at 0 integrity — an infinite loop.
 	if game_state.ship_integrity <= 0.0:
 		game_state.saga_log.append("The ship foundered. The saga ends in the deep.")
-		game_state.game_over = true
-		complete_act(game_state)
+		_show_foundered()
 		return
 
-	if game_state.ship_supplies <= 0.0:
-		game_state.ship_morale -= 10.0
-		game_state.saga_log.append("Supplies are gone. Hunger gnaws at the crew.")
+	_check_supplies_exhausted()
 
-	# Advance to next day and continue
+	# Finalize the day's summary (task resolution + this event, together)
+	# and advance to next day.
+	_finalize_day_summary()
 	_advance_day()
 
 	if game_state.course >= 100.0:

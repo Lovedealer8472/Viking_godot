@@ -200,6 +200,15 @@ static func _sync_derived_event_flags(state: GameState) -> void:
 
 # ═══════════════════════════════════════════════════════════════════════════
 # Weekly event selection — weighted random, with tutorial/shipping overrides.
+#
+# Realism gating lives in two places here:
+#   1. Eligibility — an event with a non-empty "realism" list is only ever
+#      in the pool when state.realism is in that list (filter below, and
+#      the fallback pool further down). Mundane events omit "realism"
+#      entirely and are eligible in every mode.
+#   2. Weighting — SimEvents.weighted_pick_roll() biases realism-tagged
+#      events rarer in Historical, baseline in Saga-Born, and more
+#      prominent in Draugr-Touched (see SimEvents._realism_weight_mult).
 # ═══════════════════════════════════════════════════════════════════════════
 
 static func pick_weekly_event(state: GameState, rng: Callable) -> Dictionary:
@@ -233,7 +242,10 @@ static func pick_weekly_event(state: GameState, rng: Callable) -> Dictionary:
 			continue
 		if eid in recent:
 			continue
-		# Realism filter
+		# Realism filter: events with no "realism" key are mundane and
+		# always eligible; events that declare one are restricted to
+		# those modes (e.g. a mythic omen tagged [FANTASY, HORROR] never
+		# appears in a Historical/NORMAL saga).
 		var realism_list: Array = e.get("realism", [])
 		if not realism_list.is_empty() and not (state.realism in realism_list):
 			continue
@@ -255,13 +267,26 @@ static func pick_weekly_event(state: GameState, rng: Callable) -> Dictionary:
 		var block_flags: Dictionary = e.get("blocks_flags", {})
 		if SimEvents.event_flags_blocked(state.event_flags, block_flags):
 			continue
+		# Lore requirement (JSON dict keys arrive as strings -> int())
+		var req_lore: Dictionary = e.get("requires_lore", {})
+		if not req_lore.is_empty():
+			var lore_ok := true
+			for b in req_lore:
+				if state.get_lore(int(b)) < int(req_lore[b]):
+					lore_ok = false
+					break
+			if not lore_ok:
+				continue
+		if e.has("requires_standing") and state.standing < int(e["requires_standing"]):
+			continue
 		# Cooldown
 		var cooldown: int = e.get("cooldown_weeks", 4)
 		if eid in recent.slice(0, cooldown):
 			continue
 		eligible.append(e)
 
-	# Fallback if eligible pool is empty
+	# Fallback if eligible pool is empty (still realism-gated — a Historical
+	# saga must never fall back into a mythic-only event pool).
 	var pool: Array = eligible
 	if pool.is_empty():
 		pool = []
@@ -273,8 +298,10 @@ static func pick_weekly_event(state: GameState, rng: Callable) -> Dictionary:
 			if realism_list.is_empty() or (state.realism in realism_list):
 				pool.append(e)
 
-	# Weighted selection
-	return SimEvents.weighted_pick_roll(pool, rng, state.difficulty)
+	# Weighted selection — realism additionally biases how often a
+	# realism-tagged (supernatural/mythic) event surfaces among the
+	# eligible pool; see SimEvents._realism_weight_mult.
+	return SimEvents.weighted_pick_roll(pool, rng, state.difficulty, state.realism)
 
 
 # ═══════════════════════════════════════════════════════════════════════════
@@ -546,7 +573,7 @@ static func resolve_assignments(state: GameState) -> Dictionary:
 			if c.alive and not c.injured and not c.is_child:
 				able.append(c)
 		if not able.is_empty() and rng.call() < sup_injury:
-			var pick: CharacterData = able[rng.call() * able.size()]
+			var pick: CharacterData = able[mini(int(rng.call() * able.size()), able.size() - 1)]
 			if not (pick.char_name in injuries):
 				pick.injured = true
 				injuries.append(pick.char_name)
@@ -846,6 +873,10 @@ static func advance_week(state: GameState) -> GameState:
 
 	# ── Update state ──
 	state.week = next_week
+	# Year is derived from the global week counter (52 weeks/year). Without this,
+	# the year stays frozen at 1 — breaking the survive-3-years victory, the
+	# year>=2 viking gate, and shipping-season tracking.
+	state.year = (next_week - 1) / 52 + 1
 	state.season = season
 	state.weather = weather
 	state.event_flags = flags

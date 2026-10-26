@@ -1,0 +1,6547 @@
+[
+	{
+		"id": "survey_the_land",
+		"title": "Survey the Land",
+		"text": "The high-seat pillars stand in the earth. Before you lies a wild shore — sea to the west, mountains to the east, and a narrow strip of grazing land between. Your household looks to you. What shall be done first?",
+		"weight": 0,
+		"tags": [
+			"tutorial"
+		],
+		"seasons": [
+			0,
+			1,
+			2
+		],
+		"min_week": 1,
+		"max_week": 4,
+		"choices": [
+			{
+				"text": "Send scouts to read the land (recommended)",
+				"effects": {
+					"food": 3,
+					"knowledge": 3,
+					"lore_branch": 3,
+					"lore_amount": 2
+				}
+			},
+			{
+				"text": "Gather what the shore provides",
+				"effects": {
+					"food": 5,
+					"fuel": 3
+				}
+			},
+			{
+				"text": "Raise the first shelter beams",
+				"effects": {
+					"materials": -3,
+					"shelter": 1
+				}
+			}
+		]
+	},
+	{
+		"id": "flokis_temptation",
+		"title": "Floki's Temptation",
+		"text": "The fishing is extraordinary this week. The crew wants to drop the hay scythes and haul in the catch.",
+		"weight": 8,
+		"tags": [
+			"saga",
+			"survival"
+		],
+		"seasons": [
+			1
+		],
+		"choices": [
+			{
+				"text": "Fish hard (+food, but no hay cut)",
+				"effects": {
+					"food": 22,
+					"hay": -6,
+					"saga_entry": "Like Floki, the household chose fish over hay. Winter will judge it."
+				}
+			},
+			{
+				"text": "Split labor (some food, keep cutting hay)",
+				"effects": {
+					"food": 9,
+					"hay": 4,
+					"morale": 2
+				}
+			},
+			{
+				"text": "Cut hay regardless (fodder secured)",
+				"effects": {
+					"hay": 10,
+					"morale": -2
+				}
+			}
+		]
+	},
+	{
+		"id": "bardr_warm_wind",
+		"title": "The Warm Inland Wind",
+		"text": "A scout notices the wind off the interior is warmer than the sea wind, as Bardr once did.",
+		"weight": 6,
+		"tags": [
+			"saga",
+			"wayfinding"
+		],
+		"min_week": 2,
+		"choices": [
+			{
+				"text": "Send scouts inland (wayfinding lore + discovery)",
+				"effects": {
+					"lore_branch": 3,
+					"lore_amount": 4,
+					"discover_region": 8,
+					"saga_entry": "Scouts followed the warm wind to sheltered slopes."
+				}
+			},
+			{
+				"text": "Stay and work the camp",
+				"effects": {
+					"morale": 1
+				}
+			}
+		]
+	},
+	{
+		"id": "whispering_bones",
+		"title": "Whispering Bones",
+		"text": "Marked bones hum at dusk near an old cairn. The dogs will not approach.",
+		"weight": 6,
+		"tags": [
+			"saga",
+			"lore"
+		],
+		"min_week": 2,
+		"choices": [
+			{
+				"text": "Study the markings (needs ritual lore)",
+				"effects": {
+					"knowledge": 8,
+					"lore_branch": 1,
+					"lore_amount": 4,
+					"morale": 3,
+					"milestone": "tomeFirstHearth",
+					"saga_entry": "The First Hearth tome begun from the bone-markings."
+				},
+				"requires_lore": {
+					"1": 3
+				}
+			},
+			{
+				"text": "Rebury them properly",
+				"effects": {
+					"lore_branch": 1,
+					"lore_amount": 2,
+					"morale": 2
+				}
+			},
+			{
+				"text": "Leave them be",
+				"effects": {
+					"morale": -2
+				}
+			}
+		]
+	},
+	{
+		"id": "driftwood_windfall",
+		"title": "Driftwood Windfall",
+		"text": "A storm heaps sea-borne timber on the strand.",
+		"weight": 7,
+		"tags": [
+			"resource"
+		],
+		"seasons": [
+			0,
+			2,
+			3
+		],
+		"choices": [
+			{
+				"text": "Haul it all (+materials +fuel, costs food)",
+				"effects": {
+					"materials": 15,
+					"fuel": 6,
+					"food": -5
+				}
+			},
+			{
+				"text": "Take what is easy",
+				"effects": {
+					"materials": 8
+				}
+			}
+		]
+	},
+	{
+		"id": "orlygr_holy_cargo",
+		"title": "Holy Cargo",
+		"text": "A western ship offers church timber, an iron bell, and consecrated earth, as Bishop Patrick gave Orlygr.",
+		"weight": 4,
+		"tags": [
+			"saga",
+			"religion"
+		],
+		"seasons": [
+			1
+		],
+		"min_week": 14,
+		"choices": [
+			{
+				"text": "Accept and raise a church (needs ritual lore)",
+				"effects": {
+					"wealth": -4,
+					"materials": -6,
+					"morale": 8,
+					"lore_branch": 1,
+					"lore_amount": 6,
+					"milestone": "templeOrChurch",
+					"saga_entry": "Consecrated earth laid beneath new posts; a church rises."
+				},
+				"requires_lore": {
+					"1": 3
+				}
+			},
+			{
+				"text": "Trade for the timber only",
+				"effects": {
+					"wealth": -2,
+					"materials": 8
+				}
+			},
+			{
+				"text": "Decline the offer",
+				"effects": {}
+			}
+		]
+	},
+	{
+		"id": "auds_crosses",
+		"title": "Aud's Crosses",
+		"text": "A baptised elder wishes to raise crosses on the hill and pray there, as Aud the Deep-Minded did.",
+		"weight": 4,
+		"tags": [
+			"saga",
+			"religion"
+		],
+		"choices": [
+			{
+				"text": "Allow it (genealogy + ritual lore, morale)",
+				"effects": {
+					"lore_branch": 2,
+					"lore_amount": 3,
+					"morale": 5,
+					"standing": 2,
+					"saga_entry": "Crosses raised on the hill; kin memory deepens."
+				}
+			},
+			{
+				"text": "Keep the hill for the old rites",
+				"effects": {
+					"lore_branch": 1,
+					"lore_amount": 3,
+					"morale": 2
+				}
+			}
+		]
+	},
+	{
+		"id": "strangers_at_gate",
+		"title": "Frozen Travelers",
+		"text": "Three strangers stagger from the snow toward your hall.",
+		"weight": 5,
+		"tags": [
+			"saga",
+			"social"
+		],
+		"seasons": [
+			3
+		],
+		"min_week": 20,
+		"choices": [
+			{
+				"text": "Welcome them (food + standing + skills)",
+				"effects": {
+					"food": -12,
+					"fuel": -5,
+					"morale": 10,
+					"standing": 5,
+					"wealth": 2,
+					"knowledge": 4,
+					"saga_entry": "The hall gave fire and stew to the frozen; the household is spoken well of."
+				}
+			},
+			{
+				"text": "Turn them away",
+				"effects": {
+					"morale": -6,
+					"standing": -3
+				}
+			}
+		]
+	},
+	{
+		"id": "bog_iron",
+		"title": "Bog Iron",
+		"text": "Rusty blooms glint at a marsh edge.",
+		"weight": 6,
+		"tags": [
+			"resource"
+		],
+		"seasons": [
+			1,
+			2
+		],
+		"choices": [
+			{
+				"text": "Experiment with smelting",
+				"effects": {
+					"tools": 12,
+					"fuel": -6,
+					"materials": -3,
+					"knowledge": 4
+				}
+			},
+			{
+				"text": "Mark the site for later",
+				"effects": {
+					"knowledge": 3,
+					"discover_region": 2
+				}
+			}
+		]
+	},
+	{
+		"id": "wood_rights",
+		"title": "Wood Rights",
+		"text": "A neighbouring household claims your grove, as Thorolf Halt-Foot once feuded over timber.",
+		"weight": 5,
+		"tags": [
+			"saga",
+			"politics"
+		],
+		"seasons": [
+			2,
+			1
+		],
+		"min_week": 14,
+		"choices": [
+			{
+				"text": "Take it to law (needs law lore)",
+				"effects": {
+					"lore_branch": 0,
+					"lore_amount": 4,
+					"standing": 5,
+					"materials": 6,
+					"saga_entry": "A lawful case settled the grove in your favour."
+				},
+				"requires_lore": {
+					"0": 6
+				}
+			},
+			{
+				"text": "Offer shared use",
+				"effects": {
+					"materials": -5,
+					"morale": 3,
+					"standing": 1
+				}
+			},
+			{
+				"text": "Refuse by force (standing risk)",
+				"effects": {
+					"morale": -3,
+					"standing": -4,
+					"materials": 5
+				}
+			}
+		]
+	},
+	{
+		"id": "thorolf_haltfoot",
+		"title": "The Restless Dead",
+		"text": "A herdsman is found dead and cattle run mad. The household fears a walker, like Thorolf Halt-Foot.",
+		"weight": 4,
+		"tags": [
+			"saga",
+			"supernatural"
+		],
+		"seasons": [
+			3,
+			2
+		],
+		"realism": [
+			2
+		],
+		"min_week": 24,
+		"difficulty_bias": {
+			"2": 1.2,
+			"3": 1.4
+		},
+		"choices": [
+			{
+				"text": "Hold a door-doom and rebury (needs law + ritual)",
+				"effects": {
+					"lore_branch": 1,
+					"lore_amount": 5,
+					"morale": 6,
+					"standing": 3,
+					"saga_entry": "A door-doom and proper reburial laid the walker to rest."
+				},
+				"requires_lore": {
+					"0": 2,
+					"1": 2
+				}
+			},
+			{
+				"text": "Burn the corpse and move the byre",
+				"effects": {
+					"fuel": -8,
+					"morale": 2,
+					"herd_delta": {
+						"0": -1
+					}
+				}
+			},
+			{
+				"text": "Endure the hauntings",
+				"effects": {
+					"morale": -10,
+					"herd_delta": {
+						"0": -1,
+						"1": -2
+					}
+				}
+			}
+		]
+	},
+	{
+		"id": "landvaettir_omen",
+		"title": "The Landvaettir Stir",
+		"text": "Shapes move in the hill-mist at dawn. No one agrees whether they were foxes, spirits, or the land itself taking measure.",
+		"weight": 5,
+		"tags": [
+			"mythic",
+			"omen"
+		],
+		"seasons": [
+			0,
+			1,
+			2
+		],
+		"realism": [
+			1
+		],
+		"min_week": 4,
+		"choices": [
+			{
+				"text": "Leave an offering at the hill",
+				"effects": {
+					"food": -4,
+					"morale": 5,
+					"lore_branch": 1,
+					"lore_amount": 4,
+					"saga_entry": "An offering was left where the hill watched back; the household slept easier."
+				}
+			},
+			{
+				"text": "Map the signs and weather",
+				"effects": {
+					"knowledge": 6,
+					"lore_branch": 3,
+					"lore_amount": 3,
+					"discover_region": 7
+				}
+			},
+			{
+				"text": "Mock the omen and keep working",
+				"effects": {
+					"materials": 5,
+					"morale": -3
+				}
+			}
+		]
+	},
+	{
+		"id": "draugr_dreams",
+		"title": "Dreams Under the Turf",
+		"text": "The sleepers wake with the same dream: a hand knocking from below the floor, counting the living by name.",
+		"weight": 5,
+		"tags": [
+			"horror",
+			"supernatural"
+		],
+		"seasons": [
+			2,
+			3
+		],
+		"realism": [
+			2
+		],
+		"min_week": 18,
+		"difficulty_bias": {
+			"2": 1.25,
+			"3": 1.5
+		},
+		"choices": [
+			{
+				"text": "Keep ritual watch through the night",
+				"effects": {
+					"fuel": -5,
+					"morale": 4,
+					"lore_branch": 1,
+					"lore_amount": 4,
+					"saga_entry": "The night-watch named the fear and kept it outside the hall."
+				},
+				"requires_lore": {
+					"1": 2
+				}
+			},
+			{
+				"text": "Dig beneath the floor",
+				"effects": {
+					"materials": -4,
+					"knowledge": 5,
+					"morale": -2
+				}
+			},
+			{
+				"text": "Sleep anyway",
+				"effects": {
+					"morale": -8,
+					"injury_character_id": "einar"
+				}
+			}
+		]
+	},
+	{
+		"id": "sickness",
+		"title": "Winter Sickness",
+		"text": "A fever moves through the close, smoky hall.",
+		"weight": 5,
+		"tags": [
+			"survival"
+		],
+		"seasons": [
+			3
+		],
+		"min_week": 22,
+		"difficulty_bias": {
+			"0": 0.8,
+			"2": 1.2,
+			"3": 1.35
+		},
+		"choices": [
+			{
+				"text": "Rest and nurse the sick (costs food)",
+				"effects": {
+					"food": -6,
+					"morale": 3
+				}
+			},
+			{
+				"text": "Push through the work",
+				"effects": {
+					"morale": -5,
+					"injury_character_id": "jarl"
+				}
+			}
+		]
+	},
+	{
+		"id": "mild_week",
+		"title": "Quiet Week",
+		"text": "A stretch of calm settles over the household. No crisis demands attention — but that does not mean the day is wasted.",
+		"weight": 12,
+		"tags": [
+			"filler"
+		],
+		"choices": [
+			{
+				"text": "Mend nets and tools",
+				"effects": {
+					"tools": 3,
+					"knowledge": 1
+				}
+			},
+			{
+				"text": "Tell tales by the hearth",
+				"effects": {
+					"morale": 4,
+					"knowledge": 2
+				}
+			},
+			{
+				"text": "Scout the surrounding land",
+				"effects": {
+					"knowledge": 3,
+					"food": 1
+				}
+			}
+		]
+	},
+	{
+		"id": "harsh_weather",
+		"title": "Harsh Weather",
+		"text": "Rain and wind lock the household indoors.",
+		"weight": 9,
+		"tags": [
+			"weather"
+		],
+		"difficulty_bias": {
+			"0": 0.8,
+			"2": 1.2,
+			"3": 1.35
+		},
+		"choices": [
+			{
+				"text": "Tell tales by the fire",
+				"effects": {
+					"knowledge": 5,
+					"lore_branch": 2,
+					"lore_amount": 3,
+					"morale": 5,
+					"food": -3
+				}
+			},
+			{
+				"text": "Craft indoors",
+				"effects": {
+					"tools": 4,
+					"materials": -2
+				}
+			},
+			{
+				"text": "Rest and ration",
+				"effects": {
+					"morale": 2,
+					"food": -1
+				}
+			}
+		]
+	},
+	{
+		"id": "shipping_season",
+		"title": "Sail on the Horizon",
+		"text": "A Norwegian merchant ship stands offshore — heavy-keeled, built for open water. They trade, but the King's man aboard expects some acknowledgement of the old ties.",
+		"weight": 1,
+		"tags": [
+			"politics",
+			"trade"
+		],
+		"choices": [
+			{
+				"text": "Trade surplus for iron and seed",
+				"effects": {
+					"wealth": -5,
+					"tools": 18,
+					"materials": 8,
+					"food": 8,
+					"milestone": "shippingContact",
+					"event_flag_set": {
+						"shippingContact": true
+					},
+					"saga_entry": "First contact with Norwegian traders; iron and seed secured."
+				}
+			},
+			{
+				"text": "Feast the King's envoy (needs standing)",
+				"effects": {
+					"food": -10,
+					"standing": 8,
+					"wealth": 4,
+					"milestone": "shippingContact",
+					"event_flag_set": {
+						"shippingContact": true
+					},
+					"saga_entry": "The envoy was feasted; the household's name travels to Norway."
+				},
+				"requires_standing": 15
+			},
+			{
+				"text": "Buy an indentured worker",
+				"effects": {
+					"food": -8,
+					"wealth": -3,
+					"tools": 4,
+					"saga_entry": "A captive joined the household; their loyalty must be earned."
+				}
+			},
+			{
+				"text": "Defer — not ready",
+				"effects": {
+					"standing": -2
+				}
+			}
+		]
+	},
+	{
+		"id": "lambing",
+		"title": "Lambing Season",
+		"text": "The ewes are heavy. A careful week could grow the flock.",
+		"weight": 6,
+		"tags": [
+			"herd"
+		],
+		"seasons": [
+			0
+		],
+		"choices": [
+			{
+				"text": "Stay up through lambing nights (+sheep, costs food)",
+				"effects": {
+					"food": -5,
+					"herd_delta": {
+						"1": 2,
+						"2": 1
+					},
+					"morale": 2
+				}
+			},
+			{
+				"text": "Butcher the weakest lambs for meat now",
+				"effects": {
+					"food": 6,
+					"herd_delta": {
+						"1": -1
+					}
+				}
+			},
+			{
+				"text": "Leave the flock to the shepherd dog — other work calls",
+				"effects": {
+					"herd_delta": {
+						"1": 1
+					},
+					"materials": 2
+				}
+			}
+		]
+	},
+	{
+		"id": "volcano_ash",
+		"title": "Mountain Coughs Ash",
+		"text": "Ash from an inland volcano darkens the sky. Lichen on the rocks turns gray.",
+		"weight": 5,
+		"tags": [
+			"disaster",
+			"omen",
+			"land"
+		],
+		"seasons": [
+			1,
+			0
+		],
+		"choices": [
+			{
+				"text": "Gather all lichen quickly",
+				"effects": {
+					"food": 8,
+					"materials": 3,
+					"morale": -2
+				}
+			},
+			{
+				"text": "Make an offering to the land (Land lore)",
+				"effects": {
+					"food": -3,
+					"morale": 4,
+					"lore_branch": 4,
+					"lore_amount": 4,
+					"vaettir_shift": {
+						"region": -1,
+						"mood": 1
+					},
+					"saga_entry": "An offering was laid. The ash settled."
+				},
+				"requires_lore": {
+					"4": 1
+				}
+			}
+		]
+	},
+	{
+		"id": "spring_thaw_flood",
+		"title": "Ice Break - River Roars",
+		"text": "Spring melt swells the river. The ford is impassable. Upriver is longer, downriver is faster but risky.",
+		"weight": 4,
+		"tags": [
+			"survival",
+			"wayfinding"
+		],
+		"seasons": [
+			0
+		],
+		"min_week": 8,
+		"choices": [
+			{
+				"text": "Send scouts upriver (wayfinding lore)",
+				"effects": {
+					"food": -4,
+					"knowledge": 3,
+					"lore_branch": 3,
+					"lore_amount": 2,
+					"discover_region": 4,
+					"saga_entry": "The upriver path was found safe."
+				},
+				"requires_lore": {
+					"3": 2
+				}
+			},
+			{
+				"text": "Risk the fast route (dangerous)",
+				"effects": {
+					"materials": 8,
+					"morale": 2
+				}
+			}
+		]
+	},
+	{
+		"id": "early_winter",
+		"title": "Winter Comes Early",
+		"text": "Snow falls in September. Your winter stores are only 60 percent full.",
+		"weight": 5,
+		"tags": [
+			"disaster",
+			"survival"
+		],
+		"seasons": [
+			2
+		],
+		"min_week": 12,
+		"choices": [
+			{
+				"text": "Ration strictly",
+				"effects": {
+					"morale": -8,
+					"food": 4
+				}
+			},
+			{
+				"text": "Hunt desperately before snow traps everyone",
+				"effects": {
+					"food": 12,
+					"fuel": -3,
+					"materials": -3
+				}
+			},
+			{
+				"text": "Negotiate grain loan from neighbor (debt)",
+				"effects": {
+					"food": 10,
+					"standing": -5
+				}
+			}
+		]
+	},
+	{
+		"id": "grazing_dispute",
+		"title": "Grazing Encroachment",
+		"text": "A neighboring household drives their sheep onto your upland pasture.",
+		"weight": 6,
+		"tags": [
+			"dispute",
+			"politics"
+		],
+		"choices": [
+			{
+				"text": "Bring it to the Thing (law lore)",
+				"effects": {
+					"standing": 4,
+					"morale": 3,
+					"lore_branch": 0,
+					"lore_amount": 3,
+					"event_flag_clear": [
+						"grazing_dispute",
+						"feudStarted"
+					],
+					"saga_entry": "The Thing ruled in your favor."
+				},
+				"requires_lore": {
+					"0": 5
+				}
+			},
+			{
+				"text": "Drive their sheep back by night (risky)",
+				"effects": {
+					"morale": 5,
+					"standing": -3,
+					"event_flag_set": {
+						"grazing_dispute": true,
+						"feudStarted": true
+					},
+					"saga_entry": "Sheep were driven back in darkness. Grudge followed."
+				}
+			}
+		]
+	},
+	{
+		"id": "insult_at_feast",
+		"title": "An Insult at the Feast",
+		"text": "A rival spoke slightingly of your judgment before twenty witnesses.",
+		"weight": 4,
+		"tags": [
+			"honor",
+			"politics"
+		],
+		"min_week": 16,
+		"choices": [
+			{
+				"text": "Challenge to single combat",
+				"effects": {
+					"standing": 5,
+					"morale": 6,
+					"lore_branch": 2,
+					"lore_amount": 3,
+					"saga_entry": "Combat was fought. Your household won."
+				},
+				"requires_lore": {
+					"2": 3
+				}
+			},
+			{
+				"text": "Respond with wit and grace",
+				"effects": {
+					"standing": 2,
+					"morale": 2,
+					"knowledge": 2
+				}
+			}
+		]
+	},
+	{
+		"id": "bloodfeud_legacy",
+		"title": "A Debt of Blood",
+		"text": "A man from a rival line appears. Years ago your grandfather killed his grandfather. He demands compensation or blood.",
+		"weight": 3,
+		"tags": [
+			"feud",
+			"honor",
+			"law"
+		],
+		"min_week": 20,
+		"choices": [
+			{
+				"text": "Negotiate wergeld (blood price)",
+				"effects": {
+					"wealth": -8,
+					"standing": 3,
+					"morale": 4,
+					"lore_branch": 0,
+					"lore_amount": 3,
+					"saga_entry": "Wergeld was paid. The feud ended."
+				},
+				"requires_lore": {
+					"0": 4
+				},
+				"requires_standing": 12
+			},
+			{
+				"text": "Offer single combat to end it",
+				"effects": {
+					"standing": 4,
+					"morale": 5
+				}
+			}
+		]
+	},
+	{
+		"id": "trader_proposal",
+		"title": "A Trader Seeks Partnership",
+		"text": "A Norse merchant from Trondheim offers to establish a permanent trading post at your harbor.",
+		"weight": 3,
+		"tags": [
+			"trade",
+			"politics"
+		],
+		"seasons": [
+			1
+		],
+		"min_week": 14,
+		"choices": [
+			{
+				"text": "Accept the partnership",
+				"effects": {
+					"materials": 8,
+					"wealth": 4,
+					"standing": 2,
+					"milestone": "shippingContact",
+					"saga_entry": "A trader settled at the harbor. Ships call regularly."
+				}
+			},
+			{
+				"text": "Offer seasonal booth rights only",
+				"effects": {
+					"wealth": 2,
+					"materials": 4
+				}
+			}
+		]
+	},
+	{
+		"id": "lost_shipment",
+		"title": "A Ship Vanishes",
+		"text": "A merchant ship carrying your goods is lost in a squall. No survivors.",
+		"weight": 4,
+		"tags": [
+			"disaster",
+			"trade"
+		],
+		"min_week": 18,
+		"choices": [
+			{
+				"text": "Sue at the Thing (law lore)",
+				"effects": {
+					"wealth": 6,
+					"standing": 2,
+					"lore_branch": 0,
+					"lore_amount": 2,
+					"saga_entry": "Restitution was ordered."
+				},
+				"requires_lore": {
+					"0": 4
+				}
+			},
+			{
+				"text": "Accept the loss",
+				"effects": {
+					"morale": -4,
+					"wealth": -8
+				}
+			}
+		]
+	},
+	{
+		"id": "eastern_routes",
+		"title": "Rumor of Eastern Routes",
+		"text": "A Greenland trader speaks of a new sailing route that shortens the journey to Norway.",
+		"weight": 3,
+		"tags": [
+			"exploration",
+			"risk",
+			"trade"
+		],
+		"seasons": [
+			1
+		],
+		"choices": [
+			{
+				"text": "Send a small ship to test it (wayfinding lore)",
+				"effects": {
+					"materials": -6,
+					"knowledge": 8,
+					"lore_branch": 3,
+					"lore_amount": 4,
+					"milestone": "shippingContact",
+					"saga_entry": "The new route was proven. Trade shifted."
+				},
+				"requires_lore": {
+					"3": 4
+				}
+			},
+			{
+				"text": "Load your best cargo and gamble",
+				"effects": {
+					"wealth": 10,
+					"standing": 4
+				}
+			}
+		]
+	},
+	{
+		"id": "heir_marriage",
+		"title": "A Marriage Proposal",
+		"text": "The wealthiest household proposes marriage between your eldest and their kin.",
+		"weight": 4,
+		"tags": [
+			"family",
+			"politics"
+		],
+		"min_week": 12,
+		"choices": [
+			{
+				"text": "Accept and cement alliance (genealogy lore)",
+				"effects": {
+					"standing": 6,
+					"wealth": 4,
+					"lore_branch": 2,
+					"lore_amount": 3,
+					"morale": 5,
+					"saga_entry": "Two great households became one."
+				},
+				"requires_lore": {
+					"2": 2
+				}
+			},
+			{
+				"text": "Negotiate better bride-price",
+				"effects": {
+					"wealth": 8,
+					"standing": 2
+				}
+			}
+		]
+	},
+	{
+		"id": "orphan_relative",
+		"title": "A Starving Cousin Arrives",
+		"text": "A distant relative appears ragged and half-starved. They ask for shelter and work.",
+		"weight": 5,
+		"tags": [
+			"family",
+			"charity"
+		],
+		"choices": [
+			{
+				"text": "Take them in (genealogy lore)",
+				"effects": {
+					"food": -8,
+					"morale": 4,
+					"standing": 2,
+					"lore_branch": 2,
+					"lore_amount": 2,
+					"saga_entry": "The cousin was given work. Family bonds deepened."
+				}
+			},
+			{
+				"text": "Give food and send elsewhere",
+				"effects": {
+					"food": -4,
+					"morale": 2,
+					"standing": 1
+				}
+			},
+			{
+				"text": "Turn them away",
+				"effects": {
+					"morale": -6,
+					"standing": -4
+				}
+			}
+		]
+	},
+	{
+		"id": "christian_missionary",
+		"title": "A Priest Arrives",
+		"text": "A Christian missionary offers baptism and heavenly protection. Your household is split on the old gods vs new.",
+		"weight": 4,
+		"tags": [
+			"religion",
+			"faith"
+		],
+		"choices": [
+			{
+				"text": "Baptize the household (ritual lore)",
+				"effects": {
+					"standing": 5,
+					"morale": 3,
+					"lore_branch": 1,
+					"lore_amount": 3,
+					"wealth": -2,
+					"milestone": "templeOrChurch",
+					"saga_entry": "The household was baptized."
+				},
+				"requires_lore": {
+					"1": 2
+				}
+			},
+			{
+				"text": "Let individuals decide",
+				"effects": {
+					"morale": 1,
+					"lore_branch": 1,
+					"lore_amount": 1
+				}
+			},
+			{
+				"text": "Send the priest away - keep old ways",
+				"effects": {
+					"lore_branch": 1,
+					"lore_amount": 2,
+					"standing": -2
+				}
+			}
+		]
+	},
+	{
+		"id": "skald_visit",
+		"title": "A Skald Arrives",
+		"text": "A celebrated poet asks for hospitality and offers to compose a poem about your household.",
+		"weight": 4,
+		"tags": [
+			"culture",
+			"prestige"
+		],
+		"choices": [
+			{
+				"text": "Commission a praise-poem (standing, costs food)",
+				"effects": {
+					"food": -6,
+					"standing": 6,
+					"lore_branch": 2,
+					"lore_amount": 4,
+					"knowledge": 4,
+					"saga_entry": "The skald composed a fierce drápa. Your name travels the district."
+				}
+			},
+			{
+				"text": "Ask the skald to teach the household new verses",
+				"effects": {
+					"food": -4,
+					"morale": 4,
+					"knowledge": 5,
+					"lore_branch": 2,
+					"lore_amount": 3,
+					"saga_entry": "The household learned new verses. The hearth grew warm with song."
+				}
+			},
+			{
+				"text": "Send the skald away — too many mouths to feed",
+				"effects": {
+					"morale": -3,
+					"standing": -2,
+					"saga_entry": "The skald left without composing. The household lost a chance at fame."
+				}
+			}
+		]
+	},
+	{
+		"id": "ancient_settlement",
+		"title": "Ruins of First Settlers",
+		"text": "Scouts find stone foundations and carved marks in a hidden valley, older than any known household.",
+		"weight": 4,
+		"tags": [
+			"discovery",
+			"mystery",
+			"lore"
+		],
+		"choices": [
+			{
+				"text": "Excavate carefully (rune lore)",
+				"effects": {
+					"materials": -3,
+					"knowledge": 8,
+					"lore_branch": 5,
+					"lore_amount": 5,
+					"discover_region": 5,
+					"saga_entry": "Ancient marks were read. The island remembered."
+				},
+				"requires_lore": {
+					"5": 2
+				}
+			},
+			{
+				"text": "Map the site but do not disturb",
+				"effects": {
+					"discover_region": 5
+				}
+			}
+		]
+	},
+	{
+		"id": "eagle_hunting",
+		"title": "Eagles Hunt Your Lambs",
+		"text": "A pair of sea eagles nested on the cliffs and hunt your new lambs. Three are already lost.",
+		"weight": 5,
+		"tags": [
+			"herd",
+			"land"
+		],
+		"seasons": [
+			0
+		],
+		"choices": [
+			{
+				"text": "Climb to the nest and take eggs (dangerous)",
+				"effects": {
+					"herd_delta": {
+						"1": 2
+					},
+					"morale": 5,
+					"saga_entry": "The brave hunter climbed. Eagles were driven away."
+				}
+			},
+			{
+				"text": "Move lambs to safer pasture",
+				"effects": {
+					"herd_delta": {
+						"1": -1
+					},
+					"materials": -3
+				}
+			}
+		]
+	},
+	{
+		"id": "gold_find",
+		"title": "Gold in the Stream",
+		"text": "Children find gold flakes in a stream. The stream is small but flakes are real.",
+		"weight": 2,
+		"tags": [
+			"treasure",
+			"wealth"
+		],
+		"choices": [
+			{
+				"text": "Pan the stream (knowledge)",
+				"effects": {
+					"wealth": 8,
+					"knowledge": 3,
+					"discover_region": 6,
+					"morale": 5,
+					"saga_entry": "Gold was found. Wealth flowed like water."
+				}
+			},
+			{
+				"text": "Keep it secret",
+				"effects": {
+					"wealth": 4,
+					"morale": 3
+				}
+			}
+		]
+	},
+	{
+		"id": "dead_man_high_seat",
+		"title": "The Dead Man in the High Seat",
+		"text": "An elder of the household dies sitting upright at his place by the fire. His face has set into something between sleep and fury. The household debates: carry him out the door as usual — or do it properly.",
+		"weight": 4,
+		"tags": [
+			"supernatural",
+			"burial",
+			"draugr"
+		],
+		"min_week": 4,
+		"blocks_flags": {
+			"seen_dead_man_high_seat": true
+		},
+		"choices": [
+			{
+				"text": "Break a hole in the wall — the dead must not know the door (Ritual lore)",
+				"effects": {
+					"morale": -3,
+					"materials": -2,
+					"burial_debt_shift": -2,
+					"lore_branch": 1,
+					"lore_amount": 3,
+					"event_flag_set": {
+						"seen_dead_man_high_seat": true
+					},
+					"saga_entry": "The dead man was carried through a broken wall, face covered. The door was left clean."
+				},
+				"requires_lore": {
+					"1": 2
+				}
+			},
+			{
+				"text": "Break the wall and hold full burial rites with law-witnesses",
+				"effects": {
+					"morale": -2,
+					"materials": -3,
+					"standing": 2,
+					"burial_debt_shift": -4,
+					"lore_branch": 1,
+					"lore_amount": 4,
+					"event_flag_set": {
+						"seen_dead_man_high_seat": true
+					},
+					"saga_entry": "Full rites were kept with witnesses. The dead man is quiet."
+				},
+				"requires_lore": {
+					"0": 3,
+					"1": 3
+				}
+			},
+			{
+				"text": "Carry him out the normal door — time is short",
+				"effects": {
+					"morale": 1,
+					"burial_debt_shift": 4,
+					"event_flag_set": {
+						"seen_dead_man_high_seat": true
+					},
+					"saga_entry": "They buried him quickly. Someone said the face turned as they crossed the threshold."
+				}
+			},
+			{
+				"text": "Leave him sitting — it feels wrong to move him",
+				"effects": {
+					"morale": -8,
+					"burial_debt_shift": 7,
+					"haunting_shift": 1,
+					"event_flag_set": {
+						"seen_dead_man_high_seat": true
+					},
+					"saga_entry": "They left him in the high seat a day too long. The hall felt different after."
+				}
+			}
+		]
+	},
+	{
+		"id": "blood_rain_hay",
+		"title": "Blood Rain on the Hay",
+		"text": "The workers return from the field troubled. A reddish rain has stained three haystacks. One stack, in the middle of the field, stayed dry and unmarked. The old woman says: \"Do not cut the middle patch.\"",
+		"weight": 5,
+		"tags": [
+			"supernatural",
+			"omen",
+			"vættir",
+			"álagablettir"
+		],
+		"seasons": [
+			1
+		],
+		"min_week": 6,
+		"blocks_flags": {
+			"seen_blood_rain_hay": true
+		},
+		"choices": [
+			{
+				"text": "Leave the middle patch. Cut around it (Land lore)",
+				"effects": {
+					"hay": -4,
+					"morale": 2,
+					"vaettir_shift": {
+						"region": -1,
+						"mood": 1
+					},
+					"lore_branch": 4,
+					"lore_amount": 3,
+					"event_flag_set": {
+						"seen_blood_rain_hay": true
+					},
+					"saga_entry": "The middle patch was left uncut. The land seemed to exhale."
+				},
+				"requires_lore": {
+					"4": 2
+				}
+			},
+			{
+				"text": "Make a food offering at the middle patch before cutting anything",
+				"effects": {
+					"food": -3,
+					"hay": -2,
+					"morale": 3,
+					"vaettir_shift": {
+						"region": -1,
+						"mood": 2
+					},
+					"lore_branch": 4,
+					"lore_amount": 4,
+					"event_flag_set": {
+						"seen_blood_rain_hay": true
+					},
+					"saga_entry": "Offering was left at the marked spot. The hay came in well enough."
+				},
+				"requires_lore": {
+					"1": 2,
+					"4": 1
+				}
+			},
+			{
+				"text": "Cut everything — winter does not wait for superstition",
+				"effects": {
+					"hay": 8,
+					"morale": -2,
+					"vaettir_shift": {
+						"region": -1,
+						"mood": 3
+					},
+					"taboo_violate": "coast",
+					"event_flag_set": {
+						"vaettirOffended": true,
+						"seen_blood_rain_hay": true
+					},
+					"saga_entry": "They cut the middle patch. The cattle would not eat that hay."
+				}
+			},
+			{
+				"text": "Study the rain and the pattern (Land lore)",
+				"effects": {
+					"lore_branch": 4,
+					"lore_amount": 5,
+					"morale": 1,
+					"vaettir_shift": {
+						"region": -1,
+						"mood": 1
+					},
+					"event_flag_set": {
+						"seen_blood_rain_hay": true
+					},
+					"saga_entry": "The settlement now knows which patches to watch. The island speaks in rain."
+				},
+				"requires_lore": {
+					"4": 2
+				}
+			}
+		]
+	},
+	{
+		"id": "the_hill_that_heals",
+		"title": "The Hill That Heals",
+		"text": "An injured worker has not improved in three weeks. A neighbour whispers that the mounded hill north of the settlement has elf-dwellers — and that the elves will sometimes heal, if given what they ask.",
+		"weight": 5,
+		"tags": [
+			"supernatural",
+			"álfar",
+			"healing"
+		],
+		"min_week": 5,
+		"blocks_flags": {
+			"seen_hill_heals": true
+		},
+		"choices": [
+			{
+				"text": "Slaughter the black bull and redden the hill with its blood. Make a feast for the elves.",
+				"effects": {
+					"food": -8,
+					"morale": 3,
+					"vaettir_shift": {
+						"region": 1,
+						"mood": 2
+					},
+					"lore_branch": 1,
+					"lore_amount": 4,
+					"event_flag_set": {
+						"seen_hill_heals": true
+					},
+					"saga_entry": "The bull was given. The injured worker woke clear-eyed two mornings later."
+				},
+				"requires_lore": {
+					"1": 3
+				}
+			},
+			{
+				"text": "Leave butter, milk, and a spoken word at dusk",
+				"effects": {
+					"food": -2,
+					"morale": 2,
+					"vaettir_shift": {
+						"region": 1,
+						"mood": 1
+					},
+					"lore_branch": 4,
+					"lore_amount": 2,
+					"event_flag_set": {
+						"seen_hill_heals": true
+					},
+					"saga_entry": "Butter was left at the hill. The worker recovered slowly."
+				},
+				"requires_lore": {
+					"4": 2
+				}
+			},
+			{
+				"text": "Refuse — this is idol worship and the God of the Franks forbids it",
+				"effects": {
+					"morale": -4,
+					"knowledge": 1,
+					"standing": -1,
+					"event_flag_set": {
+						"seen_hill_heals": true
+					},
+					"saga_entry": "No offering was given. The worker either healed or did not on his own terms."
+				}
+			},
+			{
+				"text": "The hill is full of good building stone. Quarry it.",
+				"effects": {
+					"materials": 10,
+					"morale": -5,
+					"vaettir_shift": {
+						"region": 1,
+						"mood": 4
+					},
+					"taboo_violate": "valley",
+					"curse_gain": "cursed_bedgear",
+					"event_flag_set": {
+						"seen_hill_heals": true
+					},
+					"saga_entry": "They quarried the elf-hill. The stone was good. The year was not."
+				}
+			}
+		]
+	},
+	{
+		"id": "driftwood_red_runes",
+		"title": "The Timber That Returns",
+		"text": "A long, useful timber has washed ashore twice. The first time it was lost to the tide. Now it is back, beached higher than the flood-line, as if placed. Some workers want it for roof-beams.",
+		"weight": 6,
+		"tags": [
+			"supernatural",
+			"curse",
+			"rune",
+			"driftwood"
+		],
+		"seasons": [
+			0,
+			1,
+			2
+		],
+		"min_week": 3,
+		"blocks_flags": {
+			"seen_driftwood_runes": true
+		},
+		"choices": [
+			{
+				"text": "Examine it closely before touching it (Rune lore)",
+				"effects": {
+					"lore_branch": 5,
+					"lore_amount": 4,
+					"morale": 1,
+					"event_flag_set": {
+						"seen_driftwood_runes": true
+					},
+					"saga_entry": "The timber bore carved runes, blood-dark in the grooves. It was left for the tide."
+				},
+				"requires_lore": {
+					"5": 3
+				}
+			},
+			{
+				"text": "Burn it on the beach without bringing it inside (Ritual lore)",
+				"effects": {
+					"fuel": 2,
+					"morale": 2,
+					"lore_branch": 5,
+					"lore_amount": 2,
+					"event_flag_set": {
+						"seen_driftwood_runes": true
+					},
+					"saga_entry": "The timber was burned where it lay. The smoke smelled of old anger."
+				},
+				"requires_lore": {
+					"1": 2,
+					"5": 1
+				}
+			},
+			{
+				"text": "Use the timber — perfectly shaped for the roof",
+				"effects": {
+					"materials": 10,
+					"curse_gain": "cursed_driftwood",
+					"haunting_shift": 1,
+					"event_flag_set": {
+						"seen_driftwood_runes": true
+					},
+					"saga_entry": "The timber was brought in and worked into the hall. It sat well. The dreams began that week."
+				}
+			},
+			{
+				"text": "Send it downriver as a gift to the next settlement",
+				"effects": {
+					"standing": 2,
+					"morale": 1,
+					"event_flag_set": {
+						"seen_driftwood_runes": true
+					},
+					"saga_entry": "The timber was sent on. Let someone else judge it."
+				}
+			}
+		]
+	},
+	{
+		"id": "door_doom_midnight",
+		"title": "The Door-Doom at Midnight",
+		"text": "The dead are sitting by the fire. Three of them. Two were workers who died last winter; the third no one recognises. They take no food and answer no names. The hall cannot be used safely until they are dismissed.",
+		"weight": 3,
+		"tags": [
+			"supernatural",
+			"haunting",
+			"draugr",
+			"law"
+		],
+		"seasons": [
+			3,
+			2
+		],
+		"choices": [
+			{
+				"text": "Hold a door-doom: summon witnesses, name the dead legally, dismiss them through the threshold",
+				"effects": {
+					"food": -4,
+					"standing": 3,
+					"morale": 5,
+					"haunting_shift": -99,
+					"burial_debt_shift": -5,
+					"draugar_set": false,
+					"lore_branch": 0,
+					"lore_amount": 5,
+					"saga_entry": "The dead were named at the door, judged before witnesses, and dismissed. The fire burned clean."
+				},
+				"requires_lore": {
+					"0": 5,
+					"1": 3
+				}
+			},
+			{
+				"text": "Burn everything the dead owned — their possessions anchor them",
+				"effects": {
+					"materials": -4,
+					"wealth": -3,
+					"haunting_shift": -2,
+					"morale": 3,
+					"lore_branch": 1,
+					"lore_amount": 3,
+					"saga_entry": "Their possessions went on the fire. Two of the three dead were not seen again."
+				},
+				"requires_lore": {
+					"1": 3
+				}
+			},
+			{
+				"text": "Bring a priest, holy water, and Christian prayer",
+				"effects": {
+					"standing": -2,
+					"morale": 4,
+					"haunting_shift": -1,
+					"lore_branch": 1,
+					"lore_amount": 2,
+					"saga_entry": "The priest came and said his words. It helped somewhat. The third ghost lingered."
+				},
+				"requires_lore": {
+					"1": 2
+				}
+			},
+			{
+				"text": "Put the household's fighters against them — steel and courage",
+				"effects": {
+					"morale": -6,
+					"injury_character_id": "bjarne",
+					"haunting_shift": 1,
+					"permanent_scar": "fear_of_dark",
+					"saga_entry": "They fought what sat at the fire. The blows landed. The dead laughed. Someone did not sleep well for a long time after."
+				}
+			},
+			{
+				"text": "Seal the hall and sleep in the byre until it passes",
+				"effects": {
+					"morale": -8,
+					"haunting_shift": 1,
+					"saga_entry": "The hall was left to them. The cold was bitter that week."
+				}
+			}
+		]
+	},
+	{
+		"id": "hidden_farm_under_stone",
+		"title": "The Hidden Farm Under Stone",
+		"text": "The workers report that the new road line passes directly over a large flat-topped boulder. The night before work was to begin, a child woke screaming about the noise from underneath. A ewe is missing. The boulder hums faintly at dusk.",
+		"weight": 5,
+		"tags": [
+			"supernatural",
+			"huldufólk",
+			"land",
+			"construction"
+		],
+		"seasons": [
+			0,
+			1
+		],
+		"min_week": 4,
+		"blocks_flags": {
+			"seen_hidden_farm": true
+		},
+		"choices": [
+			{
+				"text": "Reroute the road around the stone (Land lore)",
+				"effects": {
+					"materials": -3,
+					"morale": 2,
+					"vaettir_shift": {
+						"region": -1,
+						"mood": 1
+					},
+					"lore_branch": 4,
+					"lore_amount": 3,
+					"event_flag_set": {
+						"seen_hidden_farm": true
+					},
+					"saga_entry": "The road bent around the boulder. The ewe was found the next morning."
+				},
+				"requires_lore": {
+					"4": 2
+				}
+			},
+			{
+				"text": "Leave milk and ask in words for passage (Land lore + Ritual lore)",
+				"effects": {
+					"food": -2,
+					"morale": 3,
+					"vaettir_shift": {
+						"region": -1,
+						"mood": 2
+					},
+					"lore_branch": 4,
+					"lore_amount": 4,
+					"event_flag_set": {
+						"seen_hidden_farm": true
+					},
+					"saga_entry": "Words were spoken at the boulder. A dream came that night: passage was granted on one condition — the child born that spring must be named before the third sunrise."
+				},
+				"requires_lore": {
+					"1": 1,
+					"4": 1
+				}
+			},
+			{
+				"text": "Move the boulder — it is only rock",
+				"effects": {
+					"materials": 6,
+					"morale": -4,
+					"vaettir_shift": {
+						"region": -1,
+						"mood": 3
+					},
+					"taboo_violate": "coast",
+					"haunting_shift": 1,
+					"event_flag_set": {
+						"seen_hidden_farm": true
+					},
+					"saga_entry": "Six men moved the stone. It took twice the expected effort. Accidents followed that week."
+				}
+			},
+			{
+				"text": "Offer to help whatever is there — provide materials, not take them",
+				"effects": {
+					"materials": -5,
+					"food": -3,
+					"morale": 5,
+					"standing": 2,
+					"vaettir_shift": {
+						"region": -1,
+						"mood": 5
+					},
+					"lore_branch": 4,
+					"lore_amount": 5,
+					"event_flag_set": {
+						"seen_hidden_farm": true
+					},
+					"saga_entry": "Gifts were left at the stone with no demand. By spring, the area around it yielded the best hay on the settlement."
+				},
+				"requires_lore": {
+					"1": 2,
+					"4": 2
+				}
+			}
+		]
+	},
+	{
+		"id": "volva_visit",
+		"title": "The Travelling Völva",
+		"text": "A grey-cloaked woman has arrived at the settlement asking for hospitality. She carries a staff and sits without being invited to do so. When asked her business, she says: \"There is a famine coming. I can read its shape, if you give me what the rite requires.\"",
+		"weight": 4,
+		"tags": [
+			"supernatural",
+			"völva",
+			"prophecy"
+		],
+		"seasons": [
+			3,
+			2
+		],
+		"choices": [
+			{
+				"text": "Seat her on the raised platform, prepare the special meal, and have women sing the varðlokkur",
+				"effects": {
+					"food": -6,
+					"morale": 5,
+					"standing": 3,
+					"lore_branch": 1,
+					"lore_amount": 5,
+					"saga_entry": "The völva spoke of the season ahead, named which cow must not be slaughtered, and said where the spring was hidden. She left at dawn without taking payment."
+				},
+				"requires_lore": {
+					"1": 2
+				}
+			},
+			{
+				"text": "Feed her well but skip the full ceremony",
+				"effects": {
+					"food": -3,
+					"morale": 2,
+					"standing": 1,
+					"lore_branch": 1,
+					"lore_amount": 2,
+					"saga_entry": "She spoke of general omens — a hard winter, a calf born white, a stranger at the gate in spring."
+				}
+			},
+			{
+				"text": "Send her away — this is seiðr work and it is forbidden",
+				"effects": {
+					"standing": -2,
+					"morale": -3,
+					"saga_entry": "She left without word. The next week the weather shifted and the hay dried badly."
+				}
+			},
+			{
+				"text": "Ask her to curse the rival farm to the north (Rune lore)",
+				"effects": {
+					"standing": -3,
+					"wealth": -5,
+					"morale": 2,
+					"lore_branch": 5,
+					"lore_amount": 3,
+					"saga_entry": "She took the payment and did not say whether the curse would land on your enemies or on you."
+				},
+				"requires_lore": {
+					"5": 3
+				}
+			}
+		]
+	},
+	{
+		"id": "mountain_moves",
+		"title": "The Mountain Moves",
+		"text": "A worker returning at dusk reports a boulder in a position where there was no boulder yesterday. Three sheep are missing. In the night, something walks on the turf roof — heavy, slow, and unhurried.",
+		"weight": 4,
+		"tags": [
+			"supernatural",
+			"troll",
+			"mountain"
+		],
+		"seasons": [
+			3,
+			2
+		],
+		"choices": [
+			{
+				"text": "Wait until sunrise — delay travel, ring iron, keep fire burning (Land lore)",
+				"effects": {
+					"food": -2,
+					"morale": -2,
+					"lore_branch": 4,
+					"lore_amount": 3,
+					"vaettir_shift": {
+						"region": 7,
+						"mood": 0
+					},
+					"saga_entry": "They waited. At first light, the new boulder sat in the pass-line. A troll turned to stone at sunrise. It makes a fine quarry now."
+				},
+				"requires_lore": {
+					"4": 2
+				}
+			},
+			{
+				"text": "Lure it toward the eastern pass with noise and fire until dawn",
+				"effects": {
+					"morale": 3,
+					"materials": 8,
+					"lore_branch": 4,
+					"lore_amount": 5,
+					"saga_entry": "It took the bait. The stone giant stands in the east pass now, a permanent landmark."
+				},
+				"requires_lore": {
+					"4": 2
+				}
+			},
+			{
+				"text": "Send fighters — this is an animal or a man, not a legend",
+				"effects": {
+					"morale": -5,
+					"injury_character_id": "bjarne",
+					"food": -2,
+					"saga_entry": "They went out at night with blades. One came back badly hurt. The boulder was gone by morning."
+				}
+			},
+			{
+				"text": "Ring the hall with iron tools and keep the hearth fed all night",
+				"effects": {
+					"fuel": -4,
+					"morale": -1,
+					"saga_entry": "They ringed the hall with iron and the sound on the roof stopped before midnight. The sheep were not found."
+				}
+			}
+		]
+	},
+	{
+		"id": "barrow_temptation",
+		"title": "The Mound Beside the Meadow",
+		"text": "Scouts have found a burial mound on the lee slope — old, clearly wealthy, the ground around it undisturbed for generations. A silver brooch is visible through a gap in the stone. The dead man inside probably has more.",
+		"weight": 4,
+		"tags": [
+			"supernatural",
+			"barrow",
+			"wealth",
+			"draugr"
+		],
+		"seasons": [
+			0,
+			1,
+			2
+		],
+		"min_week": 5,
+		"blocks_flags": {
+			"seen_barrow_temptation": true
+		},
+		"choices": [
+			{
+				"text": "Claim ancestry to this mound — \"He is my uncle's uncle.\" (Genealogy lore)",
+				"effects": {
+					"wealth": 12,
+					"standing": 4,
+					"morale": 3,
+					"lore_branch": 2,
+					"lore_amount": 4,
+					"event_flag_set": {
+						"seen_barrow_temptation": true,
+						"barrowClaimed": true
+					},
+					"saga_entry": "The claim was witnessed and spoken. The mound was opened properly. The silver was taken as inheritance."
+				},
+				"requires_lore": {
+					"2": 4
+				}
+			},
+			{
+				"text": "Open it with ceremony — leave offerings, take one item only (Ritual lore)",
+				"effects": {
+					"wealth": 6,
+					"food": -4,
+					"morale": 2,
+					"lore_branch": 1,
+					"lore_amount": 3,
+					"event_flag_set": {
+						"seen_barrow_temptation": true
+					},
+					"saga_entry": "One item was taken with proper ceremony. The mound was closed again. The dead man did not stir."
+				},
+				"requires_lore": {
+					"1": 2
+				}
+			},
+			{
+				"text": "Loot it quietly at night — no witnesses",
+				"effects": {
+					"wealth": 14,
+					"curse_gain": "barrow_silver",
+					"burial_debt_shift": 4,
+					"haunting_shift": 1,
+					"event_flag_set": {
+						"barrowClaimed": true,
+						"seen_barrow_temptation": true
+					},
+					"saga_entry": "They came back loaded. They did not speak of it. The first dream came three nights later."
+				}
+			},
+			{
+				"text": "Sleep beside the mound and ask the dead in dream (Land lore + Ritual lore)",
+				"effects": {
+					"morale": 2,
+					"lore_branch": 4,
+					"lore_amount": 5,
+					"event_flag_set": {
+						"seen_barrow_temptation": true
+					},
+					"saga_entry": "The dead man answered in dream. He asked for his name to be spoken at the Thing. In return, the location of a spring was given."
+				},
+				"requires_lore": {
+					"1": 2,
+					"4": 2
+				}
+			},
+			{
+				"text": "Leave it undisturbed",
+				"effects": {
+					"morale": 1,
+					"vaettir_shift": {
+						"region": 8,
+						"mood": 1
+					},
+					"event_flag_set": {
+						"seen_barrow_temptation": true
+					},
+					"saga_entry": "The mound was left. The land around it feels watchful."
+				}
+			}
+		]
+	},
+	{
+		"id": "dwarf_iron",
+		"title": "Dwarf Iron",
+		"text": "The bog-iron smelting has failed three times this summer. The iron crumbles. A thrall says he found a door in the lava field to the north — round, low, with a hinge like nothing he had seen. It was shut, but smoke came from the crack.",
+		"weight": 3,
+		"tags": [
+			"supernatural",
+			"dwarf",
+			"craft",
+			"rune"
+		],
+		"seasons": [
+			1
+		],
+		"min_week": 8,
+		"blocks_flags": {
+			"seen_dwarf_iron": true
+		},
+		"choices": [
+			{
+				"text": "Go to the door and speak terms (Rune lore)",
+				"effects": {
+					"tools": 12,
+					"wealth": -6,
+					"lore_branch": 5,
+					"lore_amount": 5,
+					"event_flag_set": {
+						"seen_dwarf_iron": true
+					},
+					"saga_entry": "A bargain was struck. The terms were unusual and binding. The tools that arrived were unlike any made above ground."
+				},
+				"requires_lore": {
+					"5": 3
+				}
+			},
+			{
+				"text": "Send Brynja — craftwork is her territory",
+				"effects": {
+					"tools": 7,
+					"morale": 2,
+					"lore_branch": 5,
+					"lore_amount": 2,
+					"event_flag_set": {
+						"seen_dwarf_iron": true
+					},
+					"saga_entry": "Brynja went alone. She returned with worked iron and would not say what was asked of her in return."
+				}
+			},
+			{
+				"text": "Force the door open — there is iron inside and winter is coming",
+				"effects": {
+					"tools": -2,
+					"morale": -4,
+					"vaettir_shift": {
+						"region": 2,
+						"mood": 4
+					},
+					"event_flag_set": {
+						"seen_dwarf_iron": true
+					},
+					"saga_entry": "The door held. Two tools broke against it. The bog smelled of copper for a week."
+				}
+			},
+			{
+				"text": "Ignore it — stories are not iron",
+				"effects": {
+					"morale": -1,
+					"event_flag_set": {
+						"seen_dwarf_iron": true
+					},
+					"saga_entry": "The thrall was not believed. The iron still crumbled."
+				}
+			}
+		]
+	},
+	{
+		"id": "witch_accusation",
+		"title": "Ride-by-Night",
+		"text": "Gunnlaug was found at dawn, badly injured and raving. He claims a woman rode him through the night like a horse. Eyes fall on Katla, a widow in the settlement who keeps strange hours. Accusation without proof is itself a crime at the Thing.",
+		"weight": 4,
+		"tags": [
+			"supernatural",
+			"witch",
+			"law",
+			"seiðr"
+		],
+		"min_week": 5,
+		"blocks_flags": {
+			"seen_witch_accusation": true
+		},
+		"choices": [
+			{
+				"text": "Bring it to the Thing with proper witnesses and evidence (Law lore)",
+				"effects": {
+					"standing": 3,
+					"morale": 2,
+					"lore_branch": 0,
+					"lore_amount": 4,
+					"event_flag_set": {
+						"seen_witch_accusation": true
+					},
+					"saga_entry": "The case was heard. Katla answered well. The verdict was ambiguous. The standing of the household rose for pursuing law over vengeance."
+				},
+				"requires_lore": {
+					"0": 4
+				}
+			},
+			{
+				"text": "Have a rune-wise member craft a counter-charm (Rune lore)",
+				"effects": {
+					"morale": 3,
+					"lore_branch": 5,
+					"lore_amount": 5,
+					"event_flag_set": {
+						"seen_witch_accusation": true
+					},
+					"saga_entry": "A sealskin pouch was made and Katla's glamour broke. Whatever she was hiding, she was not seen to hide it again."
+				},
+				"requires_lore": {
+					"5": 4
+				}
+			},
+			{
+				"text": "Accuse her openly and demand exile",
+				"effects": {
+					"standing": -3,
+					"morale": -2,
+					"event_flag_set": {
+						"seen_witch_accusation": true
+					},
+					"saga_entry": "The accusation was made in public without proof. Half the settlement sided with Katla. The feud began that afternoon."
+				}
+			},
+			{
+				"text": "Dismiss Gunnlaug's story — he drinks",
+				"effects": {
+					"morale": -1,
+					"event_flag_set": {
+						"seen_witch_accusation": true
+					},
+					"saga_entry": "Nothing was done. Gunnlaug did not recover quickly."
+				}
+			}
+		]
+	},
+	{
+		"id": "nidstang_opportunity",
+		"title": "The Pole and the Horse-Head",
+		"text": "A rival settlement has been taking your best fishing grounds. A visiting skald offers to help you raise a níðstang — a carved pole with a horse-head and runes, directed against the rival chieftain. It is devastating, illegal at the Thing, and it works.",
+		"weight": 3,
+		"tags": [
+			"supernatural",
+			"nidstang",
+			"law",
+			"rune",
+			"politics"
+		],
+		"seasons": [
+			0,
+			1
+		],
+		"min_week": 8,
+		"blocks_flags": {
+			"seen_nidstang": true
+		},
+		"choices": [
+			{
+				"text": "Raise the pole (Rune lore)",
+				"effects": {
+					"standing": -4,
+					"morale": 4,
+					"food": 6,
+					"lore_branch": 5,
+					"lore_amount": 4,
+					"curse_gain": "nid_pole",
+					"vaettir_shift": {
+						"region": 0,
+						"mood": 3
+					},
+					"event_flag_set": {
+						"seen_nidstang": true
+					},
+					"saga_entry": "The pole was carved and raised against the rival. The fishing grounds cleared. The vættir of the land did not enjoy being used as weapons."
+				},
+				"requires_lore": {
+					"5": 4
+				}
+			},
+			{
+				"text": "Bring the fishing dispute to the Thing instead (Law lore)",
+				"effects": {
+					"standing": 5,
+					"morale": 2,
+					"food": 2,
+					"lore_branch": 0,
+					"lore_amount": 4,
+					"event_flag_set": {
+						"seen_nidstang": true
+					},
+					"saga_entry": "The case was argued at the Thing. The ruling came slowly, but it came in your favour."
+				},
+				"requires_lore": {
+					"0": 5
+				}
+			},
+			{
+				"text": "Take the fishing grounds by force",
+				"effects": {
+					"food": 10,
+					"morale": 2,
+					"standing": -5,
+					"injury_character_id": "bjarne",
+					"event_flag_set": {
+						"seen_nidstang": true
+					},
+					"saga_entry": "The fishing grounds were taken. Three men were hurt. The feud was begun."
+				}
+			},
+			{
+				"text": "Decline — that kind of magic brings trouble home",
+				"effects": {
+					"morale": -1,
+					"event_flag_set": {
+						"seen_nidstang": true
+					},
+					"saga_entry": "The skald shrugged and left. The fishing grounds stayed contested."
+				}
+			}
+		]
+	},
+	{
+		"id": "feud_escalates",
+		"title": "The Feud Returns",
+		"text": "The rival household sends word: your grazing dispute was not forgotten. They demand satisfaction or blood.",
+		"weight": 7,
+		"tags": [
+			"feud",
+			"politics"
+		],
+		"min_week": 10,
+		"requires_flags": {
+			"feudStarted": true
+		},
+		"choices": [
+			{
+				"text": "Pay wergeld and close the feud (law lore)",
+				"effects": {
+					"wealth": -6,
+					"standing": 2,
+					"morale": 2,
+					"lore_branch": 0,
+					"lore_amount": 2,
+					"event_flag_clear": [
+						"feudStarted",
+						"grazing_dispute"
+					],
+					"saga_entry": "Blood-price was paid. The feud cooled."
+				},
+				"requires_lore": {
+					"0": 3
+				}
+			},
+			{
+				"text": "Refuse and keep grazing rights",
+				"effects": {
+					"standing": -2,
+					"morale": -3,
+					"event_flag_set": {
+						"bloodfeud": true
+					},
+					"saga_entry": "The household refused. The feud sharpened."
+				}
+			}
+		]
+	},
+	{
+		"id": "neighbor_grudge",
+		"title": "Sheep on Your Meadow",
+		"text": "Again the neighbor drives sheep onto your upland pasture. This time they come with witnesses.",
+		"weight": 6,
+		"tags": [
+			"feud",
+			"politics"
+		],
+		"min_week": 6,
+		"requires_flags": {
+			"grazing_dispute": true
+		},
+		"blocks_flags": {
+			"feudStarted": true
+		},
+		"choices": [
+			{
+				"text": "Raise boundary stones (land lore)",
+				"effects": {
+					"materials": -4,
+					"standing": 3,
+					"lore_branch": 4,
+					"lore_amount": 2,
+					"event_flag_set": {
+						"feudStarted": true
+					},
+					"saga_entry": "Stones marked the meadow. The neighbor withdrew."
+				},
+				"requires_lore": {
+					"4": 2
+				}
+			},
+			{
+				"text": "Drive their sheep back by night",
+				"effects": {
+					"morale": 3,
+					"standing": -4,
+					"event_flag_set": {
+						"feudStarted": true
+					},
+					"saga_entry": "Sheep were driven back in darkness. Grudge followed."
+				}
+			}
+		]
+	},
+	{
+		"id": "draugr_stirs",
+		"title": "Footsteps in the Hall",
+		"text": "Someone heavy walks the hall after the fire dies. The dogs will not enter.",
+		"weight": 5,
+		"tags": [
+			"supernatural",
+			"draugr"
+		],
+		"requires_flags": {
+			"burialDebtHigh": true
+		},
+		"choices": [
+			{
+				"text": "Hold full burial rites now (ritual lore)",
+				"effects": {
+					"materials": -3,
+					"fuel": -2,
+					"burial_debt_shift": -4,
+					"haunting_shift": -1,
+					"draugar_set": false,
+					"lore_branch": 1,
+					"lore_amount": 2,
+					"event_flag_clear": [
+						"burialDebtHigh"
+					],
+					"saga_entry": "Rites were kept. The footsteps stopped."
+				},
+				"requires_lore": {
+					"1": 3
+				}
+			},
+			{
+				"text": "Bar the doors and say nothing",
+				"effects": {
+					"morale": -6,
+					"haunting_shift": 1,
+					"draugar_set": true,
+					"saga_entry": "They said nothing. The hall grew colder."
+				}
+			}
+		]
+	},
+	{
+		"id": "shipping_returns",
+		"title": "The Ship Returns",
+		"text": "The trader who first called at your harbor sends word: a profitable cargo waits if you can receive it.",
+		"weight": 5,
+		"tags": [
+			"trade"
+		],
+		"seasons": [
+			1
+		],
+		"min_week": 20,
+		"requires_flags": {
+			"shippingContact": true
+		},
+		"choices": [
+			{
+				"text": "Host the trader generously",
+				"effects": {
+					"food": -5,
+					"wealth": 8,
+					"materials": 6,
+					"standing": 3,
+					"saga_entry": "The trader returned. The harbor prospered."
+				}
+			},
+			{
+				"text": "Charge harbor dues (law lore)",
+				"effects": {
+					"wealth": 10,
+					"standing": -1,
+					"lore_branch": 0,
+					"lore_amount": 1,
+					"saga_entry": "Dues were taken. Trade continued, grudgingly."
+				},
+				"requires_lore": {
+					"0": 2
+				}
+			}
+		]
+	},
+	{
+		"id": "barrow_whispers",
+		"title": "Whispers from the Mound",
+		"text": "Since the barrow was opened, folk dream of gold and of a dead man sitting upright.",
+		"weight": 4,
+		"tags": [
+			"supernatural",
+			"burial"
+		],
+		"min_week": 8,
+		"requires_flags": {
+			"barrowClaimed": true
+		},
+		"choices": [
+			{
+				"text": "Return a gift to the mound with rites",
+				"effects": {
+					"wealth": -3,
+					"morale": 2,
+					"burial_debt_shift": -2,
+					"lore_branch": 1,
+					"lore_amount": 2,
+					"event_flag_clear": [
+						"barrowClaimed"
+					],
+					"saga_entry": "A gift was returned. The dreams faded."
+				},
+				"requires_lore": {
+					"1": 2,
+					"2": 2
+				}
+			},
+			{
+				"text": "Keep the barrow silver",
+				"effects": {
+					"wealth": 4,
+					"morale": -4,
+					"haunting_shift": 1,
+					"saga_entry": "The silver stayed. The mound did not forget."
+				}
+			}
+		]
+	},
+	{
+		"id": "vaettir_demand",
+		"title": "The Land Demands Payment",
+		"text": "Livestock refuse the middle pasture. An old woman says the vættir were offended and want words, not hay.",
+		"weight": 6,
+		"tags": [
+			"supernatural",
+			"land"
+		],
+		"requires_flags": {
+			"vaettirOffended": true
+		},
+		"choices": [
+			{
+				"text": "Leave milk and ask forgiveness (land + ritual)",
+				"effects": {
+					"food": -3,
+					"morale": 3,
+					"vaettir_shift": {
+						"region": -1,
+						"mood": 2
+					},
+					"lore_branch": 4,
+					"lore_amount": 2,
+					"event_flag_clear": [
+						"vaettirOffended"
+					],
+					"saga_entry": "An offering was accepted. The pasture eased."
+				},
+				"requires_lore": {
+					"1": 1,
+					"4": 1
+				}
+			},
+			{
+				"text": "Plow anyway — winter will not wait",
+				"effects": {
+					"hay": 6,
+					"morale": -3,
+					"vaettir_shift": {
+						"region": -1,
+						"mood": 4
+					},
+					"saga_entry": "They plowed despite the warning. The land remembered."
+				}
+			}
+		]
+	},
+	{
+		"id": "jarls_tribute_due",
+		"title": "The Jarl Expects His Tribute",
+		"text": "A longship appears in the bay — the jarl you swore to in Norway has sent a collector. He demands silver, wool, and a share of the first harvest. The household remembers the oath, but the stores are your own.",
+		"weight": 7,
+		"tags": [
+			"feud",
+			"politics",
+			"trade"
+		],
+		"min_week": 10,
+		"max_week": 20,
+		"requires_flags": {
+			"act1_promise_jarl": true
+		},
+		"blocks_flags": {
+			"jarl_tribute_paid": true
+		},
+		"choices": [
+			{
+				"text": "Pay the tribute in full — honour the oath, keep the jarl's favour",
+				"effects": {
+					"wealth": -6,
+					"food": -5,
+					"standing": 5,
+					"morale": 2,
+					"knowledge": 3,
+					"event_flag_set": {
+						"jarl_tribute_paid": true
+					},
+					"saga_entry": "The tribute was weighed and counted. The jarl's man sailed back satisfied."
+				}
+			},
+			{
+				"text": "Pay half — plead a lean year and promise the rest at harvest",
+				"effects": {
+					"wealth": -3,
+					"food": -3,
+					"standing": 0,
+					"knowledge": 3,
+					"event_flag_set": {
+						"jarl_tribute_paid": true
+					},
+					"saga_entry": "Half the tribute was given. The collector left with a promise. Whether the jarl accepts it remains to be seen."
+				}
+			},
+			{
+				"text": "Refuse — Iceland has no jarls",
+				"effects": {
+					"standing": -6,
+					"morale": 4,
+					"event_flag_set": {
+						"jarl_tribute_paid": true,
+						"feudStarted": true
+					},
+					"saga_entry": "The collector was sent back empty-handed. The jarl will not forget this."
+				}
+			}
+		]
+	},
+	{
+		"id": "godis_hof_inspection",
+		"title": "The Goði Inspects the Hof",
+		"text": "The goði who blessed your settlement has crossed the firth to see what you have built. He expects a hof worthy of the gods — or at least a proper ring for oaths. The household watches how you receive him.",
+		"weight": 6,
+		"tags": [
+			"religion",
+			"politics",
+			"saga"
+		],
+		"min_week": 15,
+		"max_week": 30,
+		"requires_flags": {
+			"act1_promise_godi": true,
+			"hof_built": true
+		},
+		"blocks_flags": {
+			"hof_inspected": true
+		},
+		"choices": [
+			{
+				"text": "Welcome him with a feast and blót — show the hof at its finest",
+				"effects": {
+					"food": -7,
+					"wealth": -3,
+					"standing": 6,
+					"morale": 4,
+					"lore_branch": 1,
+					"lore_amount": 5,
+					"event_flag_set": {
+						"hof_inspected": true,
+						"hof_approved": true
+					},
+					"saga_entry": "The goði was feasted. He walked the hof, touched the ring, and pronounced it worthy."
+				}
+			},
+			{
+				"text": "Show him humbly — the hof is simple but sincere",
+				"effects": {
+					"food": -3,
+					"standing": 3,
+					"morale": 2,
+					"lore_branch": 1,
+					"lore_amount": 3,
+					"event_flag_set": {
+						"hof_inspected": true
+					},
+					"saga_entry": "The goði saw what had been built and said little. His silence was not disapproval."
+				}
+			},
+			{
+				"text": "Challenge his authority — the settlement runs its own rites now",
+				"effects": {
+					"standing": -4,
+					"morale": 5,
+					"lore_branch": 1,
+					"lore_amount": 3,
+					"event_flag_set": {
+						"hof_inspected": true,
+						"norway_hostile": true
+					},
+					"saga_entry": "The goði was told his services were no longer required. He left without a blessing."
+				}
+			}
+		]
+	},
+	{
+		"id": "fighters_kin_arrive",
+		"title": "The Fighter's Kin Seek Their Promised Land",
+		"text": "Three families arrive at your hall — kin of the fighter who sailed with you. They say he promised them farmland and a share of the settlement. They have cattle, children, and a copy of the agreement scratched on a bone.",
+		"weight": 6,
+		"tags": [
+			"family",
+			"politics",
+			"social"
+		],
+		"min_week": 8,
+		"max_week": 20,
+		"requires_flags": {
+			"act1_promise_fighter": true
+		},
+		"blocks_flags": {
+			"fighters_kin_settled": true
+		},
+		"choices": [
+			{
+				"text": "Grant them the promised land — a full farmstead with grazing",
+				"effects": {
+					"food": -6,
+					"materials": -4,
+					"standing": 6,
+					"morale": 4,
+					"herd_delta": {
+						"1": 2
+					},
+					"event_flag_set": {
+						"fighters_kin_settled": true
+					},
+					"saga_entry": "Land was measured and granted. The kin raised their own roof beams. The fighter's oath was kept."
+				}
+			},
+			{
+				"text": "Offer work and shelter instead — land is not yet surveyed",
+				"effects": {
+					"food": -4,
+					"materials": -2,
+					"morale": 3,
+					"standing": 2,
+					"event_flag_set": {
+						"fighters_kin_settled": true
+					},
+					"saga_entry": "They were given roof and work but not the promised land. They accepted, though their eyes held questions."
+				}
+			},
+			{
+				"text": "Turn them away — you made no such promise to the fighter",
+				"effects": {
+					"morale": -6,
+					"standing": -6,
+					"event_flag_set": {
+						"fighters_kin_settled": true,
+						"feudStarted": true
+					},
+					"saga_entry": "The kin were refused. The fighter was furious. Loyalties frayed that winter."
+				}
+			}
+		]
+	},
+	{
+		"id": "merchant_credit_call",
+		"title": "The Merchant Calls in His Debt",
+		"text": "A knarr from Norway anchors at your landing. The merchant who financed your departure has arrived to collect — not in silver, but in goods. He wants your best timber, your finest wool, and a cargo of dried fish. The timing could not be worse.",
+		"weight": 5,
+		"tags": [
+			"trade",
+			"politics"
+		],
+		"min_week": 12,
+		"max_week": 24,
+		"requires_flags": {
+			"act1_promise_merchant": true
+		},
+		"blocks_flags": {
+			"merchant_debt_paid": true
+		},
+		"choices": [
+			{
+				"text": "Fill his cargo hold as promised — timber, wool, and fish",
+				"effects": {
+					"materials": -6,
+					"food": -5,
+					"wealth": 5,
+					"standing": 5,
+					"knowledge": 3,
+					"event_flag_set": {
+						"merchant_debt_paid": true
+					},
+					"saga_entry": "The knarr was loaded. The merchant left satisfied. He would speak well of the settlement."
+				}
+			},
+			{
+				"text": "Offer half now, the rest at the next sailing season",
+				"effects": {
+					"materials": -3,
+					"food": -3,
+					"standing": -1,
+					"knowledge": 3,
+					"event_flag_set": {
+						"merchant_debt_paid": true
+					},
+					"saga_entry": "Half the cargo was given. The merchant noted the shortfall and sailed east."
+				}
+			},
+			{
+				"text": "Repudiate the debt — the crossing was expensive enough",
+				"effects": {
+					"standing": -5,
+					"wealth": 3,
+					"morale": 3,
+					"event_flag_set": {
+						"merchant_debt_paid": true
+					},
+					"saga_entry": "The merchant was turned away without his cargo. He would remember, and so would every trader he spoke to."
+				}
+			}
+		]
+	},
+	{
+		"id": "cast_highseat_pillars",
+		"title": "Cast the High-Seat Pillars",
+		"text": "Your high-seat posts were flung overboard as the coast came into view. Wherever they beach is where your hall must stand — land, omen, and livelihood all bound into one choice.",
+		"weight": 7,
+		"tags": [
+			"saga",
+			"religion",
+			"settlement"
+		],
+		"art": {
+			"category": "religion"
+		},
+		"seasons": [
+			0,
+			1
+		],
+		"min_week": 1,
+		"max_week": 16,
+		"blocks_flags": {
+			"cast_highseat_pillars_done": true
+		},
+		"choices": [
+			{
+				"text": "Follow where they beach (honour the omen)",
+				"effects": {
+					"food": -3,
+					"morale": 10,
+					"standing": 4,
+					"lore_branch": 4,
+					"lore_amount": 6,
+					"vaettir_shift": {
+						"region": -1,
+						"mood": 2
+					},
+					"event_flag_set": {
+						"cast_highseat_pillars_done": true,
+						"pillar_omen_followed": true
+					},
+					"saga_entry": "The high-seat pillars led the household true. The land received them."
+				}
+			},
+			{
+				"text": "Send slaves to search the coast before committing",
+				"effects": {
+					"food": -5,
+					"knowledge": 5,
+					"lore_branch": 3,
+					"lore_amount": 3,
+					"event_flag_set": {
+						"cast_highseat_pillars_done": true
+					},
+					"saga_entry": "Scouts were sent first. The pillars found later."
+				}
+			},
+			{
+				"text": "Seize the richest meadow regardless",
+				"effects": {
+					"hay": 8,
+					"materials": 4,
+					"morale": -4,
+					"standing": -2,
+					"vaettir_shift": {
+						"region": -1,
+						"mood": 3
+					},
+					"event_flag_set": {
+						"cast_highseat_pillars_done": true,
+						"pillar_omen_ignored": true
+					},
+					"saga_entry": "The omen was set aside for the richest ground. The land spirits took notice."
+				}
+			}
+		]
+	},
+	{
+		"id": "temple_mould_new_firth",
+		"title": "Temple Mould in the New Firth",
+		"text": "A cask of temple earth and carved posts survived the crossing. Þórhaddr the Old brought his god's mould all the way to Stöðvarfjörður and hallowed the firth. Your household carries the same inheritance.",
+		"weight": 5,
+		"tags": [
+			"saga",
+			"religion",
+			"settlement"
+		],
+		"art": {
+			"category": "religion"
+		},
+		"seasons": [
+			0,
+			1
+		],
+		"min_week": 4,
+		"blocks_flags": {
+			"temple_mould_done": true
+		},
+		"choices": [
+			{
+				"text": "Perform the full hallowing rite",
+				"effects": {
+					"materials": -6,
+					"food": -4,
+					"morale": 12,
+					"lore_branch": 1,
+					"lore_amount": 8,
+					"vaettir_shift": {
+						"region": -1,
+						"mood": 2
+					},
+					"standing": 4,
+					"event_flag_set": {
+						"temple_mould_done": true,
+						"hof_ritual_complete": true
+					},
+					"saga_entry": "Temple earth was scattered at the firth. The district was hallowed."
+				},
+				"requires_lore": {
+					"1": 2
+				}
+			},
+			{
+				"text": "Perform a shortened hallowing",
+				"effects": {
+					"materials": -2,
+					"morale": 5,
+					"lore_branch": 1,
+					"lore_amount": 3,
+					"event_flag_set": {
+						"temple_mould_done": true
+					},
+					"saga_entry": "A brief rite was spoken over the mould. Better than nothing."
+				}
+			},
+			{
+				"text": "Save the mould for a proper hof later",
+				"effects": {
+					"knowledge": 4,
+					"event_flag_set": {
+						"temple_mould_done": true,
+						"hof_mould_stored": true
+					},
+					"saga_entry": "The temple earth was stored. The household will use it rightly in time."
+				}
+			},
+			{
+				"text": "Reject the old rite — shelter is more pressing",
+				"effects": {
+					"morale": -3,
+					"vaettir_shift": {
+						"region": -1,
+						"mood": 3
+					},
+					"event_flag_set": {
+						"temple_mould_done": true
+					},
+					"saga_entry": "The mould was left in its cask. The land waits."
+				}
+			}
+		]
+	},
+	{
+		"id": "crosses_on_knolls",
+		"title": "Crosses on the Knolls",
+		"text": "A baptised elder, like Auðr the Deep-Minded, asks to raise crosses on the knoll above the farmstead and pray there. The request divides the household between the old ways and the new faith.",
+		"weight": 5,
+		"tags": [
+			"saga",
+			"religion",
+			"social"
+		],
+		"art": {
+			"category": "religion"
+		},
+		"min_week": 8,
+		"blocks_flags": {
+			"crosses_knolls_done": true
+		},
+		"choices": [
+			{
+				"text": "Allow it openly — honour old Auðr's custom",
+				"effects": {
+					"morale": 8,
+					"standing": 4,
+					"lore_branch": 2,
+					"lore_amount": 4,
+					"event_flag_set": {
+						"crosses_knolls_done": true,
+						"christian_presence": true
+					},
+					"saga_entry": "Crosses rose on the knoll. The elder's prayers were heard in the wind."
+				}
+			},
+			{
+				"text": "A quiet prayer-station only — no public display",
+				"effects": {
+					"morale": 4,
+					"lore_branch": 1,
+					"lore_amount": 2,
+					"event_flag_set": {
+						"crosses_knolls_done": true
+					},
+					"saga_entry": "A prayer-stone was placed in silence. Peace held."
+				}
+			},
+			{
+				"text": "Permit both shrine and small hof to stand",
+				"effects": {
+					"morale": 6,
+					"standing": 2,
+					"knowledge": 4,
+					"event_flag_set": {
+						"crosses_knolls_done": true,
+						"christian_presence": true
+					},
+					"saga_entry": "Two faiths shared the hill. The household kept an uneasy balance."
+				}
+			},
+			{
+				"text": "Forbid it — keep the hill for the old rites",
+				"effects": {
+					"morale": -4,
+					"standing": -2,
+					"lore_branch": 1,
+					"lore_amount": 3,
+					"event_flag_set": {
+						"crosses_knolls_done": true
+					},
+					"saga_entry": "The elder was refused. Old rites held the hill."
+				}
+			}
+		]
+	},
+	{
+		"id": "blood_for_drift_timber",
+		"title": "Blood for Drift-Timber",
+		"text": "Hallstein made a blood-offering to Thor and was sent high-seat posts from the sea. Your hall needs timber for the posts. The forge is cold and the forest gone — but the sea is there.",
+		"weight": 5,
+		"tags": [
+			"saga",
+			"religion",
+			"resource"
+		],
+		"art": {
+			"category": "resource"
+		},
+		"seasons": [
+			0,
+			1,
+			2
+		],
+		"min_week": 6,
+		"blocks_flags": {
+			"drift_timber_done": true
+		},
+		"choices": [
+			{
+				"text": "Offer sacrifice — let the sea send what is needed",
+				"effects": {
+					"food": -6,
+					"herd_delta": {
+						"1": -1
+					},
+					"materials": 16,
+					"morale": 6,
+					"lore_branch": 1,
+					"lore_amount": 4,
+					"event_flag_set": {
+						"drift_timber_done": true
+					},
+					"saga_entry": "Blood was given at the shore. The tide brought great posts."
+				},
+				"requires_lore": {
+					"1": 2
+				}
+			},
+			{
+				"text": "Organise a secular driftwood search along the strand",
+				"effects": {
+					"food": -4,
+					"materials": 9,
+					"event_flag_set": {
+						"drift_timber_done": true
+					},
+					"saga_entry": "Men walked the strand for three days and came back with good timber."
+				}
+			},
+			{
+				"text": "Barter with a ship for imported wood",
+				"effects": {
+					"wealth": -8,
+					"materials": 12,
+					"event_flag_set": {
+						"drift_timber_done": true
+					},
+					"saga_entry": "Norwegian silver bought Norwegian pine. The hall rose from traded timber."
+				}
+			}
+		]
+	},
+	{
+		"id": "saint_cargo_esjuberg",
+		"title": "Saint's Cargo",
+		"text": "A westbound ship offers church timber, an iron bell, consecrated earth, and instructions where to build — just as Bishop Patrick gave Orlygr Hrappsson. The cargo is real; so is the obligation.",
+		"weight": 3,
+		"tags": [
+			"saga",
+			"religion",
+			"trade"
+		],
+		"art": {
+			"category": "religion"
+		},
+		"seasons": [
+			1
+		],
+		"min_week": 14,
+		"blocks_flags": {
+			"saint_cargo_done": true
+		},
+		"choices": [
+			{
+				"text": "Build at the indicated site (honour the saint's instruction)",
+				"effects": {
+					"materials": -6,
+					"wealth": -4,
+					"morale": 12,
+					"standing": 6,
+					"lore_branch": 1,
+					"lore_amount": 10,
+					"milestone": "templeOrChurch",
+					"event_flag_set": {
+						"saint_cargo_done": true,
+						"christian_presence": true
+					},
+					"saga_entry": "Consecrated earth beneath new posts. The church stands where the saint said."
+				},
+				"requires_lore": {
+					"1": 3
+				}
+			},
+			{
+				"text": "Salvage the timber, keep the bell — build later",
+				"effects": {
+					"materials": 10,
+					"knowledge": 4,
+					"event_flag_set": {
+						"saint_cargo_done": true
+					},
+					"saga_entry": "Timber taken; the bell hung in the hall. The church is yet to come."
+				}
+			},
+			{
+				"text": "Trade part of the cargo for immediate supplies",
+				"effects": {
+					"wealth": 8,
+					"food": 6,
+					"materials": 4,
+					"morale": -3,
+					"event_flag_set": {
+						"saint_cargo_done": true
+					},
+					"saga_entry": "Sacred timber sold for grain. The household fed; the saint unanswered."
+				}
+			}
+		]
+	},
+	{
+		"id": "build_hof_oath_ring",
+		"title": "Build the Hof and Oath-Ring",
+		"text": "Þórólfr Mostrarskegg built a great hof, kept a silver arm-ring on the altar, and swore all oaths by it. Your district grows — it needs a sacred centre if men are to trust your authority.",
+		"weight": 5,
+		"tags": [
+			"saga",
+			"religion",
+			"politics"
+		],
+		"art": {
+			"category": "religion"
+		},
+		"min_week": 20,
+		"blocks_flags": {
+			"hof_built": true
+		},
+		"choices": [
+			{
+				"text": "Build the full hof with oath-ring and sacrificial bowl",
+				"effects": {
+					"materials": -18,
+					"food": -8,
+					"morale": 12,
+					"standing": 8,
+					"lore_branch": 1,
+					"lore_amount": 10,
+					"milestone": "templeOrChurch",
+					"vaettir_shift": {
+						"region": -1,
+						"mood": 2
+					},
+					"event_flag_set": {
+						"hof_built": true,
+						"hof_ritual_complete": true
+					},
+					"saga_entry": "The hof rose above the farm. Oaths sworn on the arm-ring bound the district."
+				}
+			},
+			{
+				"text": "Build only the ring-hall — no full sacrificial apparatus",
+				"effects": {
+					"materials": -9,
+					"morale": 6,
+					"standing": 4,
+					"lore_branch": 1,
+					"lore_amount": 4,
+					"event_flag_set": {
+						"hof_built": true
+					},
+					"saga_entry": "A ring-hall raised. Oaths were sworn, feasts held, but no blood-bowl yet."
+				}
+			},
+			{
+				"text": "Host a seasonal blót feast without permanent shrine",
+				"effects": {
+					"food": -10,
+					"morale": 8,
+					"standing": 4,
+					"lore_branch": 1,
+					"lore_amount": 2,
+					"saga_entry": "Feast and sacrifice without a hof. Enough for now."
+				}
+			}
+		]
+	},
+	{
+		"id": "helgafell_defiled",
+		"title": "Helgafell Must Not Be Defiled",
+		"text": "Your settlers press into the hill that overlooks the firth. Þórólfr's law was plain: no man should look unwashed upon the holy mountain; nothing that lived on it should be killed. The quarrymen want to cut stone from its slopes.",
+		"weight": 5,
+		"tags": [
+			"saga",
+			"lore",
+			"land"
+		],
+		"art": {
+			"category": "lore"
+		},
+		"min_week": 10,
+		"blocks_flags": {
+			"helgafell_decision": true
+		},
+		"choices": [
+			{
+				"text": "Preserve the hill — forbid quarrying and hunting there",
+				"effects": {
+					"morale": 6,
+					"standing": 4,
+					"lore_branch": 4,
+					"lore_amount": 8,
+					"vaettir_shift": {
+						"region": 7,
+						"mood": 2
+					},
+					"event_flag_set": {
+						"helgafell_decision": true,
+						"helgafell_preserved": true
+					},
+					"saga_entry": "The holy hill was kept inviolate. The land spirits held their peace."
+				}
+			},
+			{
+				"text": "Allow ritual access only — the hill serves rite, not quarry",
+				"effects": {
+					"morale": 4,
+					"lore_branch": 4,
+					"lore_amount": 5,
+					"event_flag_set": {
+						"helgafell_decision": true,
+						"helgafell_preserved": true
+					},
+					"saga_entry": "Only the properly washed may ascend. A compromise that holds."
+				}
+			},
+			{
+				"text": "Secretly quarry it in winter when few watch",
+				"effects": {
+					"materials": 12,
+					"morale": -5,
+					"haunting_shift": 1,
+					"taboo_violate": "headland",
+					"vaettir_shift": {
+						"region": 7,
+						"mood": 4
+					},
+					"event_flag_set": {
+						"helgafell_decision": true,
+						"helgafell_violated": true
+					},
+					"saga_entry": "Stone was cut in darkness. The hill remembers."
+				}
+			},
+			{
+				"text": "Call it superstition — put the household to work",
+				"effects": {
+					"materials": 8,
+					"morale": -4,
+					"standing": -3,
+					"vaettir_shift": {
+						"region": 7,
+						"mood": 3
+					},
+					"event_flag_set": {
+						"helgafell_decision": true
+					},
+					"saga_entry": "The household scoffed and quarried. An older household would not have."
+				}
+			}
+		]
+	},
+	{
+		"id": "sacred_thing_vale",
+		"title": "The Sacred Thing-Vale and Dritsker",
+		"text": "Þórólfr purified the assembly ground: men must not relieve themselves on the sacred earth. A skerry in the bay served instead. Now your own þing-site needs the same care if law is to hold.",
+		"weight": 4,
+		"tags": [
+			"saga",
+			"politics",
+			"religion"
+		],
+		"art": {
+			"category": "politics"
+		},
+		"min_week": 20,
+		"blocks_flags": {
+			"thing_vale_done": true
+		},
+		"choices": [
+			{
+				"text": "Enforce strict purity rules at the thing-site",
+				"effects": {
+					"morale": 4,
+					"standing": 6,
+					"lore_branch": 0,
+					"lore_amount": 5,
+					"milestone": "thingEstablished",
+					"event_flag_set": {
+						"thing_vale_done": true,
+						"thing_pure": true
+					},
+					"saga_entry": "Law-site kept holy. Men trusted the oaths sworn there."
+				}
+			},
+			{
+				"text": "Create a makeshift outlying skerry arrangement",
+				"effects": {
+					"materials": -2,
+					"morale": 2,
+					"standing": 3,
+					"lore_branch": 0,
+					"lore_amount": 2,
+					"event_flag_set": {
+						"thing_vale_done": true
+					},
+					"saga_entry": "Practical measures taken. The thing-ground stayed clean enough."
+				}
+			},
+			{
+				"text": "Relax the rules in winter — purity is a summer concern",
+				"effects": {
+					"morale": -3,
+					"standing": -2,
+					"event_flag_set": {
+						"thing_vale_done": true
+					},
+					"saga_entry": "Rules softened. Some men grumbled that law was cheapened."
+				}
+			}
+		]
+	},
+	{
+		"id": "guardian_curse_pole",
+		"title": "Guardian Spirits Hear the Curse-Pole",
+		"text": "Egill Skallagrímsson raised a horse-head níðstöng against King Eiríkr and called the land-spirits to drive him out. You have a grievance of your own that law cannot easily reach.",
+		"weight": 3,
+		"tags": [
+			"saga",
+			"supernatural",
+			"politics"
+		],
+		"art": {
+			"category": "supernatural"
+		},
+		"min_week": 26,
+		"choices": [
+			{
+				"text": "Raise the níðstöng — call the vættir as witnesses",
+				"effects": {
+					"morale": 8,
+					"standing": 6,
+					"lore_branch": 5,
+					"lore_amount": 6,
+					"vaettir_shift": {
+						"region": -1,
+						"mood": 1
+					},
+					"event_flag_set": {
+						"nidpole_raised": true
+					},
+					"saga_entry": "The horse-head was set; the curse named aloud. The land spirits stirred."
+				},
+				"requires_lore": {
+					"4": 2,
+					"5": 3
+				}
+			},
+			{
+				"text": "Threaten with it — but do not plant the pole yet",
+				"effects": {
+					"standing": 3,
+					"morale": 3,
+					"knowledge": 4,
+					"saga_entry": "Word of the pole spread before it was planted. A useful threat."
+				}
+			},
+			{
+				"text": "Abandon this vengeance — it costs more than it gains",
+				"effects": {
+					"morale": -2,
+					"saga_entry": "The grievance was set down. Wisdom or weakness, time would tell."
+				}
+			}
+		]
+	},
+	{
+		"id": "glams_yule_watch",
+		"title": "Glam's Yule Watch",
+		"text": "A Swedish herdsman hired last autumn refused to fast on Christmas Eve, went out alone, and has not returned. In the morning the household found him dead on the snowfield — face twisted, body dark. No wound. The dogs will not touch the body.",
+		"weight": 4,
+		"tags": [
+			"saga",
+			"supernatural",
+			"survival"
+		],
+		"art": {
+			"category": "supernatural"
+		},
+		"seasons": [
+			3
+		],
+		"realism": [
+			1,
+			2
+		],
+		"min_week": 20,
+		"blocks_flags": {
+			"glam_decided": true
+		},
+		"choices": [
+			{
+				"text": "Search immediately — drag the body back before dark",
+				"effects": {
+					"food": -3,
+					"morale": -5,
+					"burial_debt_shift": 1,
+					"event_flag_set": {
+						"glam_decided": true,
+						"glam_buried": true
+					},
+					"saga_entry": "The body was hauled back through the storm. The hall was uneasy."
+				}
+			},
+			{
+				"text": "Wait for daylight and go in numbers",
+				"effects": {
+					"morale": -4,
+					"lore_branch": 1,
+					"lore_amount": 3,
+					"event_flag_set": {
+						"glam_decided": true
+					},
+					"saga_entry": "Daylight brought them to the body. What they found unsettled them."
+				}
+			},
+			{
+				"text": "Send for a priest or goði before touching him",
+				"effects": {
+					"food": -4,
+					"morale": 3,
+					"lore_branch": 1,
+					"lore_amount": 6,
+					"haunting_shift": -1,
+					"burial_debt_shift": -1,
+					"event_flag_set": {
+						"glam_decided": true,
+						"glam_properly_buried": true
+					},
+					"saga_entry": "Rites were said before the body was moved. The valley quieted."
+				},
+				"requires_lore": {
+					"1": 4
+				}
+			},
+			{
+				"text": "Bar the valley and count him lost",
+				"effects": {
+					"morale": -8,
+					"haunting_shift": 2,
+					"burial_debt_shift": 3,
+					"draugar_set": true,
+					"event_flag_set": {
+						"glam_decided": true,
+						"glam_unburied": true
+					},
+					"saga_entry": "The body was left. The valley grew dangerous after dark."
+				}
+			}
+		]
+	},
+	{
+		"id": "corpse_demands_hospitality",
+		"title": "Corpse Demands Hospitality",
+		"text": "A funeral party arrives at dusk — four men carrying a bier through sleeting rain. The dead woman within was a woman of some standing; her bearers say she wished to be waked properly. Stores are low.",
+		"weight": 5,
+		"tags": [
+			"saga",
+			"supernatural",
+			"social"
+		],
+		"art": {
+			"category": "supernatural"
+		},
+		"seasons": [
+			2,
+			3
+		],
+		"min_week": 20,
+		"choices": [
+			{
+				"text": "Give them full shelter and a hot meal",
+				"effects": {
+					"food": -6,
+					"fuel": -3,
+					"morale": 6,
+					"standing": 4,
+					"lore_branch": 1,
+					"lore_amount": 3,
+					"burial_debt_shift": -1,
+					"saga_entry": "The dead woman was given fire and food. The household slept easy."
+				}
+			},
+			{
+				"text": "Feed them but no sleeping space — stores are too thin",
+				"effects": {
+					"food": -3,
+					"morale": 2,
+					"standing": 1,
+					"saga_entry": "Food given, beds withheld. The bearers moved on before dawn."
+				}
+			},
+			{
+				"text": "Turn them away — the hall cannot spare the space",
+				"effects": {
+					"morale": -5,
+					"standing": -4,
+					"haunting_shift": 1,
+					"burial_debt_shift": 2,
+					"event_flag_set": {
+						"burial_refused": true
+					},
+					"saga_entry": "The door was shut. The bearers cursed the hall as they left."
+				}
+			},
+			{
+				"text": "Direct them to the churchyard only — no waking here",
+				"effects": {
+					"morale": -2,
+					"standing": -1,
+					"lore_branch": 1,
+					"lore_amount": 2,
+					"saga_entry": "A churchyard was offered. Cold comfort for a long-dead noblewoman."
+				}
+			}
+		]
+	},
+	{
+		"id": "drowned_men_at_hearth",
+		"title": "Drowned Men at the Hearth",
+		"text": "The men who were lost to the sea last autumn — among them Þóroddr and five household workers — have returned dripping to their own funeral feast. They sit by the fire and say nothing. Their shoes leave wet prints on the floorboards.",
+		"weight": 4,
+		"tags": [
+			"saga",
+			"supernatural",
+			"survival"
+		],
+		"art": {
+			"category": "supernatural"
+		},
+		"seasons": [
+			3
+		],
+		"realism": [
+			1,
+			2
+		],
+		"min_week": 26,
+		"requires_flags": {
+			"burial_refused": true
+		},
+		"choices": [
+			{
+				"text": "Welcome them formally — set places at the feast",
+				"effects": {
+					"food": -5,
+					"morale": -3,
+					"lore_branch": 1,
+					"lore_amount": 5,
+					"haunting_shift": -1,
+					"saga_entry": "Places were set for the sea-dead. They ate in silence and were not seen the next night."
+				},
+				"requires_lore": {
+					"1": 3
+				}
+			},
+			{
+				"text": "Extinguish the fire and abandon the hall for the night",
+				"effects": {
+					"morale": -6,
+					"fuel": -3,
+					"haunting_shift": 1,
+					"saga_entry": "The hearth went dark. The household huddled in a side-building."
+				}
+			},
+			{
+				"text": "Move everyone to the second building until dawn",
+				"effects": {
+					"morale": -4,
+					"shelter": -2,
+					"knowledge": 3,
+					"event_flag_set": {
+						"hall_haunted": true
+					},
+					"saga_entry": "The main hall was yielded to the dead. Morning came without incident."
+				}
+			},
+			{
+				"text": "Consult a goði or priest at once — this needs more than courage",
+				"effects": {
+					"food": -4,
+					"wealth": -3,
+					"morale": 4,
+					"lore_branch": 1,
+					"lore_amount": 6,
+					"haunting_shift": -2,
+					"burial_debt_shift": -2,
+					"saga_entry": "Rites were spoken over every hearth-stone. The dead did not return the next night."
+				},
+				"requires_lore": {
+					"1": 4
+				}
+			}
+		]
+	},
+	{
+		"id": "seal_head_firepit",
+		"title": "Seal-Head in the Firepit",
+		"text": "A seal-head has appeared in the central firepit — rising slowly, eye open, no sign of how it came there. The workers are refusing the hall. The children have been moved.",
+		"weight": 3,
+		"tags": [
+			"saga",
+			"supernatural"
+		],
+		"art": {
+			"category": "supernatural"
+		},
+		"seasons": [
+			3
+		],
+		"realism": [
+			1,
+			2
+		],
+		"min_week": 30,
+		"requires_flags": {
+			"hall_haunted": true
+		},
+		"choices": [
+			{
+				"text": "Beat it back with iron and keep the fire burning",
+				"effects": {
+					"morale": -5,
+					"tools": -2,
+					"knowledge": 4,
+					"lore_branch": 5,
+					"lore_amount": 3,
+					"saga_entry": "Iron drove it back. The fire held. Three men slept badly for a week."
+				}
+			},
+			{
+				"text": "Keep the fire burning and hold ground — show no fear",
+				"effects": {
+					"morale": -4,
+					"haunting_shift": 1,
+					"saga_entry": "The household stayed by the fire. The head sank at cockcrow. It returned the next night."
+				}
+			},
+			{
+				"text": "Move all cooking and sleeping to the side-hearth",
+				"effects": {
+					"morale": -3,
+					"fuel": -4,
+					"shelter": -2,
+					"knowledge": 3,
+					"saga_entry": "The central fire was abandoned. The side-hearth was crowded and smoky."
+				}
+			},
+			{
+				"text": "Declare it illusion and punish any who panic",
+				"effects": {
+					"morale": -7,
+					"standing": -2,
+					"haunting_shift": 2,
+					"saga_entry": "The household was silenced. The seal-head grew bolder."
+				}
+			}
+		]
+	},
+	{
+		"id": "fire_above_howe",
+		"title": "Fire Above the Howe",
+		"text": "A night-watcher reports pale fire moving over the large burial mound on the ridge — the kind Grettir saw above old Kárr's howe. No one has touched that mound. No one knows whose it is.",
+		"weight": 4,
+		"tags": [
+			"saga",
+			"supernatural",
+			"lore"
+		],
+		"art": {
+			"category": "supernatural"
+		},
+		"seasons": [
+			3,
+			2
+		],
+		"min_week": 20,
+		"blocks_flags": {
+			"barrow_fire_seen": true
+		},
+		"choices": [
+			{
+				"text": "Investigate — mark the mound and assess",
+				"effects": {
+					"knowledge": 6,
+					"lore_branch": 4,
+					"lore_amount": 4,
+					"barrow_discover": {
+						"id": "karr_howe",
+						"name": "Kárr's Howe",
+						"regionId": "valley",
+						"opened": false
+					},
+					"event_flag_set": {
+						"barrow_fire_seen": true,
+						"barrow_known": true
+					},
+					"saga_entry": "The mound was marked and measured. Fire or no fire, treasure lies there."
+				}
+			},
+			{
+				"text": "Ignore it — night-lights are common in Iceland",
+				"effects": {
+					"event_flag_set": {
+						"barrow_fire_seen": true
+					},
+					"saga_entry": "The fire was not spoken of again. The mound sits."
+				}
+			},
+			{
+				"text": "Mark the mound as sacred ground and forbid approach",
+				"effects": {
+					"morale": 3,
+					"lore_branch": 4,
+					"lore_amount": 3,
+					"standing": 2,
+					"event_flag_set": {
+						"barrow_fire_seen": true
+					},
+					"saga_entry": "The mound was ringed with stones and left to its owner."
+				}
+			}
+		]
+	},
+	{
+		"id": "break_the_barrow",
+		"title": "Break the Barrow for Kárr's Blade",
+		"text": "Grettir entered the howe alone by night — descended by rope into the dark, felt the dead man's hands close on him, and still won the treasure. You have found the mound. The question now is whether to open it.",
+		"weight": 3,
+		"tags": [
+			"saga",
+			"supernatural",
+			"lore"
+		],
+		"art": {
+			"category": "supernatural"
+		},
+		"seasons": [
+			3,
+			0
+		],
+		"requires_flags": {
+			"barrow_known": true
+		},
+		"blocks_flags": {
+			"barrow_opened": true
+		},
+		"choices": [
+			{
+				"text": "Enter with your strongest fighter — by rope, by night",
+				"effects": {
+					"wealth": 16,
+					"tools": 8,
+					"knowledge": 6,
+					"morale": -4,
+					"food": -3,
+					"haunting_shift": 1,
+					"lore_branch": 5,
+					"lore_amount": 5,
+					"event_flag_set": {
+						"barrow_opened": true
+					},
+					"saga_entry": "The howe was broken. Old steel and silver came up with the fighter. Something else stirred below."
+				}
+			},
+			{
+				"text": "Send hirelings down — if they die, so it goes",
+				"effects": {
+					"wealth": 10,
+					"morale": -6,
+					"standing": -3,
+					"haunting_shift": 2,
+					"burial_debt_shift": 2,
+					"event_flag_set": {
+						"barrow_opened": true
+					},
+					"saga_entry": "Silver recovered. Two men would not say what they saw. One left the settlement."
+				}
+			},
+			{
+				"text": "Invoke proper rites before opening — ask the dead for permission",
+				"effects": {
+					"wealth": 10,
+					"tools": 6,
+					"lore_branch": 1,
+					"lore_amount": 8,
+					"morale": 2,
+					"haunting_shift": -1,
+					"event_flag_set": {
+						"barrow_opened": true
+					},
+					"saga_entry": "Rite and silence first. The dead lay quiet. The blade was taken with gratitude given."
+				},
+				"requires_lore": {
+					"1": 4,
+					"5": 2
+				}
+			},
+			{
+				"text": "Leave it sealed — mark it and move on",
+				"effects": {
+					"standing": 2,
+					"lore_branch": 4,
+					"lore_amount": 4,
+					"saga_entry": "The mound remained shut. Some things are owed to the earth."
+				}
+			}
+		]
+	},
+	{
+		"id": "giant_driftwood_posts",
+		"title": "Giant Driftwood for Hall Posts",
+		"text": "A storm has stranded an immense drift trunk on the black sand — the kind described in Landnámabók as being sawn into high-seat posts across the fjords. Half the settlement is already arguing over who owns it.",
+		"weight": 5,
+		"tags": [
+			"resource",
+			"politics"
+		],
+		"art": {
+			"category": "resource"
+		},
+		"seasons": [
+			2,
+			3,
+			0
+		],
+		"blocks_flags": {
+			"giant_driftwood_claimed": true
+		},
+		"choices": [
+			{
+				"text": "Claim it for the hall — high-seat posts from this trunk",
+				"effects": {
+					"materials": 18,
+					"morale": 4,
+					"standing": 3,
+					"event_flag_set": {
+						"giant_driftwood_claimed": true
+					},
+					"saga_entry": "The great log was hauled up and split for high-seat posts. The hall grew."
+				}
+			},
+			{
+				"text": "Split it fairly among all households — share the windfall",
+				"effects": {
+					"materials": 9,
+					"morale": 8,
+					"standing": 5,
+					"event_flag_set": {
+						"giant_driftwood_claimed": true
+					},
+					"saga_entry": "Each household got timber. The goodwill was worth more than the whole log alone."
+				}
+			},
+			{
+				"text": "Trade sections for grain, livestock, or tools",
+				"effects": {
+					"materials": 4,
+					"food": 6,
+					"wealth": 8,
+					"event_flag_set": {
+						"giant_driftwood_claimed": true
+					},
+					"saga_entry": "The timber was converted to what the settlement truly needed."
+				}
+			},
+			{
+				"text": "Consecrate it before cutting — a tree this size carries weight",
+				"effects": {
+					"materials": 14,
+					"morale": 6,
+					"lore_branch": 1,
+					"lore_amount": 4,
+					"vaettir_shift": {
+						"region": 0,
+						"mood": 1
+					},
+					"event_flag_set": {
+						"giant_driftwood_claimed": true
+					},
+					"saga_entry": "Proper words were spoken. The timber yielded cleanly."
+				},
+				"requires_lore": {
+					"1": 2
+				}
+			}
+		]
+	},
+	{
+		"id": "invite_thorbjorg",
+		"title": "Invite the Little Völva",
+		"text": "The catches fail for the third week. The hayfield stunted. A völva travels from farm to farm — Þorbjörg litilvölva, known to read the wyrd of the coming seasons. You can invite her or not.",
+		"weight": 5,
+		"tags": [
+			"saga",
+			"lore",
+			"religion"
+		],
+		"art": {
+			"category": "lore"
+		},
+		"seasons": [
+			2,
+			3
+		],
+		"min_week": 22,
+		"blocks_flags": {
+			"volva_visited": true
+		},
+		"choices": [
+			{
+				"text": "Send a formal delegation with gifts to invite her",
+				"effects": {
+					"food": -6,
+					"wealth": -3,
+					"standing": 4,
+					"lore_branch": 1,
+					"lore_amount": 3,
+					"event_flag_set": {
+						"volva_visited": true,
+						"volva_welcomed": true
+					},
+					"saga_entry": "The delegation returned with the völva. The district took note of the courtesy."
+				}
+			},
+			{
+				"text": "Spy on her from a distance before committing",
+				"effects": {
+					"knowledge": 5,
+					"lore_branch": 3,
+					"lore_amount": 2,
+					"event_flag_set": {
+						"volva_visited": true
+					},
+					"saga_entry": "Watched from the ridge. She sat alone, speaking to the wind. Strange, but not hostile."
+				}
+			},
+			{
+				"text": "Refuse on Christian grounds — this is witch-work",
+				"effects": {
+					"morale": -4,
+					"standing": -2,
+					"lore_branch": 1,
+					"lore_amount": 2,
+					"event_flag_set": {
+						"volva_visited": true
+					},
+					"saga_entry": "The door was shut to the seeress. The dearth continued."
+				}
+			},
+			{
+				"text": "Demand a practical forecast only — no spirit-work",
+				"effects": {
+					"food": -3,
+					"knowledge": 5,
+					"event_flag_set": {
+						"volva_visited": true,
+						"volva_welcomed": true
+					},
+					"saga_entry": "A bare forecast was asked. The völva gave less than she might have."
+				}
+			}
+		]
+	},
+	{
+		"id": "prepare_ritual_meal",
+		"title": "Prepare the Ritual Meal",
+		"text": "Þorbjörg must be fed as custom demands: kid-milk porridge, the hearts of all available animals. The stores are already stretched.",
+		"weight": 6,
+		"tags": [
+			"saga",
+			"lore",
+			"religion"
+		],
+		"art": {
+			"category": "lore"
+		},
+		"seasons": [
+			2,
+			3
+		],
+		"min_week": 23,
+		"requires_flags": {
+			"volva_welcomed": true
+		},
+		"blocks_flags": {
+			"volva_meal_done": true
+		},
+		"choices": [
+			{
+				"text": "Spend prime stores — kid-milk and hearts as demanded",
+				"effects": {
+					"food": -8,
+					"herd_delta": {
+						"1": -1
+					},
+					"lore_branch": 1,
+					"lore_amount": 6,
+					"morale": 3,
+					"event_flag_set": {
+						"volva_meal_done": true,
+						"volva_rite_full": true
+					},
+					"saga_entry": "The meal was prepared without shortcut. The völva accepted."
+				}
+			},
+			{
+				"text": "Substitute lesser fare — she will understand",
+				"effects": {
+					"food": -3,
+					"lore_branch": 1,
+					"lore_amount": 2,
+					"morale": -2,
+					"event_flag_set": {
+						"volva_meal_done": true
+					},
+					"saga_entry": "The meal was thin. The völva's eyes were unreadable."
+				}
+			},
+			{
+				"text": "Cancel the rite — the stores will not stretch",
+				"effects": {
+					"morale": -4,
+					"lore_branch": 1,
+					"lore_amount": 1,
+					"event_flag_set": {
+						"volva_meal_done": true,
+						"volva_rite_cancelled": true
+					},
+					"saga_entry": "The rite was cancelled. The völva left without speaking."
+				}
+			}
+		]
+	},
+	{
+		"id": "find_singer_varðlokkur",
+		"title": "Find a Singer for the Weird-Songs",
+		"text": "Varðlokkur — the spirit-luring songs — must be sung to draw the spirits near. Like Guðríðr who sang them against her will, you need someone who knows the old words. The household may not have them.",
+		"weight": 6,
+		"tags": [
+			"saga",
+			"lore",
+			"religion"
+		],
+		"art": {
+			"category": "lore"
+		},
+		"seasons": [
+			2,
+			3
+		],
+		"min_week": 24,
+		"requires_flags": {
+			"volva_rite_full": true
+		},
+		"blocks_flags": {
+			"varðlokkur_done": true
+		},
+		"choices": [
+			{
+				"text": "Ask the eldest pagan in the household to sing",
+				"effects": {
+					"morale": 4,
+					"lore_branch": 1,
+					"lore_amount": 8,
+					"knowledge": 6,
+					"event_flag_set": {
+						"varðlokkur_done": true,
+						"volva_rite_complete": true
+					},
+					"saga_entry": "An elder remembered the words. The spirits came."
+				}
+			},
+			{
+				"text": "Pressure a reluctant Christian — Guðríðr was reluctant too",
+				"effects": {
+					"morale": -3,
+					"standing": -2,
+					"lore_branch": 1,
+					"lore_amount": 5,
+					"knowledge": 4,
+					"event_flag_set": {
+						"varðlokkur_done": true,
+						"volva_rite_complete": true
+					},
+					"saga_entry": "She sang under pressure. The spirits came. So did resentment."
+				}
+			},
+			{
+				"text": "Attempt an instrumental substitute — drums and bone-flutes",
+				"effects": {
+					"morale": 2,
+					"lore_branch": 1,
+					"lore_amount": 3,
+					"event_flag_set": {
+						"varðlokkur_done": true
+					},
+					"saga_entry": "The sounds were made. Whether the spirits came is unclear."
+				}
+			},
+			{
+				"text": "Abandon the rite — no one here knows the songs",
+				"effects": {
+					"morale": -5,
+					"event_flag_set": {
+						"varðlokkur_done": true,
+						"volva_rite_cancelled": true
+					},
+					"saga_entry": "The rite failed for want of a singer. The völva withdrew."
+				}
+			}
+		]
+	},
+	{
+		"id": "hear_the_forecast",
+		"title": "Hear the Forecast and Fate-Reading",
+		"text": "The rite is done. Þorbjörg speaks: the dearth will end when the season turns; someone in the household will travel far and be spoken of; the land remembers what was given to it. Choose how much to trust her words.",
+		"weight": 6,
+		"tags": [
+			"saga",
+			"lore",
+			"religion"
+		],
+		"art": {
+			"category": "lore"
+		},
+		"seasons": [
+			2,
+			3
+		],
+		"min_week": 25,
+		"requires_flags": {
+			"volva_rite_complete": true
+		},
+		"blocks_flags": {
+			"volva_forecast_heard": true
+		},
+		"choices": [
+			{
+				"text": "Publicly proclaim the prophecy — let the whole district hear",
+				"effects": {
+					"morale": 12,
+					"standing": 6,
+					"lore_branch": 1,
+					"lore_amount": 8,
+					"knowledge": 8,
+					"hay": 5,
+					"food": 5,
+					"event_flag_set": {
+						"volva_forecast_heard": true,
+						"prophecy_public": true
+					},
+					"saga_entry": "The seeress was believed. The household worked as if winter were already past."
+				}
+			},
+			{
+				"text": "Keep it within family counsel — too much hope is dangerous",
+				"effects": {
+					"morale": 7,
+					"knowledge": 6,
+					"lore_branch": 1,
+					"lore_amount": 5,
+					"hay": 3,
+					"event_flag_set": {
+						"volva_forecast_heard": true
+					},
+					"saga_entry": "The prophecy was held close. It guided the household without binding it."
+				}
+			},
+			{
+				"text": "Act only on the practical scarcity forecast — ignore the fate-parts",
+				"effects": {
+					"knowledge": 8,
+					"food": 5,
+					"hay": 4,
+					"event_flag_set": {
+						"volva_forecast_heard": true
+					},
+					"saga_entry": "The household trusted the weather-signs and set aside the rest."
+				}
+			},
+			{
+				"text": "Reject the personal foretelling — we make our own wyrd",
+				"effects": {
+					"morale": -3,
+					"knowledge": 3,
+					"event_flag_set": {
+						"volva_forecast_heard": true
+					},
+					"saga_entry": "The fate-reading was set aside. The household relied on its own hands."
+				}
+			}
+		]
+	},
+	{
+		"id": "katla_loom_glamour",
+		"title": "Katla's Loom-Glamour",
+		"text": "A fugitive is hiding with a household woman known for seiðr — Katla has hidden her son beneath glamour three times already. A search party has come from the valley, armed and impatient.",
+		"weight": 4,
+		"tags": [
+			"saga",
+			"supernatural",
+			"politics"
+		],
+		"art": {
+			"category": "supernatural"
+		},
+		"min_week": 14,
+		"choices": [
+			{
+				"text": "Trust the hedge-witch — let her glamour hold",
+				"effects": {
+					"morale": 4,
+					"standing": 2,
+					"lore_branch": 5,
+					"lore_amount": 4,
+					"event_flag_set": {
+						"katla_trust": true
+					},
+					"saga_entry": "The searchers found nothing. Katla's glamour held. For now."
+				},
+				"requires_lore": {
+					"5": 2
+				}
+			},
+			{
+				"text": "Lead a mundane search — no glamour survives iron and torchlight",
+				"effects": {
+					"standing": -3,
+					"morale": -3,
+					"lore_branch": 0,
+					"lore_amount": 3,
+					"saga_entry": "The hall was searched thoroughly. A goat, a ash-heap, a spun spindle — no man."
+				}
+			},
+			{
+				"text": "Bring a counter-worker — break the glamour directly",
+				"effects": {
+					"lore_branch": 5,
+					"lore_amount": 6,
+					"morale": -2,
+					"standing": -2,
+					"knowledge": 6,
+					"saga_entry": "The glamour was unravelled. The fugitive was found. Katla's power is now known."
+				},
+				"requires_lore": {
+					"5": 4
+				}
+			},
+			{
+				"text": "Seize hostages instead of searching — let them prove innocence",
+				"effects": {
+					"standing": -5,
+					"morale": -5,
+					"event_flag_set": {
+						"katla_hostage": true
+					},
+					"saga_entry": "Hostages taken in lieu of the fugitive. A clumsy use of power."
+				}
+			}
+		]
+	},
+	{
+		"id": "kveldriða_accusation",
+		"title": "Night-Rider Accusation",
+		"text": "A man was found with broken ribs and no memory of the night. Someone in the valley says it was Geirríð — a woman known for her dealings with hidden things. The þing is in a fortnight.",
+		"weight": 4,
+		"tags": [
+			"saga",
+			"politics",
+			"supernatural"
+		],
+		"art": {
+			"category": "politics"
+		},
+		"seasons": [
+			0
+		],
+		"min_week": 8,
+		"blocks_flags": {
+			"kveldriða_resolved": true
+		},
+		"choices": [
+			{
+				"text": "Prosecute for witch-riding at the þing",
+				"effects": {
+					"wealth": -6,
+					"standing": 4,
+					"lore_branch": 0,
+					"lore_amount": 6,
+					"event_flag_set": {
+						"kveldriða_resolved": true
+					},
+					"saga_entry": "The case was brought at the assembly. Law tested the accusation."
+				},
+				"requires_lore": {
+					"0": 4
+				}
+			},
+			{
+				"text": "Seek silver compensation instead — avoid the public disgrace",
+				"effects": {
+					"wealth": 5,
+					"standing": 1,
+					"morale": 2,
+					"event_flag_set": {
+						"kveldriða_resolved": true
+					},
+					"saga_entry": "Silver changed hands. The injury was paid for without naming names."
+				}
+			},
+			{
+				"text": "Stage an oath-clearing — let her swear innocence publicly",
+				"effects": {
+					"morale": 4,
+					"standing": 3,
+					"lore_branch": 0,
+					"lore_amount": 4,
+					"event_flag_set": {
+						"kveldriða_resolved": true
+					},
+					"saga_entry": "The oath was sworn on the ring. Most believed it."
+				}
+			},
+			{
+				"text": "Call an outside judge to rule on the evidence",
+				"effects": {
+					"wealth": -3,
+					"standing": 5,
+					"lore_branch": 0,
+					"lore_amount": 5,
+					"event_flag_set": {
+						"kveldriða_resolved": true
+					},
+					"saga_entry": "A respected outsider sat judgment. The district accepted the verdict."
+				}
+			}
+		]
+	},
+	{
+		"id": "kotkell_storm_scaffold",
+		"title": "Storm-Scaffold of Kotkell and Gríma",
+		"text": "In the night a scaffold was raised on the ridge. Singing carried on the wind. At first light, the household ship is overdue — last seen rounding the headland as the sky turned strange.",
+		"weight": 3,
+		"tags": [
+			"saga",
+			"supernatural",
+			"survival"
+		],
+		"art": {
+			"category": "supernatural"
+		},
+		"seasons": [
+			1,
+			2
+		],
+		"realism": [
+			1,
+			2
+		],
+		"min_week": 18,
+		"choices": [
+			{
+				"text": "Strike the sorcerers before they finish — kill before the next storm",
+				"effects": {
+					"morale": -4,
+					"standing": -4,
+					"food": 3,
+					"event_flag_set": {
+						"kotkell_dealt": true
+					},
+					"saga_entry": "The household moved fast. The scaffold was destroyed before morning."
+				}
+			},
+			{
+				"text": "Expel them by district consensus — rally neighbours",
+				"effects": {
+					"standing": 5,
+					"morale": 3,
+					"wealth": -4,
+					"lore_branch": 0,
+					"lore_amount": 4,
+					"event_flag_set": {
+						"kotkell_dealt": true
+					},
+					"saga_entry": "Every farm in the valley sent word. Kotkell's family left before the week was out."
+				},
+				"requires_lore": {
+					"0": 3
+				}
+			},
+			{
+				"text": "Ignore the rumours — there is no proof of sorcery",
+				"effects": {
+					"morale": -8,
+					"food": -5,
+					"wealth": -6,
+					"haunting_shift": 1,
+					"saga_entry": "The boat did not return. Three men were gone. The household regretted inaction."
+				}
+			},
+			{
+				"text": "Ward the next boat with priest or wise-person before it sails",
+				"effects": {
+					"food": -3,
+					"morale": 2,
+					"lore_branch": 1,
+					"lore_amount": 5,
+					"event_flag_set": {
+						"kotkell_dealt": true
+					},
+					"saga_entry": "The boat was spoken over. It returned safe. The scaffold stood dark on the ridge."
+				},
+				"requires_lore": {
+					"1": 3
+				}
+			}
+		]
+	},
+	{
+		"id": "rune_scored_root",
+		"title": "Rune-Scored Root to the Enemy",
+		"text": "An old woman offers to send a rune-carved piece of driftwood against your enemies — floated on the tide, turned widdershins, and set with blood. She says it will find them wherever they hide, as it found Grettir on Drangey.",
+		"weight": 3,
+		"tags": [
+			"saga",
+			"supernatural",
+			"feud"
+		],
+		"art": {
+			"category": "supernatural"
+		},
+		"realism": [
+			1,
+			2
+		],
+		"min_week": 30,
+		"choices": [
+			{
+				"text": "Commission the curse — root, runes, blood, widdershins turn",
+				"effects": {
+					"wealth": -6,
+					"lore_branch": 5,
+					"lore_amount": 6,
+					"standing": -3,
+					"morale": 3,
+					"permanent_scar": "curse_taint",
+					"event_flag_set": {
+						"rune_root_sent": true
+					},
+					"saga_entry": "The root was carved and sent. What it finds, it finds without mercy."
+				},
+				"requires_lore": {
+					"5": 3
+				}
+			},
+			{
+				"text": "Refuse — pursue open feud with men and steel instead",
+				"effects": {
+					"morale": 3,
+					"standing": 2,
+					"saga_entry": "The sorcery was declined. The household chose honest enmity."
+				}
+			},
+			{
+				"text": "Sabotage the ritual object — better no curse than a botched one",
+				"effects": {
+					"lore_branch": 5,
+					"lore_amount": 5,
+					"knowledge": 4,
+					"saga_entry": "The root was quietly destroyed. Safer for everyone."
+				},
+				"requires_lore": {
+					"5": 2
+				}
+			},
+			{
+				"text": "Buy warding for yourself — assume the enemy may do the same",
+				"effects": {
+					"wealth": -4,
+					"morale": 3,
+					"lore_branch": 1,
+					"lore_amount": 4,
+					"saga_entry": "Wards were spoken over the hall. Let the enemy try their sorcery now."
+				},
+				"requires_lore": {
+					"1": 2
+				}
+			}
+		]
+	},
+	{
+		"id": "seek_elf_hill_cure",
+		"title": "Seek the Elf-Hill Cure",
+		"text": "A valued fighter's wound will not close — it was three weeks ago and the flesh has gone strange. The healer says what Þormóðr's kin said to him: go to the hill and leave an offering. The álfar who live there cure such wounds if properly approached.",
+		"weight": 4,
+		"tags": [
+			"saga",
+			"lore",
+			"supernatural"
+		],
+		"art": {
+			"category": "lore"
+		},
+		"seasons": [
+			0,
+			1,
+			2
+		],
+		"blocks_flags": {
+			"alfar_cure_sought": true
+		},
+		"choices": [
+			{
+				"text": "Attempt the rite — go to the hill with an offering",
+				"effects": {
+					"food": -3,
+					"lore_branch": 4,
+					"lore_amount": 4,
+					"knowledge": 4,
+					"event_flag_set": {
+						"alfar_cure_sought": true,
+						"alfar_approach_made": true
+					},
+					"saga_entry": "The hill was approached with an offering in hand."
+				}
+			},
+			{
+				"text": "Seek ordinary healing only — poultice, rest, prayers",
+				"effects": {
+					"food": -2,
+					"morale": -2,
+					"event_flag_set": {
+						"alfar_cure_sought": true
+					},
+					"saga_entry": "Ordinary measures were tried. The wound was slow to close."
+				}
+			},
+			{
+				"text": "Try both — the healer and the hill",
+				"effects": {
+					"food": -4,
+					"wealth": -2,
+					"lore_branch": 4,
+					"lore_amount": 3,
+					"event_flag_set": {
+						"alfar_cure_sought": true,
+						"alfar_approach_made": true
+					},
+					"saga_entry": "Two remedies offered together. One of them would surely work."
+				}
+			},
+			{
+				"text": "Denounce the hill custom — no Christian home does this",
+				"effects": {
+					"morale": -3,
+					"standing": -1,
+					"lore_branch": 1,
+					"lore_amount": 2,
+					"event_flag_set": {
+						"alfar_cure_sought": true
+					},
+					"saga_entry": "The custom was rejected. The wound healed in its own time. Barely."
+				}
+			}
+		]
+	},
+	{
+		"id": "blood_the_hill",
+		"title": "Blood the Hill with Bull's Gore",
+		"text": "The healer's instruction is clear: kill a bull, smear its blood on the hill-face, and leave the carcass for the feast. You have a bull. The herd is not large.",
+		"weight": 4,
+		"tags": [
+			"saga",
+			"lore",
+			"supernatural"
+		],
+		"art": {
+			"category": "lore"
+		},
+		"seasons": [
+			0,
+			1
+		],
+		"requires_flags": {
+			"alfar_approach_made": true
+		},
+		"blocks_flags": {
+			"alfar_bull_given": true
+		},
+		"choices": [
+			{
+				"text": "Use the best breeding bull — give the álfar what they deserve",
+				"effects": {
+					"herd_delta": {
+						"1": -2
+					},
+					"morale": 6,
+					"lore_branch": 4,
+					"lore_amount": 6,
+					"vaettir_shift": {
+						"region": 1,
+						"mood": 2
+					},
+					"event_flag_set": {
+						"alfar_bull_given": true,
+						"alfar_rite_full": true
+					},
+					"saga_entry": "The best bull's blood ran down the hill. The wound closed by morning."
+				}
+			},
+			{
+				"text": "Use a lesser animal — a goat or sick cow",
+				"effects": {
+					"herd_delta": {
+						"1": -1
+					},
+					"lore_branch": 4,
+					"lore_amount": 3,
+					"event_flag_set": {
+						"alfar_bull_given": true
+					},
+					"saga_entry": "A lesser offering. The álfar may accept it. May."
+				}
+			},
+			{
+				"text": "Fake the blooding — painted water, not blood",
+				"effects": {
+					"morale": -4,
+					"vaettir_shift": {
+						"region": 1,
+						"mood": 3
+					},
+					"event_flag_set": {
+						"alfar_bull_given": true
+					},
+					"saga_entry": "The hill was not fooled. The fighter worsened."
+				}
+			},
+			{
+				"text": "Postpone until spring when the herd is stronger",
+				"effects": {
+					"morale": -3,
+					"event_flag_set": {
+						"alfar_bull_given": true
+					},
+					"saga_entry": "The rite was delayed. The wound was slow, but not killing."
+				}
+			}
+		]
+	},
+	{
+		"id": "feast_the_alfar",
+		"title": "Feast the Álfar from the Slaughter",
+		"text": "The bull is killed. The blood is given. Now the carcass must be prepared into a proper feast and left at the hill — the offering must be complete for the cure to hold.",
+		"weight": 5,
+		"tags": [
+			"saga",
+			"lore",
+			"supernatural"
+		],
+		"art": {
+			"category": "lore"
+		},
+		"seasons": [
+			0,
+			1
+		],
+		"requires_flags": {
+			"alfar_rite_full": true
+		},
+		"blocks_flags": {
+			"alfar_feast_done": true
+		},
+		"choices": [
+			{
+				"text": "Full offering — prepare the meat and leave it all at the hill",
+				"effects": {
+					"food": -8,
+					"morale": 8,
+					"lore_branch": 4,
+					"lore_amount": 6,
+					"vaettir_shift": {
+						"region": 1,
+						"mood": 2
+					},
+					"event_flag_set": {
+						"alfar_feast_done": true,
+						"alfar_cure_complete": true
+					},
+					"saga_entry": "Everything was given. The fighter rose from his pallet the next morning."
+				}
+			},
+			{
+				"text": "Token meal — share between household and hill",
+				"effects": {
+					"food": -4,
+					"lore_branch": 4,
+					"lore_amount": 3,
+					"event_flag_set": {
+						"alfar_feast_done": true
+					},
+					"saga_entry": "A token was left. Whether it satisfied the hidden ones is not known."
+				}
+			},
+			{
+				"text": "Family rite only — close kin carry food to the hill at dawn",
+				"effects": {
+					"food": -5,
+					"morale": 5,
+					"lore_branch": 4,
+					"lore_amount": 4,
+					"event_flag_set": {
+						"alfar_feast_done": true,
+						"alfar_cure_complete": true
+					},
+					"saga_entry": "The family went alone in the grey dawn. What passed at the hill was not spoken of."
+				}
+			},
+			{
+				"text": "Abandon the rite after blooding — that should be enough",
+				"effects": {
+					"morale": -3,
+					"vaettir_shift": {
+						"region": 1,
+						"mood": 3
+					},
+					"event_flag_set": {
+						"alfar_feast_done": true
+					},
+					"saga_entry": "The feast was not given. The cure came half-way. Resentment remained."
+				}
+			}
+		]
+	},
+	{
+		"id": "trade_the_ring",
+		"title": "Trade the Ring for the Bull",
+		"text": "Your neighbour has the bull you need for the offering — a fine animal. He wants Steingerðr's ring, an heirloom that came across the sea with your grandmother. It is worth more than a bull. It is also irreplaceable.",
+		"weight": 4,
+		"tags": [
+			"saga",
+			"lore",
+			"supernatural"
+		],
+		"art": {
+			"category": "trade"
+		},
+		"requires_flags": {
+			"alfar_approach_made": true
+		},
+		"blocks_flags": {
+			"alfar_bull_given": true
+		},
+		"choices": [
+			{
+				"text": "Give the ring — the fighter is worth more than an heirloom",
+				"effects": {
+					"wealth": -10,
+					"morale": 3,
+					"herd_delta": {
+						"1": 1
+					},
+					"lore_branch": 2,
+					"lore_amount": -2,
+					"event_flag_set": {
+						"alfar_bull_given": true,
+						"alfar_rite_full": true
+					},
+					"saga_entry": "The ring was given. The heirloom left. The fighter lives."
+				}
+			},
+			{
+				"text": "Seize the neighbour's beast by force — pay later",
+				"effects": {
+					"herd_delta": {
+						"1": 1
+					},
+					"standing": -5,
+					"morale": -3,
+					"event_flag_set": {
+						"alfar_bull_given": true,
+						"alfar_rite_full": true
+					},
+					"saga_entry": "The bull was taken. The neighbour was furious. The fighter lives."
+				}
+			},
+			{
+				"text": "Haggle — offer silver and a future service instead",
+				"effects": {
+					"wealth": -5,
+					"morale": -2,
+					"event_flag_set": {
+						"alfar_bull_given": true,
+						"alfar_rite_full": true
+					},
+					"saga_entry": "Haggling worked eventually. Three days were lost."
+				}
+			},
+			{
+				"text": "Refuse the cure — no ring is worth this ritual",
+				"effects": {
+					"wealth": 0,
+					"morale": -4,
+					"standing": 1,
+					"event_flag_set": {
+						"alfar_bull_given": true
+					},
+					"saga_entry": "The ring was kept. The fighter healed slowly, or did not."
+				}
+			}
+		]
+	},
+	{
+		"id": "release_the_ravens",
+		"title": "Release the Ravens",
+		"text": "Flóki Vilgerðarson used three ravens to navigate. One flew back; one circled and returned; the third flew straight ahead and did not return. The coast is unclear. You have birds. The crew is waiting.",
+		"weight": 5,
+		"tags": [
+			"saga",
+			"wayfinding",
+			"omen"
+		],
+		"art": {
+			"category": "weather"
+		},
+		"seasons": [
+			0,
+			1
+		],
+		"min_week": 1,
+		"max_week": 16,
+		"blocks_flags": {
+			"ravens_released": true
+		},
+		"choices": [
+			{
+				"text": "Release one raven — watch where it flies",
+				"effects": {
+					"knowledge": 5,
+					"lore_branch": 3,
+					"lore_amount": 4,
+					"event_flag_set": {
+						"ravens_released": true
+					},
+					"saga_entry": "The raven flew and did not return. Land is ahead."
+				}
+			},
+			{
+				"text": "Wait for clearer weather before releasing",
+				"effects": {
+					"food": -3,
+					"knowledge": 3,
+					"event_flag_set": {
+						"ravens_released": true
+					},
+					"saga_entry": "The birds were held until the sky cleared. A better read then."
+				}
+			},
+			{
+				"text": "Trust the stars and coastline — ravens are for those without lore",
+				"effects": {
+					"lore_branch": 3,
+					"lore_amount": 5,
+					"morale": 3,
+					"event_flag_set": {
+						"ravens_released": true
+					},
+					"saga_entry": "Stars and coast were read without birds. The household reached land first."
+				},
+				"requires_lore": {
+					"3": 4
+				}
+			}
+		]
+	},
+	{
+		"id": "name_the_land_from_ice",
+		"title": "Name the Land from Ice",
+		"text": "Flóki climbed a ridge in the northwest and saw a fjord choked with drift-ice. He called the land Iceland. You see the same ice now. What you name this place will shape who follows you here.",
+		"weight": 4,
+		"tags": [
+			"saga",
+			"wayfinding",
+			"politics"
+		],
+		"art": {
+			"category": "weather"
+		},
+		"seasons": [
+			0,
+			2
+		],
+		"min_week": 2,
+		"blocks_flags": {
+			"land_named": true
+		},
+		"choices": [
+			{
+				"text": "Name it honestly — frost, wind, hard land. Let settlers know.",
+				"effects": {
+					"knowledge": 6,
+					"standing": 3,
+					"lore_branch": 3,
+					"lore_amount": 4,
+					"event_flag_set": {
+						"land_named": true,
+						"land_named_honest": true
+					},
+					"saga_entry": "The land was named plainly. Those who came later knew what they were choosing."
+				}
+			},
+			{
+				"text": "Name it to attract settlers — 'green hills, rich soil, calm summers'",
+				"effects": {
+					"standing": 5,
+					"morale": 3,
+					"lore_branch": 2,
+					"lore_amount": 3,
+					"event_flag_set": {
+						"land_named": true,
+						"land_named_generous": true
+					},
+					"saga_entry": "The name spread east. It brought people. Some were disappointed."
+				}
+			},
+			{
+				"text": "Keep quiet — report mixed prospects, no dramatic naming",
+				"effects": {
+					"knowledge": 4,
+					"event_flag_set": {
+						"land_named": true
+					},
+					"saga_entry": "No name was declared. The land kept its own counsel."
+				}
+			}
+		]
+	},
+	{
+		"id": "blood_rain_on_hay_saga",
+		"title": "Blood-Rain on the Hay",
+		"text": "The sky darkens at midday and a red rain falls on the hayfields — just as it fell at Fróðá before the year of the walking dead. The hay is stained. The household is frightened.",
+		"weight": 4,
+		"tags": [
+			"saga",
+			"omen",
+			"supernatural"
+		],
+		"art": {
+			"category": "supernatural"
+		},
+		"seasons": [
+			1
+		],
+		"min_week": 14,
+		"max_week": 30,
+		"blocks_flags": {
+			"blood_rain_saga_done": true
+		},
+		"choices": [
+			{
+				"text": "Save the wet hay fast — stain or not, fodder is fodder",
+				"effects": {
+					"hay": -6,
+					"food": -3,
+					"morale": -4,
+					"event_flag_set": {
+						"blood_rain_saga_done": true
+					},
+					"saga_entry": "The bloodied hay was hauled in. The animals ate it. Dreams came."
+				}
+			},
+			{
+				"text": "Preserve the bloodied patch for reading — this is a message",
+				"effects": {
+					"hay": -4,
+					"knowledge": 8,
+					"lore_branch": 4,
+					"lore_amount": 6,
+					"morale": -2,
+					"event_flag_set": {
+						"blood_rain_saga_done": true,
+						"blood_rain_read": true
+					},
+					"saga_entry": "The stained earth was studied. The omen was not welcome news."
+				}
+			},
+			{
+				"text": "Dismiss as weather — bog-iron runoff, nothing more",
+				"effects": {
+					"hay": 4,
+					"morale": 2,
+					"haunting_shift": 1,
+					"event_flag_set": {
+						"blood_rain_saga_done": true
+					},
+					"saga_entry": "Work continued through the red rain. The omen was ignored. The land filed it away."
+				}
+			},
+			{
+				"text": "Make public warning preparations — bar the hall at night",
+				"effects": {
+					"hay": -2,
+					"morale": 4,
+					"standing": 3,
+					"lore_branch": 4,
+					"lore_amount": 4,
+					"event_flag_set": {
+						"blood_rain_saga_done": true
+					},
+					"saga_entry": "Word was sent to every farm. The household was braced before winter came."
+				}
+			}
+		]
+	},
+	{
+		"id": "moon_of_the_dead",
+		"title": "Moon of the Dead in the Hall",
+		"text": "A half-moon of pale light has been creeping anti-sunwise around the dark timber walls of the hall for three nights. The *Eyrbyggja* says that is how the corpse-moon moved before the Fróðá deaths began.",
+		"weight": 3,
+		"tags": [
+			"saga",
+			"supernatural",
+			"omen"
+		],
+		"art": {
+			"category": "supernatural"
+		},
+		"seasons": [
+			3
+		],
+		"realism": [
+			1,
+			2
+		],
+		"min_week": 34,
+		"choices": [
+			{
+				"text": "Quarantine the weakest workers — move them to the side-building",
+				"effects": {
+					"morale": -3,
+					"food": -2,
+					"lore_branch": 1,
+					"lore_amount": 3,
+					"saga_entry": "The vulnerable were moved. The moon circled three more nights and stopped."
+				}
+			},
+			{
+				"text": "Call goði or priest — this has a name and a remedy",
+				"effects": {
+					"wealth": -3,
+					"food": -4,
+					"morale": 5,
+					"lore_branch": 1,
+					"lore_amount": 6,
+					"haunting_shift": -1,
+					"saga_entry": "Rites were spoken over the hall-posts. The moon did not return."
+				},
+				"requires_lore": {
+					"1": 3
+				}
+			},
+			{
+				"text": "Ignore it — it is moonlight through a crack in the roof",
+				"effects": {
+					"morale": -4,
+					"haunting_shift": 1,
+					"saga_entry": "The household was told to stop dreaming. The moon kept circling."
+				}
+			},
+			{
+				"text": "Move all sleeping arrangements immediately — stay out of its path",
+				"effects": {
+					"morale": -2,
+					"shelter": -2,
+					"knowledge": 4,
+					"lore_branch": 4,
+					"lore_amount": 3,
+					"saga_entry": "Beds were moved to the far wall. The moon circled an empty space."
+				}
+			}
+		]
+	},
+	{
+		"id": "gula_thing_inheritance",
+		"title": "Gula-Þing Inheritance Suit",
+		"text": "Egill Skallagrímsson pursued his wife's inheritance before the Gula-Thing, inside hazel-pole precincts, before twelve judges. A related inheritance dispute has surfaced here. The other party has witnesses. You have the better claim — if you can make it stand.",
+		"weight": 4,
+		"tags": [
+			"saga",
+			"politics",
+			"law"
+		],
+		"art": {
+			"category": "politics"
+		},
+		"seasons": [
+			1
+		],
+		"min_week": 18,
+		"choices": [
+			{
+				"text": "Bring witnesses to the þing and make the legal case",
+				"effects": {
+					"wealth": 14,
+					"standing": 6,
+					"lore_branch": 0,
+					"lore_amount": 8,
+					"event_flag_set": {
+						"inheritance_suit_won": true
+					},
+					"saga_entry": "Witnesses spoke well. The inheritance was awarded by the judges."
+				},
+				"requires_lore": {
+					"0": 5
+				}
+			},
+			{
+				"text": "Bring witnesses — and twenty armed men behind them",
+				"effects": {
+					"wealth": 12,
+					"standing": 2,
+					"morale": 3,
+					"lore_branch": 0,
+					"lore_amount": 3,
+					"event_flag_set": {
+						"inheritance_suit_won": true
+					},
+					"saga_entry": "The claim held — partly through law, partly through the sword-hilts behind the speakers."
+				}
+			},
+			{
+				"text": "Settle privately before the þing convenes",
+				"effects": {
+					"wealth": 7,
+					"standing": 3,
+					"morale": 2,
+					"lore_branch": 0,
+					"lore_amount": 3,
+					"saga_entry": "Silver changed hands quietly. The dispute did not reach the law-hill."
+				}
+			},
+			{
+				"text": "Abandon the claim — litigation is costly and risky",
+				"effects": {
+					"morale": -4,
+					"standing": -2,
+					"saga_entry": "The claim was let go. Others noted it."
+				}
+			}
+		]
+	},
+	{
+		"id": "lesser_outlawry_thrall",
+		"title": "Lesser Outlawry for Thrall-Slaying",
+		"text": "A boundary dispute boiled over. Two of a neighbour's thralls are dead — killed on what your household insists is your grazing land. The neighbour is summoning men to the spring þing. Lesser outlawry is the minimum penalty if you are convicted.",
+		"weight": 5,
+		"tags": [
+			"saga",
+			"politics",
+			"law",
+			"feud"
+		],
+		"art": {
+			"category": "politics"
+		},
+		"seasons": [
+			0
+		],
+		"min_week": 8,
+		"choices": [
+			{
+				"text": "Pay compensation quickly and close the case",
+				"effects": {
+					"wealth": -8,
+					"morale": 3,
+					"standing": 3,
+					"lore_branch": 0,
+					"lore_amount": 4,
+					"event_flag_clear": [
+						"grazing_dispute",
+						"feudStarted"
+					],
+					"saga_entry": "Silver paid and the suit dropped. Clean, if expensive."
+				}
+			},
+			{
+				"text": "Counter-sue for trespass — they had no right to that land",
+				"effects": {
+					"wealth": -4,
+					"standing": 4,
+					"lore_branch": 0,
+					"lore_amount": 7,
+					"event_flag_set": {
+						"legal_counter": true
+					},
+					"saga_entry": "A counter-case filed. The þing would have two suits to untangle."
+				},
+				"requires_lore": {
+					"0": 5
+				}
+			},
+			{
+				"text": "Intimidate the plaintiff — make clear what a lawsuit will cost them",
+				"effects": {
+					"standing": -4,
+					"morale": -2,
+					"event_flag_set": {
+						"feudStarted": true
+					},
+					"saga_entry": "Threats were made. The suit was dropped. The enmity deepened."
+				}
+			},
+			{
+				"text": "Invite arbitration by respected elders — split the difference",
+				"effects": {
+					"wealth": -4,
+					"standing": 4,
+					"morale": 4,
+					"lore_branch": 0,
+					"lore_amount": 4,
+					"saga_entry": "Elders arbitrated. Both parties gave ground. Grudges cooled."
+				}
+			}
+		]
+	},
+	{
+		"id": "door_court_against_dead",
+		"title": "Door-Court Against the Dead",
+		"text": "The hauntings have passed beyond what prayers can hold. Snorri goði's solution at Fróðá was to hold a formal door-court: summon each dead person at the hall-door, hear them, and expel them by law. This requires a goði, a priest, and the nerve to stand at the threshold.",
+		"weight": 3,
+		"tags": [
+			"saga",
+			"supernatural",
+			"law"
+		],
+		"art": {
+			"category": "supernatural"
+		},
+		"seasons": [
+			3
+		],
+		"realism": [
+			1,
+			2
+		],
+		"min_week": 30,
+		"requires_flags": {
+			"hall_haunted": true,
+			"hauntingStage": 3
+		},
+		"blocks_flags": {
+			"door_court_held": true
+		},
+		"choices": [
+			{
+				"text": "Hold the full door-court — summon, judge, and lawfully expel each dead",
+				"effects": {
+					"morale": 14,
+					"standing": 8,
+					"knowledge": 10,
+					"lore_branch": 0,
+					"lore_amount": 10,
+					"haunting_shift": -99,
+					"draugar_set": false,
+					"burial_debt_shift": -4,
+					"event_flag_set": {
+						"door_court_held": true,
+						"hall_haunted": false
+					},
+					"saga_entry": "Each dead was named aloud and judged. Each went. The hall was clean."
+				},
+				"requires_lore": {
+					"0": 5,
+					"1": 4
+				}
+			},
+			{
+				"text": "Attempt exorcism without formal law — prayer and iron",
+				"effects": {
+					"morale": 7,
+					"lore_branch": 1,
+					"lore_amount": 7,
+					"haunting_shift": -2,
+					"event_flag_set": {
+						"door_court_held": true
+					},
+					"saga_entry": "Prayers drove some of the dead back. Not all. Not yet."
+				},
+				"requires_lore": {
+					"1": 5
+				}
+			},
+			{
+				"text": "Burn the infected bedding and hall-furnishings",
+				"effects": {
+					"materials": -8,
+					"morale": 3,
+					"haunting_shift": -1,
+					"saga_entry": "Fire cleaned what rite could not. The hall was colder but quieter."
+				}
+			},
+			{
+				"text": "Evacuate the hall — start again in a secondary building",
+				"effects": {
+					"shelter": -8,
+					"morale": -6,
+					"food": -4,
+					"haunting_shift": -3,
+					"event_flag_set": {
+						"door_court_held": true,
+						"hall_abandoned": true
+					},
+					"saga_entry": "The hall was left to the dead. The household moved to smaller quarters."
+				}
+			}
+		]
+	},
+	{
+		"id": "blood_cloak_settlement",
+		"title": "Blood-Cloak or Settlement",
+		"text": "An important retainer has been slain. Hildigunn wrapped Flosi in her husband's blood-soaked cloak to demand vengeance. The widow is here now, holding the cloak. The assembly is in two weeks.",
+		"weight": 4,
+		"tags": [
+			"saga",
+			"feud",
+			"politics",
+			"law"
+		],
+		"art": {
+			"category": "feud"
+		},
+		"min_week": 26,
+		"choices": [
+			{
+				"text": "Accept financial compensation — wealth over blood",
+				"effects": {
+					"wealth": 16,
+					"morale": -4,
+					"standing": 4,
+					"lore_branch": 0,
+					"lore_amount": 5,
+					"event_flag_clear": [
+						"feudStarted"
+					],
+					"saga_entry": "Silver was taken. The widow was paid. The cloak was buried."
+				}
+			},
+			{
+				"text": "Pursue lawful prosecution at the þing",
+				"effects": {
+					"wealth": -6,
+					"standing": 7,
+					"lore_branch": 0,
+					"lore_amount": 8,
+					"morale": 2,
+					"saga_entry": "The killers were prosecuted. The þing voted. Law held — this time."
+				},
+				"requires_lore": {
+					"0": 5
+				}
+			},
+			{
+				"text": "Swear blood vengeance — the cloak demands it",
+				"effects": {
+					"standing": 5,
+					"morale": 6,
+					"food": -6,
+					"event_flag_set": {
+						"bloodfeud": true,
+						"feudStarted": true
+					},
+					"saga_entry": "The cloak was accepted. The oath was sworn. Flosi's path opens."
+				}
+			},
+			{
+				"text": "Delay while gathering allies — do nothing rash yet",
+				"effects": {
+					"morale": -3,
+					"standing": -2,
+					"knowledge": 5,
+					"event_flag_set": {
+						"feudStarted": true
+					},
+					"saga_entry": "Time was bought. Allies were sought. The widow waited."
+				}
+			}
+		]
+	},
+	{
+		"id": "flee_haralds_pressure",
+		"title": "Flee Harald's Pressure",
+		"text": "Word has come back across the sea: Harald Fairhair's men have taken another three farms in your home district. Your kin there are being pushed to swear or leave. The first pressure from Norway reaches even here.",
+		"weight": 4,
+		"tags": [
+			"saga",
+			"politics",
+			"trade"
+		],
+		"art": {
+			"category": "politics"
+		},
+		"min_week": 10,
+		"blocks_flags": {
+			"norway_pressure_decided": true
+		},
+		"choices": [
+			{
+				"text": "Send word for kin to leave now — bring capital while they can",
+				"effects": {
+					"wealth": 10,
+					"food": 5,
+					"standing": 3,
+					"morale": 3,
+					"event_flag_set": {
+						"norway_pressure_decided": true,
+						"norway_hostile": true
+					},
+					"saga_entry": "Kin came west with silver and livestock intact. The king got only an empty farm."
+				}
+			},
+			{
+				"text": "Tell them to stay and resist — confiscation is not certain",
+				"effects": {
+					"morale": -4,
+					"standing": -2,
+					"event_flag_set": {
+						"norway_pressure_decided": true,
+						"norway_hostile": true
+					},
+					"saga_entry": "Resistance was advised. Three months later the farms were taken anyway."
+				}
+			},
+			{
+				"text": "Route them west via the islands — slower, but safer",
+				"effects": {
+					"food": -4,
+					"wealth": 5,
+					"knowledge": 4,
+					"lore_branch": 3,
+					"lore_amount": 4,
+					"event_flag_set": {
+						"norway_pressure_decided": true
+					},
+					"saga_entry": "The island route cost time but kept people safe. They arrived thin but intact."
+				}
+			},
+			{
+				"text": "Submit to Harald — swear and leave later with more",
+				"effects": {
+					"wealth": 8,
+					"standing": -4,
+					"morale": -5,
+					"event_flag_set": {
+						"norway_pressure_decided": true,
+						"norway_oath_sworn": true
+					},
+					"saga_entry": "An oath was sworn. The estate was kept another year. The cost was pride."
+				}
+			}
+		]
+	},
+	{
+		"id": "merchant_winters_hall",
+		"title": "Merchant Winters at the Hall",
+		"text": "A Norwegian merchant ship has put in for winter. The captain asks to winter here — he has cloth, walrus rope, and news from the east. He will trade well if treated well.",
+		"weight": 5,
+		"tags": [
+			"saga",
+			"trade",
+			"politics"
+		],
+		"art": {
+			"category": "trade"
+		},
+		"seasons": [
+			2,
+			3
+		],
+		"min_week": 22,
+		"choices": [
+			{
+				"text": "Host lavishly — feast them, give prime quarters",
+				"effects": {
+					"food": -10,
+					"fuel": -5,
+					"wealth": 14,
+					"knowledge": 5,
+					"standing": 6,
+					"morale": 4,
+					"milestone": "shippingContact",
+					"saga_entry": "The merchant stayed well. He spoke of the settlement to everyone he met east."
+				}
+			},
+			{
+				"text": "Host for hard bargains — trade first, comfort second",
+				"effects": {
+					"food": -5,
+					"wealth": 10,
+					"knowledge": 3,
+					"standing": 2,
+					"milestone": "shippingContact",
+					"saga_entry": "Stiff terms on both sides. Silver changed hands fairly."
+				}
+			},
+			{
+				"text": "Allow warehouse use only — no household access",
+				"effects": {
+					"wealth": 5,
+					"standing": -2,
+					"saga_entry": "The merchant sheltered his goods but not himself here. He remembered it."
+				}
+			},
+			{
+				"text": "Refuse — stores cannot support extra mouths",
+				"effects": {
+					"food": 4,
+					"standing": -4,
+					"morale": -2,
+					"saga_entry": "The ship was turned away. The merchant carried that news east too."
+				}
+			}
+		]
+	},
+	{
+		"id": "missionary_rood_cross",
+		"title": "Missionary with the Rood-Cross",
+		"text": "A priest arrives from Norway with a rood-cross and the backing of Olaf Tryggvason — or at least says so. Like Þangbrand, he is not gentle about his business. He is preaching in the valley.",
+		"weight": 3,
+		"tags": [
+			"saga",
+			"religion",
+			"politics"
+		],
+		"art": {
+			"category": "religion"
+		},
+		"min_week": 30,
+		"blocks_flags": {
+			"missionary_handled": true
+		},
+		"choices": [
+			{
+				"text": "Welcome him — let him preach freely, it costs little",
+				"effects": {
+					"morale": 2,
+					"standing": 4,
+					"lore_branch": 1,
+					"lore_amount": 3,
+					"event_flag_set": {
+						"missionary_handled": true,
+						"christian_presence": true
+					},
+					"saga_entry": "The priest preached. Some listened. Norway was pleased."
+				}
+			},
+			{
+				"text": "Tolerate him but bar any forced conversion",
+				"effects": {
+					"morale": 4,
+					"standing": 3,
+					"lore_branch": 0,
+					"lore_amount": 3,
+					"event_flag_set": {
+						"missionary_handled": true
+					},
+					"saga_entry": "He was allowed to speak, not to compel. A careful line."
+				}
+			},
+			{
+				"text": "Expel him — this district keeps its own customs",
+				"effects": {
+					"morale": 5,
+					"standing": -5,
+					"lore_branch": 1,
+					"lore_amount": 3,
+					"event_flag_set": {
+						"missionary_handled": true,
+						"norway_hostile": true
+					},
+					"saga_entry": "The priest was told to leave. The district was pleased. Norway was not."
+				}
+			},
+			{
+				"text": "Convert publicly for Norway favour — faith is politics",
+				"effects": {
+					"standing": 6,
+					"wealth": 5,
+					"morale": -4,
+					"lore_branch": 1,
+					"lore_amount": 2,
+					"event_flag_set": {
+						"missionary_handled": true,
+						"christian_presence": true
+					},
+					"saga_entry": "The cross was kissed in public. Silver and favour followed. The household was not sure what it believed."
+				}
+			}
+		]
+	},
+	{
+		"id": "queen_gunnhild_favour",
+		"title": "Queen Gunnhild's Favour Turns Toxic",
+		"text": "A skilled poet or champion in your household has caught the notice of Queen Gunnhild at the Norwegian court — her 'magic cunning' is well known, and her gifts are never free. A message has arrived.",
+		"weight": 3,
+		"tags": [
+			"saga",
+			"politics",
+			"supernatural"
+		],
+		"art": {
+			"category": "politics"
+		},
+		"min_week": 20,
+		"choices": [
+			{
+				"text": "Accept the favour — gifts and standing in Norway are worth having",
+				"effects": {
+					"wealth": 12,
+					"standing": 6,
+					"morale": -2,
+					"event_flag_set": {
+						"gunnhild_favour": true,
+						"norway_hostile": false
+					},
+					"saga_entry": "The queen's gift was accepted. It arrived with a hook attached."
+				}
+			},
+			{
+				"text": "Keep distance from the queen — serve Eiríkr directly instead",
+				"effects": {
+					"standing": 3,
+					"wealth": 4,
+					"morale": 2,
+					"lore_branch": 2,
+					"lore_amount": 3,
+					"saga_entry": "The king's man dealt with, the queen's ignored. A safer course."
+				}
+			},
+			{
+				"text": "Accept the gifts but leave the court before obligations set in",
+				"effects": {
+					"wealth": 8,
+					"morale": 3,
+					"lore_branch": 3,
+					"lore_amount": 3,
+					"saga_entry": "Silver taken, departure swift. Gunnhild noted the speed."
+				}
+			},
+			{
+				"text": "Insult the court openly and leave with your household's honour intact",
+				"effects": {
+					"standing": -6,
+					"morale": 8,
+					"event_flag_set": {
+						"norway_hostile": true
+					},
+					"saga_entry": "The hall was insulted, the door left open behind them. Egill would have approved."
+				}
+			}
+		]
+	},
+	{
+		"id": "war_balls_skraelings",
+		"title": "War-Balls of the Skrælingar",
+		"text": "They came out of the tree-line on the far shore — dark figures, and something launched from poles: spinning, black, screaming through the air. The Norse vanguard broke before contact. Two men are down.",
+		"weight": 2,
+		"tags": [
+			"saga",
+			"survival",
+			"lore"
+		],
+		"art": {
+			"category": "survival"
+		},
+		"realism": [
+			1,
+			2
+		],
+		"min_week": 30,
+		"blocks_flags": {
+			"skraelings_encountered": true
+		},
+		"choices": [
+			{
+				"text": "Hold shield-wall — do not run from what you do not understand",
+				"effects": {
+					"morale": 6,
+					"food": -4,
+					"knowledge": 4,
+					"lore_branch": 3,
+					"lore_amount": 4,
+					"event_flag_set": {
+						"skraelings_encountered": true
+					},
+					"saga_entry": "The wall held. The weapons stopped. A cautious standoff."
+				}
+			},
+			{
+				"text": "Retreat to defensible rocks — regroup and observe",
+				"effects": {
+					"morale": -5,
+					"food": -3,
+					"knowledge": 6,
+					"event_flag_set": {
+						"skraelings_encountered": true
+					},
+					"saga_entry": "The shore was yielded. From the rocks, patterns were studied."
+				}
+			},
+			{
+				"text": "Countercharge with noise and iron — show you will not yield",
+				"effects": {
+					"morale": 5,
+					"food": -6,
+					"standing": 3,
+					"event_flag_set": {
+						"skraelings_encountered": true
+					},
+					"saga_entry": "The charge was made. The Skrælingar withdrew. The shore was held — for that day."
+				}
+			},
+			{
+				"text": "Hold up trade goods — attempt renewed exchange",
+				"effects": {
+					"wealth": 6,
+					"knowledge": 8,
+					"morale": 2,
+					"lore_branch": 3,
+					"lore_amount": 6,
+					"event_flag_set": {
+						"skraelings_encountered": true
+					},
+					"saga_entry": "Cloth and trinkets held up. A cautious exchange followed."
+				}
+			}
+		]
+	},
+	{
+		"id": "one_footer_creek",
+		"title": "The One-Footer at the Creek",
+		"text": "A one-footed creature shot an arrow from the creek-bank and fled into the trees before any man could turn. The arrow is real. It is in Þorvaldr's chest. He will not survive the night.",
+		"weight": 1,
+		"tags": [
+			"saga",
+			"supernatural",
+			"survival"
+		],
+		"art": {
+			"category": "supernatural"
+		},
+		"realism": [
+			1,
+			2
+		],
+		"min_week": 30,
+		"blocks_flags": {
+			"one_footer_seen": true
+		},
+		"choices": [
+			{
+				"text": "Pursue the creature into the trees",
+				"effects": {
+					"morale": -5,
+					"food": -5,
+					"lore_branch": 3,
+					"lore_amount": 4,
+					"knowledge": 6,
+					"event_flag_set": {
+						"one_footer_seen": true
+					},
+					"saga_entry": "No track was found. The forest gave nothing. Men came back shaken."
+				}
+			},
+			{
+				"text": "Secure the wounded first — the creature can wait",
+				"effects": {
+					"morale": 3,
+					"food": -3,
+					"lore_branch": 1,
+					"lore_amount": 3,
+					"event_flag_set": {
+						"one_footer_seen": true
+					},
+					"saga_entry": "Þorvaldr was carried back. He died before sunset, but not alone."
+				}
+			},
+			{
+				"text": "Mark the place and withdraw — return with more men",
+				"effects": {
+					"knowledge": 8,
+					"lore_branch": 3,
+					"lore_amount": 5,
+					"morale": -2,
+					"event_flag_set": {
+						"one_footer_seen": true
+					},
+					"saga_entry": "The creek was marked on the chart. The expedition withdrew in good order."
+				}
+			},
+			{
+				"text": "Deny what was seen — steady the men before morale breaks",
+				"effects": {
+					"morale": -6,
+					"standing": -2,
+					"saga_entry": "The creature was called a shadow. No one believed it. The men flinched at sounds for weeks."
+				}
+			}
+		]
+	},
+	{
+		"id": "white_men_land_rumour",
+		"title": "White-Men Land Rumour",
+		"text": "Children taken and later freed report a land to the south and west where men go dressed in white and carry crosses. Hvítramannaland. No one has returned from it deliberately, but the rumour persists.",
+		"weight": 2,
+		"tags": [
+			"saga",
+			"lore",
+			"wayfinding"
+		],
+		"art": {
+			"category": "lore"
+		},
+		"realism": [
+			1
+		],
+		"min_week": 20,
+		"blocks_flags": {
+			"hvitramanna_rumour": true
+		},
+		"choices": [
+			{
+				"text": "Believe it — plan a speculative voyage",
+				"effects": {
+					"wealth": -8,
+					"knowledge": 8,
+					"morale": 6,
+					"lore_branch": 3,
+					"lore_amount": 7,
+					"event_flag_set": {
+						"hvitramanna_rumour": true
+					},
+					"saga_entry": "A voyage was planned. The household argued about it for the rest of the winter."
+				}
+			},
+			{
+				"text": "Record it in lore only — knowledge without commitment",
+				"effects": {
+					"knowledge": 10,
+					"lore_branch": 3,
+					"lore_amount": 6,
+					"event_flag_set": {
+						"hvitramanna_rumour": true
+					},
+					"saga_entry": "The rumour was written down and stored. Its time may come."
+				}
+			},
+			{
+				"text": "Trade the rumour to Norwegian merchants as prestige knowledge",
+				"effects": {
+					"wealth": 6,
+					"standing": 4,
+					"knowledge": 4,
+					"event_flag_set": {
+						"hvitramanna_rumour": true
+					},
+					"saga_entry": "The story was sold east. Men paid well for the right kind of wonder."
+				}
+			},
+			{
+				"text": "Suppress it — distraction serves no one",
+				"effects": {
+					"morale": -2,
+					"event_flag_set": {
+						"hvitramanna_rumour": true
+					},
+					"saga_entry": "The children were told to be quiet. The rumour spread anyway."
+				}
+			}
+		]
+	},
+	{
+		"id": "ship_worm_lottery",
+		"title": "Ship-Worm Lottery in the Irish Ocean",
+		"text": "The hull is eaten. Half the planks are riddled with worm. The ship cannot make it home with everyone aboard. Lots must be cast — some will be left on the nearest rock, some will sail. There is no good answer.",
+		"weight": 2,
+		"tags": [
+			"saga",
+			"survival",
+			"politics"
+		],
+		"art": {
+			"category": "survival"
+		},
+		"seasons": [
+			1,
+			2
+		],
+		"realism": [
+			1,
+			2
+		],
+		"min_week": 20,
+		"blocks_flags": {
+			"shipworm_faced": true
+		},
+		"choices": [
+			{
+				"text": "Cast lots fairly — every man equal before chance",
+				"effects": {
+					"morale": 5,
+					"standing": 6,
+					"food": -8,
+					"lore_branch": 2,
+					"lore_amount": 4,
+					"event_flag_set": {
+						"shipworm_faced": true
+					},
+					"saga_entry": "Lots were drawn. Those left on the rock were remembered."
+				}
+			},
+			{
+				"text": "Load only elites — the jarl does not draw lots",
+				"effects": {
+					"wealth": 6,
+					"morale": -10,
+					"standing": -8,
+					"event_flag_set": {
+						"shipworm_faced": true
+					},
+					"saga_entry": "The powerful took the ship. Thralls and carpenters were left. The saga recorded it."
+				}
+			},
+			{
+				"text": "Swap places with a man who drew the short lot",
+				"effects": {
+					"morale": 12,
+					"standing": 10,
+					"food": -10,
+					"lore_branch": 2,
+					"lore_amount": 6,
+					"event_flag_set": {
+						"shipworm_faced": true
+					},
+					"saga_entry": "The leader took the rock. The household was never the same after."
+				}
+			},
+			{
+				"text": "Attempt emergency hull treatment with tar and seal-fat — risk all",
+				"effects": {
+					"materials": -8,
+					"food": -4,
+					"morale": 4,
+					"knowledge": 6,
+					"lore_branch": 3,
+					"lore_amount": 7,
+					"event_flag_set": {
+						"shipworm_faced": true
+					},
+					"saga_entry": "Every seal-skin and pitch-jar was used. The hull held — barely."
+				},
+				"requires_lore": {
+					"3": 4
+				}
+			}
+		]
+	},
+	{
+		"id": "late_heir_marriage",
+		"title": "A Wealthy Neighbour Proposes Alliance",
+		"text": "A prosperous household from the far side of the firth sends word: their eldest son seeks your daughter's hand. The bride-price they name is generous, the alliance valuable. But accepting means binding your grain stores to the wedding-feast at the worst possible season.",
+		"weight": 4,
+		"tags": [
+			"saga",
+			"politics",
+			"family"
+		],
+		"art": {
+			"category": "politics"
+		},
+		"min_week": 30,
+		"max_week": 40,
+		"blocks_flags": {
+			"late_heir_marriage_done": true
+		},
+		"choices": [
+			{
+				"text": "Accept the match — bind the households with a proper feast",
+				"effects": {
+					"food": -8,
+					"standing": 6,
+					"morale": 5,
+					"event_flag_set": {
+						"late_heir_marriage_done": true,
+						"alliance_formed": true
+					},
+					"saga_entry": "A wedding was held. The two households became one. The firth grew quieter for it."
+				}
+			},
+			{
+				"text": "Decline courteously — the timing is wrong",
+				"effects": {
+					"standing": -4,
+					"morale": -2,
+					"event_flag_set": {
+						"late_heir_marriage_done": true
+					},
+					"saga_entry": "The offer was refused with gifts and good words. The neighbour understood, though he was not pleased."
+				}
+			},
+			{
+				"text": "Negotiate — a smaller feast, a larger bride-price",
+				"effects": {
+					"wealth": 6,
+					"knowledge": 4,
+					"morale": 2,
+					"event_flag_set": {
+						"late_heir_marriage_done": true
+					},
+					"saga_entry": "Terms were haggled through three rounds of messengers. Both sides claimed victory."
+				}
+			}
+		]
+	},
+	{
+		"id": "late_sheep_plague",
+		"title": "Rot-Foot in the Flock",
+		"text": "The ewes are limping. A grey rot creeps between the hooves — the old shepherds call it klaufaveiki. It spreads through the whole flock when they bed together. Autumn rains make it worse.",
+		"weight": 5,
+		"tags": [
+			"saga",
+			"survival",
+			"herd"
+		],
+		"art": {
+			"category": "survival"
+		},
+		"seasons": [
+			2
+		],
+		"min_week": 32,
+		"max_week": 44,
+		"blocks_flags": {
+			"sheep_plague_resolved": true
+		},
+		"choices": [
+			{
+				"text": "Cull the affected animals — save the healthy",
+				"effects": {
+					"herd_delta": {
+						"1": -4
+					},
+					"food": -3,
+					"knowledge": 4,
+					"morale": -3,
+					"event_flag_set": {
+						"sheep_plague_resolved": true
+					},
+					"saga_entry": "The sick were slaughtered and burned. The flock stopped dying."
+				}
+			},
+			{
+				"text": "Isolate the sick and pray over the flock",
+				"effects": {
+					"food": -4,
+					"lore_branch": 1,
+					"lore_amount": 5,
+					"knowledge": 3,
+					"herd_delta": {
+						"1": -2
+					},
+					"morale": 2,
+					"event_flag_set": {
+						"sheep_plague_resolved": true
+					},
+					"saga_entry": "The sick were penned apart and rites were sung. The rot slowed."
+				},
+				"requires_lore": {
+					"1": 3
+				}
+			},
+			{
+				"text": "Trade for healthy stock from the next valley",
+				"effects": {
+					"wealth": -8,
+					"herd_delta": {
+						"1": 3
+					},
+					"knowledge": 2,
+					"event_flag_set": {
+						"sheep_plague_resolved": true
+					},
+					"saga_entry": "Silver bought untainted sheep from the east valley. The herd began again."
+				}
+			}
+		]
+	},
+	{
+		"id": "late_glacial_flood",
+		"title": "The Glacier Speaks — Jökulhlaup",
+		"text": "A dull rumble rolls down from the highland ice. The river that drains the glacier swells beyond its banks — grey meltwater carrying ice and stone. Your best pastures lie in the flood path.",
+		"weight": 4,
+		"tags": [
+			"saga",
+			"survival",
+			"land"
+		],
+		"art": {
+			"category": "survival"
+		},
+		"min_week": 35,
+		"max_week": 48,
+		"blocks_flags": {
+			"glacial_flood_handled": true
+		},
+		"choices": [
+			{
+				"text": "Move the herd to high ground — pay hay for the disruption",
+				"effects": {
+					"hay": -8,
+					"food": -4,
+					"morale": -3,
+					"herd_delta": {
+						"1": 0
+					},
+					"event_flag_set": {
+						"glacial_flood_handled": true
+					},
+					"saga_entry": "The herd was driven to the ridge. The flood took the lower pasture."
+				}
+			},
+			{
+				"text": "Build a diversion channel — stone, turf, and tools",
+				"effects": {
+					"materials": -8,
+					"tools": -4,
+					"food": -5,
+					"knowledge": 4,
+					"event_flag_set": {
+						"glacial_flood_handled": true
+					},
+					"saga_entry": "A channel was cut through the moraine. The flood followed it into the barren gully."
+				}
+			},
+			{
+				"text": "Appeal to the land-wights — this is their country",
+				"effects": {
+					"food": -4,
+					"lore_branch": 4,
+					"lore_amount": 6,
+					"morale": 4,
+					"vaettir_shift": {
+						"region": 1,
+						"mood": 2
+					},
+					"event_flag_set": {
+						"glacial_flood_handled": true
+					},
+					"saga_entry": "Offerings were laid at the glacier's edge. The water rose — then stopped."
+				},
+				"requires_lore": {
+					"1": 2,
+					"4": 2
+				}
+			}
+		]
+	},
+	{
+		"id": "late_news_norway",
+		"title": "News from Norway — Harald Fairhair Consolidates",
+		"text": "A ship brings tidings: Harald Fairhair has crushed the last independent chieftains in the north. Land is being granted to his jarls. Free farmers who fled now have no way back. The news splits the household — some see opportunity, others threat.",
+		"weight": 4,
+		"tags": [
+			"saga",
+			"politics",
+			"trade"
+		],
+		"art": {
+			"category": "politics"
+		},
+		"min_week": 30,
+		"max_week": 50,
+		"blocks_flags": {
+			"norway_news_handled": true
+		},
+		"choices": [
+			{
+				"text": "Prepare for more settlers — the island will fill quickly now",
+				"effects": {
+					"food": -6,
+					"standing": 5,
+					"morale": 3,
+					"knowledge": 4,
+					"event_flag_set": {
+						"norway_news_handled": true
+					},
+					"saga_entry": "Stores were laid in for the coming wave. Word would spread that this household welcomes refugees."
+				}
+			},
+			{
+				"text": "Send word east — claim standing with the king before others do",
+				"effects": {
+					"wealth": -4,
+					"standing": 6,
+					"knowledge": 6,
+					"lore_branch": 3,
+					"lore_amount": 3,
+					"event_flag_set": {
+						"norway_news_handled": true,
+						"norway_hostile": false
+					},
+					"saga_entry": "A message and gifts were sent east. The household's name reached the king."
+				}
+			},
+			{
+				"text": "Ignore the tidings — Iceland is far from Harald's reach",
+				"effects": {
+					"morale": -2,
+					"knowledge": 2,
+					"event_flag_set": {
+						"norway_news_handled": true
+					},
+					"saga_entry": "The news was noted and set aside. The firth continued its own business."
+				}
+			}
+		]
+	},
+	{
+		"id": "late_inheritance_dispute",
+		"title": "The Dead Claim Their Share",
+		"text": "Kin of a householder who died in the early years have arrived — they say the dead man's share of the land and livestock was never apportioned. They have witnesses and a genealogy traced back three generations. The Thing must hear this or silver must change hands.",
+		"weight": 5,
+		"tags": [
+			"saga",
+			"feud",
+			"law"
+		],
+		"art": {
+			"category": "feud"
+		},
+		"min_week": 35,
+		"max_week": 50,
+		"blocks_flags": {
+			"inheritance_dispute_resolved": true
+		},
+		"choices": [
+			{
+				"text": "Honour the claim — pay what they ask, keep the peace",
+				"effects": {
+					"wealth": -8,
+					"standing": 4,
+					"morale": 2,
+					"event_flag_set": {
+						"inheritance_dispute_resolved": true
+					},
+					"saga_entry": "Silver and livestock were given. The kin left satisfied. Expensive, but clean."
+				}
+			},
+			{
+				"text": "Contest it at the Thing — the land is yours by settlement-right",
+				"effects": {
+					"wealth": -4,
+					"standing": 6,
+					"lore_branch": 0,
+					"lore_amount": 6,
+					"morale": 3,
+					"event_flag_set": {
+						"inheritance_dispute_resolved": true
+					},
+					"saga_entry": "The case was heard on the law-hill. The judges ruled in favour of settlement-right."
+				},
+				"requires_lore": {
+					"0": 4
+				}
+			},
+			{
+				"text": "Refuse outright — let them try to take what they cannot prove",
+				"effects": {
+					"standing": -6,
+					"morale": -4,
+					"event_flag_set": {
+						"inheritance_dispute_resolved": true,
+						"feudStarted": true
+					},
+					"saga_entry": "The kin were turned away empty-handed. They swore oath on the doorstep. A feud was born."
+				}
+			}
+		]
+	},
+	{
+		"id": "late_winter_wolves",
+		"title": "Starving Wolves Circle the Byre",
+		"text": "Deep winter has driven the wolves down from the highlands. Their eyes gleam at the edge of the firelight. The sheep are panicking in the byre and the cattle low without stopping. The pack grows bolder each night.",
+		"weight": 5,
+		"tags": [
+			"saga",
+			"survival",
+			"hunt"
+		],
+		"art": {
+			"category": "survival"
+		},
+		"seasons": [
+			3
+		],
+		"min_week": 38,
+		"max_week": 50,
+		"blocks_flags": {
+			"wolf_threat_handled": true
+		},
+		"choices": [
+			{
+				"text": "Hunt the pack by torchlight — drive them from the valley",
+				"effects": {
+					"food": 8,
+					"morale": 4,
+					"materials": -2,
+					"fuel": -2,
+					"event_flag_set": {
+						"wolf_threat_handled": true
+					},
+					"saga_entry": "Torches and spears took the fight to the wolves. Pelts and meat were brought back."
+				}
+			},
+			{
+				"text": "Fortify the byre with stone and sharpened stakes",
+				"effects": {
+					"materials": -6,
+					"tools": -2,
+					"morale": 3,
+					"shelter": 1,
+					"event_flag_set": {
+						"wolf_threat_handled": true
+					},
+					"saga_entry": "The byre was strengthened. The wolves circled for three nights, then moved on."
+				}
+			},
+			{
+				"text": "Keep watch-fires burning through the night — exhaust the pack",
+				"effects": {
+					"fuel": -6,
+					"morale": 4,
+					"standing": 3,
+					"event_flag_set": {
+						"wolf_threat_handled": true
+					},
+					"saga_entry": "Great fires burned along the ridge. The pack howled but did not attack."
+				}
+			}
+		]
+	},
+	{
+		"id": "late_shipwreck_survivor",
+		"title": "The Half-Dead Sailor",
+		"text": "A broken figure crawls up from the strand at dawn — salt-crusted, frozen, barely breathing. His ship went down three leagues out. He alone reached shore. He may have news of the routes, or he may be another mouth that drains the stores.",
+		"weight": 3,
+		"tags": [
+			"saga",
+			"trade",
+			"social"
+		],
+		"art": {
+			"category": "trade"
+		},
+		"min_week": 30,
+		"max_week": 48,
+		"requires_flags": {
+			"shippingContact": true
+		},
+		"blocks_flags": {
+			"shipwreck_survivor_done": true
+		},
+		"choices": [
+			{
+				"text": "Nurse him back to health — the sea gives and takes",
+				"effects": {
+					"food": -6,
+					"morale": 5,
+					"knowledge": 4,
+					"standing": 3,
+					"event_flag_set": {
+						"shipwreck_survivor_done": true,
+						"rescued_sailor": true
+					},
+					"saga_entry": "The sailor was carried to the hearth and fed. He survived. He spoke of far islands on the sunset side."
+				}
+			},
+			{
+				"text": "Question him about the sea-routes while he is lucid",
+				"effects": {
+					"food": -3,
+					"knowledge": 8,
+					"lore_branch": 3,
+					"lore_amount": 4,
+					"event_flag_set": {
+						"shipwreck_survivor_done": true
+					},
+					"saga_entry": "The sailor's knowledge was charted before he rested. New routes now lie in the household's hands."
+				}
+			},
+			{
+				"text": "Turn him away — there is no room for strangers this late",
+				"effects": {
+					"morale": -5,
+					"standing": -3,
+					"event_flag_set": {
+						"shipwreck_survivor_done": true
+					},
+					"saga_entry": "The door was shut. The sailor crawled back toward the shore. He was not seen again."
+				}
+			}
+		]
+	},
+	{
+		"id": "late_second_generation",
+		"title": "The First Settlement-Born Come of Age",
+		"text": "The first children born in this settlement — those who never knew Norway — are now old enough to wield a blade, work the fields, or seek wisdom. A dozen young men and women stand before the hall, waiting for their place in the world.",
+		"weight": 4,
+		"tags": [
+			"saga",
+			"family",
+			"social"
+		],
+		"art": {
+			"category": "saga"
+		},
+		"min_week": 36,
+		"max_week": 52,
+		"blocks_flags": {
+			"second_generation_done": true
+		},
+		"choices": [
+			{
+				"text": "Hold a great feast — mark their coming-of-age for all to see",
+				"effects": {
+					"food": -8,
+					"morale": 10,
+					"standing": 5,
+					"knowledge": 3,
+					"event_flag_set": {
+						"second_generation_done": true
+					},
+					"saga_entry": "The hall was packed for the coming-of-age feast. The children of the settlement danced by firelight. A new generation had arrived."
+				}
+			},
+			{
+				"text": "Put them to work immediately — the settlement needs their hands",
+				"effects": {
+					"food": -3,
+					"materials": 4,
+					"hay": 4,
+					"morale": -2,
+					"event_flag_set": {
+						"second_generation_done": true
+					},
+					"saga_entry": "The young ones took up tools without ceremony. The settlement gained strong backs."
+				}
+			},
+			{
+				"text": "Send the most promising to the goði for lore and law",
+				"effects": {
+					"food": -4,
+					"lore_branch": 1,
+					"lore_amount": 6,
+					"knowledge": 5,
+					"morale": 3,
+					"standing": 3,
+					"event_flag_set": {
+						"second_generation_done": true
+					},
+					"saga_entry": "Three young Icelanders were sent to study with the goði. The settlement would be wiser for it."
+				}
+			}
+		]
+	}
+]
